@@ -119,7 +119,7 @@ const MenuContextProvider = ({ children }) => {
 
   const fetchNaijaData = async () => {
     try {
-      const response = await axios.get(`${url}/api/menu/naija`);
+      const response = await axios.get(`https://food-project-api.onrender.com/api/menu/naija`);
       if (response.data.success) {
         setNaijaItems(response.data.data || []);
       } else {
