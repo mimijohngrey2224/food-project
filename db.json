@@ -1,0 +1,139 @@
+{
+    "starter":[
+        {
+            "id": 1,
+            "name": "Starter2",
+            "img": "/starter2.jpeg",
+            "price": 2000
+        },
+        {
+            "id": 2,
+            "name":"Dinner Party Starter",
+            "img": "/starter3.jpeg",
+            "price": 2000
+        },
+        {
+            "id": 3,
+            "name":"Best Dinner Party Starter",
+            "img": "/starter3.jng",
+            "price": 2000
+        },
+        {
+            "id": 4,
+            "name":"Nickysredhots starter",
+            "img": "/starters.jpeg",
+            "price": 2000
+        }
+    ],
+
+    "breakfast":[
+        {
+            "id": 5,
+            "name":"Binkley Breakfast",
+            "img": "/breakfast-food.jpg",
+            "price": 3000
+
+        },
+        {
+            "id": 6,
+            "name":"American Breakfast",
+            "img": "/breakfast.jpg",
+            "price": 3000
+        },
+        {
+            "id": 7,
+            "name":"Pan Simple and Healthy Breakfast",
+            "img": "/breakfast2.jpg",
+            "price": 3000
+        },
+        {
+            "id": 8,
+            "name":"Healthy Breakfast",
+            "img": "/breakfast4.jpg",
+            "price": 3000
+        }
+
+    ],
+
+    "dishes":[
+        {
+            "id": 9,
+            "name":"Pasta Salad",
+            "img": "/salad.jpg",
+            "price": 4000
+        },
+        {
+            "id": 10,
+            "name":"Chef Salad",
+            "img": "/salad1.jpg",
+            "price": 4000
+        },
+        {
+            "id": 11,
+            "name":"Fruit Salad",
+            "img": "/salad2.jpg",
+            "price": 4000
+        },
+        {
+            "id": 12,
+            "name":"Italian Salad",
+            "img": "/salad3.jpg",
+            "price": 4000
+        }
+
+    ],
+
+    "nigerian":[
+        {
+            "id": 13,
+            "name":"Ogbonno Soup",
+            "img": "/ogbonno.jpg",
+            "price": 5000
+        },
+        {
+            "id": 14,
+            "name":"Pepper Snail",
+            "img": "/img/snail.jpg",
+            "price": 5000
+        },
+        {
+            "id": 15,
+            "name":"Okro Soup",
+            "img": "/okro.jpg",
+            "price": 5000
+        },
+        {
+            "id": 16,
+            "name":"Pepper Soup",
+            "img": "/pepper.jpg",
+            "price": 5000
+        }
+    ],
+
+    "signatures":[
+        {
+            "id": 17,
+            "name":"Chicken and Chips",
+            "img": "/chicken and chips.jpeg",
+            "price": 6000
+        },
+        {
+            "id": 18,
+            "name":"Grill Prawns",
+            "img": "/grillprawn.jpeg",
+            "price": 6000
+        },
+        {
+            "id": 19,
+            "name":"Spaghetti Bolognese",
+            "img": "/spaghetti-bolognese-sq.webp",
+            "price": 6000
+        },
+        {
+            "id": 20,
+            "name":"Small Chop",
+            "img": "/small-chops-2.jpg",
+            "price": 6000
+        }
+    ]
+}
