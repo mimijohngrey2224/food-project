@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from 'axios';
 
-// Create the MenuContext
+
+
 export const MenuContext = createContext(null);
 
 const MenuContextProvider = ({ children }) => {
