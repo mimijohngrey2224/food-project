@@ -25,7 +25,7 @@ function BreakfastPage() {
             <Card key={item._id} className="relative">
               <div to={`${item._id}`} className="block relative">
                 <img
-                  src={`http://localhost:3000/uploads/${item.img}`} // Adjust URL as needed
+                  src={`https://food-project-api.onrender.com/uploads/${item.img}`} // Adjust URL as needed
                   alt={item.name}
                   className="w-full h-40 sm:h-48 md:h-52 lg:h-56 object-cover transition duration-300 transform hover:scale-105 rounded-lg"
                 />

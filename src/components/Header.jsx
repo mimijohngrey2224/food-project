@@ -94,68 +94,6 @@ function Header() {
     }
   };
 
-//   const fetchProfile = async () => {
-//     try {
-//       const token = localStorage.getItem("auth-token");
-//       if (!token) {
-//         console.error("No token found");
-//         return;
-//       }
-  
-//       const response = await axios.get(`${url}/api/profile`, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-  
-//       if (response.data.success) {
-//         const { profile } = response.data;
-//         if (profile && profile.image) {
-//           setProfileImage(`${url}/uploads/${profile.image}`);
-//         } else {
-//           setProfileImage(avatar);
-//         }
-//       }
-//     } catch (error) {
-//       console.error("Error fetching profile:", error);
-//     }
-//   };
-  
-  
-
-//   const updateProfile = async (updatedProfileData) => {
-//   try {
-//     const token = localStorage.getItem("auth-token");
-//     if (!token) {
-//       console.error("No token found");
-//       return;
-//     }
-
-//     const formData = new FormData();
-//     formData.append('firstName', updatedProfileData.firstName);
-//     formData.append('lastName', updatedProfileData.lastName);
-//     formData.append('email', updatedProfileData.email);
-//     if (updatedProfileData.profileImage) {
-//       formData.append('profileImage', updatedProfileData.profileImage);
-//     }
-
-//     const response = await axios.post(`${url}/api/profile/update`, formData, {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//         'Content-Type': 'multipart/form-data',
-//       },
-//     });
-
-//     if (response.data.success) {
-//       console.log('Profile updated successfully:', response.data);
-//       fetchProfile(); // Fetch updated profile
-//     } else {
-//       console.warn('Profile update failed:', response.data.message);
-//     }
-//   } catch (error) {
-//     console.error("Error updating profile:", error);
-//   }
-// };
 
   
   useEffect(() => {

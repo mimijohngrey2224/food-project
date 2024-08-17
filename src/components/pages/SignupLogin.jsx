@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function SignupLogin({ onClose }) {
   const navigate = useNavigate();
-  const [url] = useState("http://localhost:3000");
+  const [url] = useState("https://food-project-api.onrender.com");
 
   const [signupData, setSignupData] = useState({
     firstName: "",

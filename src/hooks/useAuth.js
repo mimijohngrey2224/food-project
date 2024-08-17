@@ -8,7 +8,7 @@ useEffect(() => {
         const token = localStorage.getItem("auth-token");
         if (token) {
             try {
-                const res = await fetch("https://localhost:3000/user", {
+                const res = await fetch("https://food-project-api.onrender.com/user", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
