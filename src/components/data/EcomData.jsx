@@ -171,7 +171,7 @@ export const restaurant = [
     {
         name: "ABIBIZ RESTAURANT",
         img: abibis,
-        address: "Murtala Mohammed International Airport Ikeja Lagos"
+        address: "Murtala Muhammed International Airport Ikeja Lagos"
         
     },
     {
