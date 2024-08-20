@@ -43,7 +43,7 @@ function Restaurant() {
       <div>
         <marquee behavior="" direction="">
           <b>
-            Mimi's food ordering service delivery........... let us quench your appetite with our delicious delicacies from top restaurants...
+            Food Ordering Service Delivery........... let us quench your appetite with our delicious delicacies from top restaurants...
           </b>
         </marquee>
       </div>
