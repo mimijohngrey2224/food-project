@@ -136,7 +136,7 @@ function Header() {
               Hi, {userName}!
             </p>
             <div class="relative group">
-            <p className=' font-semibold cursor-pointer px-4 py-2 text-white w-6 rounded' onClick={toggleSignupLogin}><AiOutlineLogin /></p>
+            <p className=' cursor-pointer px-4 py-2 text-white font-bold text-2xl rounded' onClick={toggleSignupLogin}><AiOutlineLogin /></p>
             <div class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 hidden group-hover:block bg-gray-700 text-white text-xs py-1 px-2 rounded">
                   Login
               </div>
