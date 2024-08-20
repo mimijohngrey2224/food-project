@@ -9,7 +9,7 @@ import cocktail2 from "/cocktail2.jpg"
 
 function Home() {
   return (
-    <div className="bg-purple-200 min-h-screen">
+    <div className="bg-purple-200 min-h-screen mb-[-5px]">
       <div className="container mx-auto px-4 py-8">
         <div className='font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center'>
           <marquee behavior="" direction="">RESTAURANTS WITH THEIR DELICACIES</marquee>
