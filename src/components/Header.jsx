@@ -130,6 +130,7 @@ function Header() {
               className="h-12 w-12 rounded-full cursor-pointer border-2 border-white"
               onClick={toggleProfileForm}
             />
+            <AiOutlineLogin  className=' font-semibold'/>
             <p className="text-white ml-2 cursor-pointer" onClick={toggleLogoutMenu}>
               Hi, {userName}!
             </p>
@@ -175,7 +176,7 @@ function Header() {
             </div>
           </Link>
           <Link to="/login" className="text-2xl font-medium hover:text-purple-500 transition-colors duration-300" >
-            Login <AiOutlineLogin />
+            Login 
           </Link>
         </nav>
       </div>
