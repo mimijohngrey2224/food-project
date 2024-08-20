@@ -175,7 +175,7 @@ function Header() {
             </div>
           </Link>
           <Link to="/login" className="text-2xl font-medium hover:text-purple-500 transition-colors duration-300" >
-            Login {<AiOutlineLogin />}
+            Login <AiOutlineLogin />
           </Link>
         </nav>
       </div>
