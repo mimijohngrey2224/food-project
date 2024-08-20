@@ -16,7 +16,7 @@ function Home() {
         </div>
 
         <div className="mt-10">
-          <h1 className="text-center font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-purple-800">
+          <h1 className="text-center font-bold text-1xl sm:text-3xl md:text-4xl lg:text-5xl text-purple-800">
             These places has a relaxed, casual vibe.
           </h1>
           <div className="mt-6 mx-auto max-w-4xl">
