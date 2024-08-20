@@ -135,8 +135,18 @@ function Header() {
             <p className="text-white ml-2 cursor-pointer" >
               Hi, {userName}!
             </p>
-            <AiOutlineLogin  className=' font-semibold' onClick={toggleSignupLogin}/>
-            <AiOutlineLogout onClick={toggleLogoutMenu} />
+            <div class="relative group">
+            <AiOutlineLogin  className=' font-semibold cursor-pointer px-4 py-2 bg-blue-500 text-white rounded' onClick={toggleSignupLogin}/>
+            <div class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 hidden group-hover:block bg-gray-700 text-white text-xs py-1 px-2 rounded">
+                  Login
+              </div>
+            </div>
+            <div class="relative group">
+            <AiOutlineLogout onClick={toggleLogoutMenu} className='cursor-pointer px-4 py-2 bg-blue-500 text-white rounded' />
+            <div class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 hidden group-hover:block bg-gray-700 text-white text-xs py-1 px-2 rounded">
+                  Logout
+              </div>
+            </div>
             {showLogoutMenu && (
               <div className="absolute top-full right-0 bg-white shadow-lg rounded mt-2 p-2">
                 <button
