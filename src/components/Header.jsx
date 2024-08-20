@@ -136,13 +136,13 @@ function Header() {
               Hi, {userName}!
             </p>
             <div class="relative group">
-            <AiOutlineLogin  className=' font-semibold cursor-pointer px-4 py-2 bg-blue-500 text-white rounded' onClick={toggleSignupLogin}/>
+            <AiOutlineLogin  className=' font-semibold cursor-pointer px-4 py-2' onClick={toggleSignupLogin}/>
             <div class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 hidden group-hover:block bg-gray-700 text-white text-xs py-1 px-2 rounded">
                   Login
               </div>
             </div>
             <div class="relative group">
-            <AiOutlineLogout onClick={toggleLogoutMenu} className='cursor-pointer px-4 py-2 bg-blue-500 text-white rounded' />
+            <AiOutlineLogout onClick={toggleLogoutMenu} className='cursor-pointer px-4 py-2' />
             <div class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 hidden group-hover:block bg-gray-700 text-white text-xs py-1 px-2 rounded">
                   Logout
               </div>
@@ -191,6 +191,9 @@ function Header() {
           <Link to="/login" className="text-2xl font-medium hover:text-purple-500 transition-colors duration-300" >
             Login 
           </Link>
+          <div onClick={handleLogout} className="text-2xl font-medium hover:text-purple-500 transition-colors duration-300" >
+            Logout 
+          </div>
         </nav>
       </div>
 
