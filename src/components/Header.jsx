@@ -8,6 +8,7 @@ import avatar from '../assets/avatar.png'; // Fallback avatar
 import SignupLogin from '../components/pages/SignupLogin';
 import ProfileForm from '../components/pages/profileForm';
 import { AiOutlineLogin } from "react-icons/ai";
+import { AiOutlineLogout } from "react-icons/ai";
 import axios from 'axios';
 
 function Header() {
@@ -130,10 +131,12 @@ function Header() {
               className="h-12 w-12 rounded-full cursor-pointer border-2 border-white"
               onClick={toggleProfileForm}
             />
-            <AiOutlineLogin  className=' font-semibold' onClick={toggleSignupLogin}/>
-            <p className="text-white ml-2 cursor-pointer" onClick={toggleLogoutMenu}>
+            
+            <p className="text-white ml-2 cursor-pointer" >
               Hi, {userName}!
             </p>
+            <AiOutlineLogin  className=' font-semibold' onClick={toggleSignupLogin}/>
+            <AiOutlineLogout onClick={toggleLogoutMenu} />
             {showLogoutMenu && (
               <div className="absolute top-full right-0 bg-white shadow-lg rounded mt-2 p-2">
                 <button
