@@ -130,7 +130,7 @@ function Header() {
               className="h-12 w-12 rounded-full cursor-pointer border-2 border-white"
               onClick={toggleProfileForm}
             />
-            <AiOutlineLogin  className=' font-semibold'/>
+            <AiOutlineLogin  className=' font-semibold' onClick={toggleSignupLogin}/>
             <p className="text-white ml-2 cursor-pointer" onClick={toggleLogoutMenu}>
               Hi, {userName}!
             </p>
