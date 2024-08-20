@@ -14,7 +14,7 @@ import { starter, breakfast, dishes, nigerian, signatures } from "./components/d
 import { BrowserRouter as Router, Routes, Route  } from "react-router-dom"
 // import Restaurant from "./components/pages/Restaurant";
 import MenuContextProvider from "./context/MenuContext";
-import SignupLogin from "./components/pages/SignupLogin";
+// import SignupLogin from "./components/pages/SignupLogin";
 import Checkout from "./components/pages/Checkout";
 import Thanks from "./components/pages/Thanks";
 import 'leaflet/dist/leaflet.css';
@@ -46,7 +46,7 @@ function App() {
       {/* <Route path="/details" element={<Details />} /> */}
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout" element={<Checkout />} />
-      <Route path="/login" element={<SignupLogin />} />
+      {/* <Route path="/login" element={<SignupLogin />} /> */}
       <Route path="/thanks" element={<Thanks />} />
         <Route path="/menu"
         element={
