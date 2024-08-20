@@ -7,6 +7,7 @@ import abibiz1 from '../assets/abibiz1 logo.jpg';
 import avatar from '../assets/avatar.png'; // Fallback avatar
 import SignupLogin from '../components/pages/SignupLogin';
 import ProfileForm from '../components/pages/profileForm';
+import { AiOutlineLogin } from "react-icons/ai";
 import axios from 'axios';
 
 function Header() {
@@ -22,6 +23,7 @@ function Header() {
   const [showSignupLogin, setShowSignupLogin] = useState(false);
   const [showProfileForm, setShowProfileForm] = useState(false);
   const [showLogoutMenu, setShowLogoutMenu] = useState(false); // State for logout menu
+  
   const [userName, setUserName] = useState('User'); // Default value as "User"
   // const [profileImage, setProfileImage] = useState(null); // New state for profile image URL
 
@@ -173,7 +175,7 @@ function Header() {
             </div>
           </Link>
           <Link to="/login" className="text-2xl font-medium hover:text-purple-500 transition-colors duration-300" >
-            Login
+            Login {<AiOutlineLogin />}
           </Link>
         </nav>
       </div>
