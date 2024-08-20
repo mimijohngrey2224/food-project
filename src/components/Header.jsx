@@ -25,7 +25,7 @@ function Header() {
   const [showProfileForm, setShowProfileForm] = useState(false);
   const [showLogoutMenu, setShowLogoutMenu] = useState(false); // State for logout menu
   
-  const [userName, setUserName] = useState('User'); // Default value as "User"
+  const [userName, setUserName] = useState('There'); // Default value as "User"
   // const [profileImage, setProfileImage] = useState(null); // New state for profile image URL
 
   // Toggle SignupLogin component
