@@ -17,11 +17,11 @@ function Home() {
 
         <div className="mt-10">
           <h1 className="text-center font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-purple-800">
-            Our Company
+            These places has a relaxed, casual vibe.
           </h1>
           <div className="mt-6 mx-auto max-w-4xl">
             <p className="text-base sm:text-lg md:text-xl text-gray-800 leading-relaxed">
-              Soft lighting, comfortable seating with elbow room, an attentive
+              Unbeatable, the atmosphere of the restaurant is unbeatable, soft lighting, comfortable seating with elbow room, an attentive
               staff, great service, a distinctive, well-thought-out menu,
               hospitality, food, drinks, and soft background music.
             </p>
