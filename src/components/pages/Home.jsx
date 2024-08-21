@@ -17,12 +17,12 @@ function Home() {
 
         <div className="mt-10">
           <h1 className="text-center font-bold text-1xl sm:text-3xl md:text-4xl lg:text-5xl text-purple-800">
-            These places has a relaxed, casual vibe.
+            These places have a relaxed, casual vibe.
           </h1>
           <div className="mt-6 mx-auto max-w-4xl">
             <p className="text-base sm:text-lg md:text-xl text-gray-800 leading-relaxed">
-              Unbeatable, the atmosphere of these restaurant is unbeatable, soft lighting, comfortable seating with elbow room, an attentive
-              beautiful waitresses and waiters with good customers services, great service, a distinctive, well-thought-out menu,
+              Unbeatable, the atmosphere of these restaurants is unbeatable, soft lighting, comfortable seating with elbow room, an attentive
+              smartly dressed waitresses and waiters with good customers services, great service, a distinctive, well-thought-out menu,
               hospitality, food, drinks, and soft background music.
             </p>
             <h2 className='font-bold text-lg sm:text-xl mt-4'>
