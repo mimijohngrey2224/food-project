@@ -451,6 +451,15 @@ function Header() {
               Logout
             </div>
           )}
+          <img
+                src={userProfile?.image ? `${url}/uploads/${userProfile.image}` : avatar} 
+                alt="Profile"
+                className="h-12 w-12 rounded-full cursor-pointer border-2 border-white"
+                onClick={toggleProfileForm}
+              />
+              <p className="text-white ml-2 cursor-pointer">
+                Hi, {userName}!
+              </p>
         </nav>
       </div>
 
