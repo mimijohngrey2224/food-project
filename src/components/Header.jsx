@@ -401,7 +401,7 @@ function Header() {
           ) : (
             <div className="text-lg font-medium flex items-center gap-2">
               <p onClick={toggleSignupLogin} className='cursor-pointer px-4 py-2 text-white font-bold text-2xl rounded'>
-                <AiOutlineLogin />
+                {/* <AiOutlineLogin /> */}
               </p>
               <div className="relative group">
                 <p className='cursor-pointer px-4 py-2 text-white font-bold text-2xl rounded' onClick={toggleSignupLogin}><AiOutlineLogin /></p>
