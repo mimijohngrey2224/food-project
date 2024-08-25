@@ -40,34 +40,18 @@ function Details({ restaurant, onClose }) {
       alert("Please select an item to add to cart.");
       return;
     }
-  
+
     const item = {
       name: selectedItem.name,
       price: selectedItem.price,
       quantity: 1,
       img: selectedItem.img,
     };
-  
-    // Determine the category of the selected item
-    const allMenuItems = [
-      ...menuItems,
-      ...breakItems,
-      ...naijaItems,
-      ...saladItems,
-      ...signatureItems,
-    ];
-  
-    const category = allMenuItems.find((item) => item.name === selectedItem.name);
-  
-    if (category) {
-      // Assuming addToCart can handle item and category
-      addToCart({ item, category: category.category }); // Adjust according to your context implementation
-      toast.success(`Added ${selectedItem.name} to cart`);
-    } else {
-      alert("Item not found in the menu.");
-    }
+
+    addToCart(item);
+    console.log(`Added ${selectedItem.name} to cart`, item);
+    toast.success(`Added ${selectedItem.name} to cart`)
   };
-  
 
   const handleSelectChange = (e) => {
     const selectedMenuItem = e.target.value;
