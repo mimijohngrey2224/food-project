@@ -69,6 +69,24 @@ function Details({ restaurant, onClose }) {
   };
   
 
+  const handleSelectChange = (e) => {
+    const selectedMenuItem = e.target.value;
+    const categoryItem = getCategoryItem(selectedMenuItem);
+    setSelectedItem(categoryItem);
+  };
+
+  const getCategoryItem = (menuItem) => {
+    let menuItemsList = [
+      ...menuItems,
+      ...breakItems,
+      ...naijaItems,
+      ...saladItems,
+      ...signatureItems,
+    ];
+    const foundItem = menuItemsList.find((item) => item.name === menuItem);
+    return foundItem || {};
+  };
+
   const handleLocationClick = useCallback(async (address) => {
     console.log("Clicked address:", address);
     try {
