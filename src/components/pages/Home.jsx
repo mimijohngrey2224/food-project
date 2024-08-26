@@ -51,7 +51,7 @@ function Home() {
         alt="Waitress Image"
         className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
       />
-      <p className="mt-2 text-center flex flex-col items-center w-48">Serves patrons with food and beverages in a positive and friendly manner</p>
+      <p className="mt-2 text-center">Serves patrons with food and <br /> beverages in a positive and friendly manner</p>
     </div>
     <div className="flex flex-col items-center">
       <img
