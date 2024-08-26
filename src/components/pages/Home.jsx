@@ -75,7 +75,7 @@ function Home() {
         alt="Cocktail Image"
         className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
       />
-      <p className="mt-2 text-center">List some ingredients and <br /> give an idea of the flavour, <br /> adding emphasis on any elements <br /> that elevate the cocktail</p>
+      <p className="mt-2 text-center">List some ingredients and <br /> give an idea of the flavour, <br /> adding emphasis on any <br /> elements that elevate the cocktail</p>
     </div>
     <div className="flex flex-col items-center">
       <img
