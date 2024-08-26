@@ -37,12 +37,14 @@ function Home() {
         
         <div className="overflow-x-auto whitespace-nowrap mt-10">
   <div className="flex space-x-4 min-w-max">
-    <img
+   <div>
+   <img
       src={whisky}
       alt="Whisky Image"
       className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
     />
     <p>whisky dry gin</p>
+   </div>
     <img
       src={waitress}
       alt="Waitress Image"
