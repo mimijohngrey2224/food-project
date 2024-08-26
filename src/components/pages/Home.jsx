@@ -100,7 +100,7 @@ function Home() {
 export default Home;
 
 
-<div class="flex flex-wrap gap-4 justify-center">
+{/* <div class="flex flex-wrap gap-4 justify-center">
   <div class="flex flex-col items-center">
     <img
       src={whisky}
@@ -149,7 +149,7 @@ export default Home;
     />
     <p className="mt-2 text-center">Guests in a restaurant waiting to be served</p>
   </div>
-</div>
+</div> */}
 
 
 
