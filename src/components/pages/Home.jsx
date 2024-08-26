@@ -37,41 +37,57 @@ function Home() {
         
         <div className="overflow-x-auto whitespace-nowrap mt-10">
   <div className="flex space-x-4 min-w-max">
-   <div>
-   <img
-      src={whisky}
-      alt="Whisky Image"
-      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
-    />
-    <p>whisky dry gin</p>
-   </div>
-    <img
-      src={waitress}
-      alt="Waitress Image"
-      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
-    />
-    <img
-      src={whisky1}
-      alt="Whisky Image"
-      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
-    />
-    <img
-      src={waiter}
-      alt="Waiter Image"
-      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
-    />
-    <img
-      src={cocktail2}
-      alt="Cocktail Image"
-      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
-    />
-    <img
-      src={abibizimg}
-      alt="Abibiz Image"
-      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
-    />
+    <div className="flex flex-col items-center">
+      <img
+        src={whisky}
+        alt="Whisky Image"
+        className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+      />
+      <p className="mt-2 text-center">Some bottles of whisky</p>
+    </div>
+    <div className="flex flex-col items-center">
+      <img
+        src={waitress}
+        alt="Waitress Image"
+        className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+      />
+      <p className="mt-2 text-center">Serves patrons with food and beverages in a positive and friendly manner</p>
+    </div>
+    <div className="flex flex-col items-center">
+      <img
+        src={whisky1}
+        alt="Whisky Image"
+        className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+      />
+      <p className="mt-2 text-center">Some tots of whisky in a glass</p>
+    </div>
+    <div className="flex flex-col items-center">
+      <img
+        src={waiter}
+        alt="Waiter Image"
+        className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+      />
+      <p className="mt-2 text-center">A waiter responsible for taking orders and serving food and beverages to guests</p>
+    </div>
+    <div className="flex flex-col items-center">
+      <img
+        src={cocktail2}
+        alt="Cocktail Image"
+        className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+      />
+      <p className="mt-2 text-center">List some ingredients and give an idea of the flavour, adding emphasis on any elements that elevate the cocktail</p>
+    </div>
+    <div className="flex flex-col items-center">
+      <img
+        src={abibizimg}
+        alt="Abibiz Image"
+        className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+      />
+      <p className="mt-2 text-center">Guests in a restaurant waiting to be served</p>
+    </div>
   </div>
 </div>
+
 
 
 
@@ -82,6 +98,58 @@ function Home() {
 }
 
 export default Home;
+
+
+<div class="flex flex-wrap gap-4 justify-center">
+  <div class="flex flex-col items-center">
+    <img
+      src={whisky}
+      alt="Whisky Image"
+      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+    />
+    <p className="mt-2 text-center">Some bottles of whisky</p>
+  </div>
+  <div class="flex flex-col items-center">
+    <img
+      src={waitress}
+      alt="Waitress Image"
+      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+    />
+    <p className="mt-2 text-center">Serves patrons with food and beverages in a positive and friendly manner</p>
+  </div>
+  <div class="flex flex-col items-center">
+    <img
+      src={whisky1}
+      alt="Whisky Image"
+      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+    />
+    <p className="mt-2 text-center">Some tots of whisky in a glass</p>
+  </div>
+  <div class="flex flex-col items-center">
+    <img
+      src={waiter}
+      alt="Waiter Image"
+      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+    />
+    <p className="mt-2 text-center">A waiter responsible for taking orders and serving food and beverages to guests</p>
+  </div>
+  <div class="flex flex-col items-center">
+    <img
+      src={cocktail2}
+      alt="Cocktail Image"
+      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+    />
+    <p className="mt-2 text-center">List some ingredients and give an idea of the flavour, adding emphasis on any elements that elevate the cocktail</p>
+  </div>
+  <div class="flex flex-col items-center">
+    <img
+      src={abibizimg}
+      alt="Abibiz Image"
+      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+    />
+    <p className="mt-2 text-center">Guests in a restaurant waiting to be served</p>
+  </div>
+</div>
 
 
 
