@@ -42,6 +42,7 @@ function Home() {
       alt="Whisky Image"
       className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
     />
+    <p>whisky dry gin</p>
     <img
       src={waitress}
       alt="Waitress Image"
