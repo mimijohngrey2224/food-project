@@ -51,7 +51,7 @@ function Home() {
         alt="Waitress Image"
         className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
       />
-      <p className="mt-2 text-center">Serves patrons with food and beverages in a positive and friendly manner</p>
+      <p className="mt-2 text-center w-7">Serves patrons with food and beverages in a positive and friendly manner</p>
     </div>
     <div className="flex flex-col items-center">
       <img
@@ -59,7 +59,7 @@ function Home() {
         alt="Whisky Image"
         className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
       />
-      <p className="mt-2 text-center">Some tots of whisky in a glass</p>
+      <p className="mt-2 text-center w-4">Some tots of whisky in a glass</p>
     </div>
     <div className="flex flex-col items-center">
       <img
@@ -67,7 +67,7 @@ function Home() {
         alt="Waiter Image"
         className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
       />
-      <p className="mt-2 text-center">A waiter responsible for taking orders and serving food and beverages to guests</p>
+      <p className="mt-2 text-center w-8">A waiter responsible for taking orders and serving food and beverages to guests</p>
     </div>
     <div className="flex flex-col items-center">
       <img
@@ -75,7 +75,7 @@ function Home() {
         alt="Cocktail Image"
         className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
       />
-      <p className="mt-2 text-center">List some ingredients and give an idea of the flavour, adding emphasis on any elements that elevate the cocktail</p>
+      <p className="mt-2 text-center w-10">List some ingredients and give an idea of the flavour, adding emphasis on any elements that elevate the cocktail</p>
     </div>
     <div className="flex flex-col items-center">
       <img
@@ -83,7 +83,7 @@ function Home() {
         alt="Abibiz Image"
         className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
       />
-      <p className="mt-2 text-center">Guests in a restaurant waiting to be served</p>
+      <p className="mt-2 text-center w-3">Guests in a restaurant waiting to be served</p>
     </div>
   </div>
 </div>
