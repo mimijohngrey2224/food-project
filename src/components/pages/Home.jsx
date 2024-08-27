@@ -165,12 +165,7 @@ import whisky from "/whisky.png";
 import waitress from "/waitress.jpg";
 import waiter from "/waiter.jpg";
 import cocktail2 from "/cocktail2.jpg";
-import { FaArrowAltCircleRight } from "react-icons/fa";
-import { FaArrowAltCircleLeft } from "react-icons/fa";
-
-
-
-
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 
 function Home() {
   const scrollContainerRef = useRef(null);
@@ -197,15 +192,9 @@ function Home() {
   const updateArrowVisibility = () => {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-
-      // Check if the content is overflowing
       const isOverflowing = scrollWidth > clientWidth;
-
-      // Check if the container is scrolled to the start or end
       const isScrolledToStart = scrollLeft === 0;
       const isScrolledToEnd = scrollLeft + clientWidth >= scrollWidth;
-
-      // Show arrows if content is overflowing and not at start or end
       setShowArrows(isOverflowing && !isScrolledToStart && !isScrolledToEnd);
     }
   };
@@ -213,7 +202,6 @@ function Home() {
   useEffect(() => {
     const container = scrollContainerRef.current;
     container.addEventListener('scroll', updateArrowVisibility);
-    
     updateArrowVisibility(); // Initial visibility check
 
     return () => {
@@ -225,7 +213,7 @@ function Home() {
     <div className="bg-purple-200 min-h-screen mb-[-20px]">
       <div className="container mx-auto px-4 py-8">
         <div className='font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center'>
-          <marquee behavior="" direction="">RESTAURANTS WITH THEIR DELICACIES</marquee>
+          <marquee>RESTAURANTS WITH THEIR DELICACIES</marquee>
         </div>
 
         <div className="mt-10">
@@ -235,7 +223,7 @@ function Home() {
           <div className="mt-6 mx-auto max-w-4xl">
             <p className="text-base sm:text-lg md:text-xl text-gray-800 leading-relaxed">
               Unbeatable, the atmosphere of these restaurants is unbeatable, soft lighting, comfortable seating with elbow room, an attentive
-              smartly dressed waitresses and waiters with good customers services, great service, a distinctive, well-thought-out menu,
+              smartly dressed waitresses and waiters with good customer service, great service, a distinctive, well-thought-out menu,
               hospitality, food, drinks, and soft background music.
             </p>
             <h2 className='font-bold text-lg sm:text-xl mt-4'>
@@ -249,9 +237,7 @@ function Home() {
         </div>
         
         <div className="relative overflow-x-auto whitespace-nowrap scrollbar-hide mt-10" ref={scrollContainerRef}>
-
           <div className="flex space-x-4 min-w-max">
-           
             <div className="flex flex-col items-center">
               <img
                 src={whisky}
@@ -291,7 +277,7 @@ function Home() {
                 className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
               />
               <div className="mt-2 text-center">
-                <p >List some ingredients and <br /> give an idea of the flavour, <br /> adding emphasis on any <br /> elements that elevate the cocktail</p>
+                <p>List some ingredients and <br /> give an idea of the flavour, <br /> adding emphasis on any <br /> elements that elevate the cocktail</p>
               </div>
             </div>
             <div className="flex flex-col items-center">
@@ -302,38 +288,24 @@ function Home() {
               />
               <p className="mt-2 text-center">Guests in a restaurant <br /> waiting to be served</p>
             </div>
-            
           </div>
-          
-          {/* Arrows positioned absolutely within the scroll container */}
-          {/* {showArrows && (
-            <>
-              <button 
-                onClick={scrollLeft}
-                className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10"
-                style={{ marginLeft: '10px' }}
-              >
-                &#9664;
-              </button>
-              <button 
-                onClick={scrollRight}
-                className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10"
-                style={{ marginRight: '10px' }}
-              >
-                &#9654;
-              </button>
-            </>
-          )} */}
-          
         </div>
-        <div className=' flex flex-wrap gap-4'>
-          <div className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10" onClick={scrollLeft}>
-            <FaArrowAltCircleLeft />
-            </div>
-          <div className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10" onClick={scrollRight}>
-            <FaArrowAltCircleRight />
-            </div>
-          </div>
+
+        {/* Navigation Arrows */}
+        <div className="relative mt-10">
+          {showArrows && (
+            <>
+              <div className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10 cursor-pointer" onClick={scrollLeft}>
+                <FaArrowAltCircleLeft />
+              </div>
+              <div className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10 cursor-pointer" onClick={scrollRight}>
+                <FaArrowAltCircleRight />
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Restaurant Component */}
         <Restaurant />
       </div>
     </div>
