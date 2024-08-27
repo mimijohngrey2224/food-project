@@ -167,12 +167,9 @@ import waiter from "/waiter.jpg";
 import cocktail2 from "/cocktail2.jpg";
 
 function Home() {
-  // Refs to the scroll container and arrows
   const scrollContainerRef = useRef(null);
-  const [isLeftVisible, setIsLeftVisible] = useState(false);
-  const [isRightVisible, setIsRightVisible] = useState(true);
+  const [showArrows, setShowArrows] = useState(false);
 
-  // Function to scroll left
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({
@@ -182,7 +179,6 @@ function Home() {
     }
   };
 
-  // Function to scroll right
   const scrollRight = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({
@@ -192,28 +188,26 @@ function Home() {
     }
   };
 
-  // Update arrow visibility based on scroll position
   const updateArrowVisibility = () => {
     if (scrollContainerRef.current) {
-      const scrollLeft = scrollContainerRef.current.scrollLeft;
-      const scrollWidth = scrollContainerRef.current.scrollWidth;
-      const clientWidth = scrollContainerRef.current.clientWidth;
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
 
-      setIsLeftVisible(scrollLeft > 0);
-      setIsRightVisible(scrollLeft < (scrollWidth - clientWidth));
+      // Show arrows only if scrolling container is not at the ends
+      setShowArrows(
+        scrollLeft > 0 || (scrollLeft + clientWidth < scrollWidth)
+      );
     }
   };
 
   useEffect(() => {
-    // Add scroll event listener
     const container = scrollContainerRef.current;
     container.addEventListener('scroll', updateArrowVisibility);
+    
+    updateArrowVisibility(); // Initial visibility check
 
-    // Initial visibility check
-    updateArrowVisibility();
-
-    // Cleanup event listener
-    return () => container.removeEventListener('scroll', updateArrowVisibility);
+    return () => {
+      container.removeEventListener('scroll', updateArrowVisibility);
+    };
   }, []);
 
   return (
@@ -297,19 +291,19 @@ function Home() {
             </div>
           </div>
           {/* Conditionally render arrows based on visibility */}
-          {isLeftVisible && (
-            <button 
-              onClick={scrollLeft}
-              className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600">
-              &#9664;
-            </button>
-          )}
-          {isRightVisible && (
-            <button 
-              onClick={scrollRight}
-              className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600">
-              &#9654;
-            </button>
+          {showArrows && (
+            <>
+              <button 
+                onClick={scrollLeft}
+                className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10">
+                &#9664;
+              </button>
+              <button 
+                onClick={scrollRight}
+                className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10">
+                &#9654;
+              </button>
+            </>
           )}
         </div>
         <Restaurant />
