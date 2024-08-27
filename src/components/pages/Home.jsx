@@ -189,23 +189,23 @@ function Home() {
     }
   };
 
-  const updateArrowVisibility = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      const isOverflowing = scrollWidth > clientWidth;
-      const isScrolledToStart = scrollLeft === 0;
-      const isScrolledToEnd = scrollLeft + clientWidth >= scrollWidth;
-      setShowArrows(isOverflowing && !isScrolledToStart && !isScrolledToEnd);
-    }
-  };
+  // const updateArrowVisibility = () => {
+  //   if (scrollContainerRef.current) {
+  //     const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+  //     const isOverflowing = scrollWidth > clientWidth;
+  //     const isScrolledToStart = scrollLeft === 0;
+  //     const isScrolledToEnd = scrollLeft + clientWidth >= scrollWidth;
+  //     setShowArrows(isOverflowing && !isScrolledToStart && !isScrolledToEnd);
+  //   }
+  // };
 
   useEffect(() => {
     const container = scrollContainerRef.current;
-    container.addEventListener('scroll', updateArrowVisibility);
-    updateArrowVisibility(); // Initial visibility check
+    // container.addEventListener('scroll', updateArrowVisibility);
+    // updateArrowVisibility(); // Initial visibility check
 
     return () => {
-      container.removeEventListener('scroll', updateArrowVisibility);
+      container.removeEventListener('scroll');
     };
   }, []);
 
@@ -292,7 +292,7 @@ function Home() {
         </div>
 
         {/* Navigation Arrows */}
-        <div className="relative mt-10">
+        <div className="relative mt-20">
           {showArrows && (
             <>
               <div className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10 cursor-pointer" onClick={scrollLeft}>
