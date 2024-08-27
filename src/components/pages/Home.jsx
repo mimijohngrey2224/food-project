@@ -324,7 +324,9 @@ function Home() {
               </button>
             </>
           )} */}
-          <div className=' flex flex-wrap gap-4'>
+          
+        </div>
+        <div className=' flex flex-wrap gap-4'>
           <div className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10" onClick={scrollLeft}>
             <FaArrowAltCircleLeft />
             </div>
@@ -332,7 +334,6 @@ function Home() {
             <FaArrowAltCircleRight />
             </div>
           </div>
-        </div>
         <Restaurant />
       </div>
     </div>
