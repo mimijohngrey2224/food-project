@@ -122,8 +122,9 @@ function Home() {
         </div>
 
         {/* Restaurant Component */}
-        <Restaurant />
+        
       </div>
+      <Restaurant />
     </div>
   );
 }
