@@ -26,7 +26,7 @@ function BreakfastPage() {
                 <img
                   src={`https://food-project-api.onrender.com/uploads/${item.img}`} // Adjust URL as needed
                   alt={item.name}
-                  className="w-full h-40 sm:h-48 md:h-52 lg:h-56 object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
+                  className="w-[350px] h-[280px] sm:h-48 md:h-52 lg:h-56 object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
                 />
                 <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
                   <p className="text-white text-base sm:text-lg font-bold">View Details</p>
