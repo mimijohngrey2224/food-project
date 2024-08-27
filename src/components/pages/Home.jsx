@@ -157,8 +157,7 @@
 
 
 
-
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import whisky1 from '/whisky.png3.jpeg';
 import abibizimg from '/abibizimg.jpeg';
 import Restaurant from './Restaurant';
@@ -168,8 +167,10 @@ import waiter from "/waiter.jpg";
 import cocktail2 from "/cocktail2.jpg";
 
 function Home() {
-  // Refs to the scroll container
+  // Refs to the scroll container and arrows
   const scrollContainerRef = useRef(null);
+  const [isLeftVisible, setIsLeftVisible] = useState(false);
+  const [isRightVisible, setIsRightVisible] = useState(true);
 
   // Function to scroll left
   const scrollLeft = () => {
@@ -190,6 +191,30 @@ function Home() {
       });
     }
   };
+
+  // Update arrow visibility based on scroll position
+  const updateArrowVisibility = () => {
+    if (scrollContainerRef.current) {
+      const scrollLeft = scrollContainerRef.current.scrollLeft;
+      const scrollWidth = scrollContainerRef.current.scrollWidth;
+      const clientWidth = scrollContainerRef.current.clientWidth;
+
+      setIsLeftVisible(scrollLeft > 0);
+      setIsRightVisible(scrollLeft < (scrollWidth - clientWidth));
+    }
+  };
+
+  useEffect(() => {
+    // Add scroll event listener
+    const container = scrollContainerRef.current;
+    container.addEventListener('scroll', updateArrowVisibility);
+
+    // Initial visibility check
+    updateArrowVisibility();
+
+    // Cleanup event listener
+    return () => container.removeEventListener('scroll', updateArrowVisibility);
+  }, []);
 
   return (
     <div className="bg-purple-200 min-h-screen mb-[-20px]">
@@ -271,16 +296,21 @@ function Home() {
               <p className="mt-2 text-center">Guests in a restaurant <br /> waiting to be served</p>
             </div>
           </div>
-          <button 
-            onClick={scrollLeft}
-            className="fixed top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600">
-            &#9664;
-          </button>
-          <button 
-            onClick={scrollRight}
-            className=" fixed top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600">
-            &#9654;
-          </button>
+          {/* Conditionally render arrows based on visibility */}
+          {isLeftVisible && (
+            <button 
+              onClick={scrollLeft}
+              className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600">
+              &#9664;
+            </button>
+          )}
+          {isRightVisible && (
+            <button 
+              onClick={scrollRight}
+              className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600">
+              &#9654;
+            </button>
+          )}
         </div>
         <Restaurant />
       </div>
