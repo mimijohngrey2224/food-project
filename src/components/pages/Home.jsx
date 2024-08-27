@@ -6,6 +6,7 @@ import whisky from "/whisky.png";
 import waitress from "/waitress.jpg";
 import waiter from "/waiter.jpg";
 import cocktail2 from "/cocktail2.jpg";
+import redwine from "/redwine.jpg";
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 
 function Home() {
@@ -107,6 +108,14 @@ function Home() {
                 className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
               />
               <p className="mt-2 text-center">Guests in a restaurant <br /> waiting to be served</p>
+            </div>
+            <div className="flex flex-col items-center">
+            <img
+                src={redwine}
+                alt="Redwine Image"
+                className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+              />
+              <p>Red wine range in hue from <br /> deep, opaque purple to pale <br /> ruby and everything in between</p>
             </div>
           </div>
         </div>
