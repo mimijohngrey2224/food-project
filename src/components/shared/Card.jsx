@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-function Card({children}) {
+function Card({ children }) {
   return (
-    <div  className=' border border-purple-400 w-[350px] text-center rounded-lg shadow-xl pb-[10px]'>
-        {children}
+    <div className="border border-purple-400 text-center rounded-lg shadow-xl pb-4 mx-auto">
+      {children}
     </div>
-  )
+  );
 }
 
-export default Card
+export default Card;
