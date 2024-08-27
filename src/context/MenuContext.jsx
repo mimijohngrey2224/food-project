@@ -305,13 +305,11 @@ const MenuContextProvider = ({ children }) => {
       });
       setUserProfile(response.data.profile);
       console.log("Fetched user profile:", response.data.profile);
-      console.error('Response data:', error.response.data);
-      console.error('Response status:', error.response.status);
-      console.error('Response headers:', error.response.headers);
     } catch (error) {
-      console.error("Error fetching user profile:", error);
+      console.error("Error fetching user profile:", error.response ? error.response.data : error.message);
     }
   };
+  
 
   const updateUserProfile = async (profileData) => {
     try {
