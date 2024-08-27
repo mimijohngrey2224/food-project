@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { MenuContext } from "../context/MenuContext";
 import Card from "./shared/Card";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -23,13 +22,13 @@ function BreakfastPage() {
         {breakItems.length > 0 ? (
           breakItems.map((item) => (
             <Card key={item._id} className="relative">
-              <div to={`${item._id}`} className="block relative">
+              <div className="relative">
                 <img
                   src={`https://food-project-api.onrender.com/uploads/${item.img}`} // Adjust URL as needed
                   alt={item.name}
-                  className="w-full h-40 sm:h-48 md:h-52 lg:h-56 object-cover transition duration-300 transform hover:scale-105 rounded-lg"
+                  className="w-full h-40 sm:h-48 md:h-52 lg:h-56 object-cover transition-transform duration-300 transform hover:scale-105 rounded-lg"
                 />
-                <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition duration-300">
+                <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
                   <p className="text-white text-base sm:text-lg font-bold">View Details</p>
                 </div>
               </div>
@@ -38,7 +37,7 @@ function BreakfastPage() {
                 <p className="text-gray-600 text-sm sm:text-base">{item.description}</p>
                 <b className="text-gray-600 block text-sm sm:text-base">₦{item.price}</b>
                 <button
-                  className="bg-purple-400 text-white p-2 rounded mt-2 w-full text-sm sm:text-base"
+                  className="bg-purple-400 text-white p-2 rounded mt-2 w-full text-sm sm:text-base hover:bg-purple-500 transition-colors duration-300"
                   onClick={() => handleAddToCart(item)}
                 >
                   Add to Cart
