@@ -79,6 +79,14 @@ function Home() {
               <p className="mt-2 text-center">Serves patrons with <br /> food and beverages in a <br /> positive and friendly manner</p>
             </div>
             <div className="flex flex-col items-center">
+            <img
+                src={hilda}
+                alt="Hilda Image"
+                className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+              />
+              <p className="mt-2 text-center">A Nigerian chef Hilda Bassey, <br /> a Guinness World Record holder <br /> for the longest cooking marathon GWR</p>
+            </div>
+            <div className="flex flex-col items-center">
               <img
                 src={whisky1}
                 alt="Whisky Image"
@@ -120,14 +128,7 @@ function Home() {
               />
               <p className="mt-2 text-center">Red wine range in hue from <br /> deep, opaque purple to pale <br /> ruby and everything in between</p>
             </div>
-            <div className="flex flex-col items-center">
-            <img
-                src={hilda}
-                alt="Hilda Image"
-                className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
-              />
-              <p className="mt-2 text-center">A Nigerian chef Hilda Bassey, <br /> a Guinness World Record holder <br /> for the longest cooking marathon GWR</p>
-            </div>
+            
             <div className="flex flex-col items-center">
             <img
                 src={foodin}
