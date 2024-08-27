@@ -157,7 +157,7 @@
 
 
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import whisky1 from '/whisky.png3.jpeg';
 import abibizimg from '/abibizimg.jpeg';
 import Restaurant from './Restaurant';
@@ -169,7 +169,6 @@ import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 
 function Home() {
   const scrollContainerRef = useRef(null);
-  const [showArrows, setShowArrows] = useState(false);
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -188,26 +187,6 @@ function Home() {
       });
     }
   };
-
-  // const updateArrowVisibility = () => {
-  //   if (scrollContainerRef.current) {
-  //     const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-  //     const isOverflowing = scrollWidth > clientWidth;
-  //     const isScrolledToStart = scrollLeft === 0;
-  //     const isScrolledToEnd = scrollLeft + clientWidth >= scrollWidth;
-  //     setShowArrows(isOverflowing && !isScrolledToStart && !isScrolledToEnd);
-  //   }
-  // };
-
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    // container.addEventListener('scroll', updateArrowVisibility);
-    // updateArrowVisibility(); // Initial visibility check
-
-    return () => {
-      container.removeEventListener('scroll');
-    };
-  }, []);
 
   return (
     <div className="bg-purple-200 min-h-screen mb-[-20px]">
@@ -292,17 +271,13 @@ function Home() {
         </div>
 
         {/* Navigation Arrows */}
-        <div className="relative mt-20">
-          {showArrows && (
-            <>
-              <div className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10 cursor-pointer" onClick={scrollLeft}>
-                <FaArrowAltCircleLeft />
-              </div>
-              <div className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10 cursor-pointer" onClick={scrollRight}>
-                <FaArrowAltCircleRight />
-              </div>
-            </>
-          )}
+        <div className="relative mt-4 mb-10">
+          <div className="absolute top-[-30px] left-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10 cursor-pointer" onClick={scrollLeft}>
+            <FaArrowAltCircleLeft size={30} />
+          </div>
+          <div className="absolute top-[-30px] right-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10 cursor-pointer" onClick={scrollRight}>
+            <FaArrowAltCircleRight size={30} />
+          </div>
         </div>
 
         {/* Restaurant Component */}
