@@ -191,11 +191,16 @@ function Home() {
   const updateArrowVisibility = () => {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      
-      // Show arrows only if scrolling container is not at the ends
-      setShowArrows(
-        scrollLeft > 0 || (scrollLeft + clientWidth < scrollWidth)
-      );
+
+      // Check if the content is overflowing
+      const isOverflowing = scrollWidth > clientWidth;
+
+      // Check if the container is scrolled to the start or end
+      const isScrolledToStart = scrollLeft === 0;
+      const isScrolledToEnd = scrollLeft + clientWidth >= scrollWidth;
+
+      // Show arrows if content is overflowing and not at start or end
+      setShowArrows(isOverflowing && !isScrolledToStart && !isScrolledToEnd);
     }
   };
 
@@ -290,17 +295,22 @@ function Home() {
               <p className="mt-2 text-center">Guests in a restaurant <br /> waiting to be served</p>
             </div>
           </div>
-          {/* Conditionally render arrows based on visibility */}
+          
+          {/* Arrows positioned absolutely within the scroll container */}
           {showArrows && (
             <>
               <button 
                 onClick={scrollLeft}
-                className="fixed top-1/2 left-4 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10">
+                className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10"
+                style={{ marginLeft: '10px' }}
+              >
                 &#9664;
               </button>
               <button 
                 onClick={scrollRight}
-                className="fixed top-1/2 right-4 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10">
+                className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10"
+                style={{ marginRight: '10px' }}
+              >
                 &#9654;
               </button>
             </>
