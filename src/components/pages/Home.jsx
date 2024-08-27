@@ -165,6 +165,12 @@ import whisky from "/whisky.png";
 import waitress from "/waitress.jpg";
 import waiter from "/waiter.jpg";
 import cocktail2 from "/cocktail2.jpg";
+import { FaArrowAltCircleRight } from "react-icons/fa";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
+
+
+
+
 
 function Home() {
   const scrollContainerRef = useRef(null);
@@ -243,7 +249,11 @@ function Home() {
         </div>
         
         <div className="relative overflow-x-auto whitespace-nowrap scrollbar-hide mt-10" ref={scrollContainerRef}>
+
           <div className="flex space-x-4 min-w-max">
+            <div className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10" onClick={scrollLeft}>
+            <FaArrowAltCircleLeft />
+            </div>
             <div className="flex flex-col items-center">
               <img
                 src={whisky}
@@ -294,10 +304,13 @@ function Home() {
               />
               <p className="mt-2 text-center">Guests in a restaurant <br /> waiting to be served</p>
             </div>
+            <div className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10" onClick={scrollRight}>
+            <FaArrowAltCircleRight />
+            </div>
           </div>
           
           {/* Arrows positioned absolutely within the scroll container */}
-          {showArrows && (
+          {/* {showArrows && (
             <>
               <button 
                 onClick={scrollLeft}
@@ -314,7 +327,7 @@ function Home() {
                 &#9654;
               </button>
             </>
-          )}
+          )} */}
         </div>
         <Restaurant />
       </div>
