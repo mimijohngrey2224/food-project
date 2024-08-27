@@ -273,12 +273,12 @@ function Home() {
           </div>
           <button 
             onClick={scrollLeft}
-            className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600">
+            className="fixed top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600">
             &#9664;
           </button>
           <button 
             onClick={scrollRight}
-            className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600">
+            className=" fixed top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600">
             &#9654;
           </button>
         </div>
