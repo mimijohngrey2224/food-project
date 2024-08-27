@@ -191,7 +191,7 @@ function Home() {
   const updateArrowVisibility = () => {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-
+      
       // Show arrows only if scrolling container is not at the ends
       setShowArrows(
         scrollLeft > 0 || (scrollLeft + clientWidth < scrollWidth)
@@ -295,12 +295,12 @@ function Home() {
             <>
               <button 
                 onClick={scrollLeft}
-                className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10">
+                className="fixed top-1/2 left-4 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10">
                 &#9664;
               </button>
               <button 
                 onClick={scrollRight}
-                className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10">
+                className="fixed top-1/2 right-4 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 z-10">
                 &#9654;
               </button>
             </>
