@@ -35,7 +35,7 @@ function Home() {
           </div>
         </div>
         
-        <div className="overflow-x-auto whitespace-nowrap scrollbar-hide mt-10">
+        <div className="relative overflow-x-auto whitespace-nowrap scrollbar-hide mt-10">
   <div className="flex space-x-4 min-w-max">
     <div className="flex flex-col items-center">
       <img
@@ -87,6 +87,13 @@ function Home() {
       />
       <p className="mt-2 text-center">Guests in a restaurant <br /> waiting to be served</p>
     </div>
+    <button className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600">
+    &#9664;
+  </button>
+  
+  <button className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600">
+    &#9654;
+  </button>
   </div>
 </div>
 
