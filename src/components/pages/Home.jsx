@@ -36,58 +36,69 @@ function Home() {
         </div>
         
         <div className="overflow-x-auto whitespace-nowrap mt-10">
-  <div className="flex space-x-4 min-w-max">
-    <div className="flex flex-col items-center">
-      <img
-        src={whisky}
-        alt="Whisky Image"
-        className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
-      />
-      <p className="mt-2 text-center">Varieties of whisky</p>
-    </div>
-    <div className="flex flex-col items-center">
-      <img
-        src={waitress}
-        alt="Waitress Image"
-        className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
-      />
-      <p className="mt-2 text-center">Serves patrons with <br /> food and beverages in a <br /> positive and friendly manner</p>
-    </div>
-    <div className="flex flex-col items-center">
-      <img
-        src={whisky1}
-        alt="Whisky Image"
-        className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
-      />
-      <p className="mt-2 text-center">Some tots of whisky in a glass</p>
-    </div>
-    <div className="flex flex-col items-center">
-      <img
-        src={waiter}
-        alt="Waiter Image"
-        className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
-      />
-      <p className="mt-2 text-center">A waiter responsible for <br /> taking orders and serving <br /> food and beverages to guests</p>
-    </div>
-    <div className="flex flex-col items-center">
-      <img
-        src={cocktail2}
-        alt="Cocktail Image"
-        className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
-      />
-      <div className="mt-2 text-center w-6 h-6">
-      <p >List some ingredients and give an idea of the flavour, adding emphasis on any elements that elevate the cocktail</p>
-      </div>
-    </div>
-    <div className="flex flex-col items-center">
-      <img
-        src={abibizimg}
-        alt="Abibiz Image"
-        className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
-      />
-      <p className="mt-2 text-center">Guests in a restaurant <br /> waiting to be served</p>
-    </div>
+        <div className="flex space-x-4 min-w-max">
+  <div className="flex flex-col items-center">
+    <img
+      src={whisky}
+      alt="Whisky Image"
+      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+    />
+    <p className="mt-2 text-center max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] text-base sm:text-lg md:text-xl lg:text-2xl">
+      Varieties of whisky
+    </p>
   </div>
+  <div className="flex flex-col items-center">
+    <img
+      src={waitress}
+      alt="Waitress Image"
+      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+    />
+    <p className="mt-2 text-center max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] text-base sm:text-lg md:text-xl lg:text-2xl">
+      Serves patrons with <br /> food and beverages in a <br /> positive and friendly manner
+    </p>
+  </div>
+  <div className="flex flex-col items-center">
+    <img
+      src={whisky1}
+      alt="Whisky Image"
+      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+    />
+    <p className="mt-2 text-center max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] text-base sm:text-lg md:text-xl lg:text-2xl">
+      Some tots of whisky in a glass
+    </p>
+  </div>
+  <div className="flex flex-col items-center">
+    <img
+      src={waiter}
+      alt="Waiter Image"
+      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+    />
+    <p className="mt-2 text-center max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] text-base sm:text-lg md:text-xl lg:text-2xl">
+      A waiter responsible for <br /> taking orders and serving <br /> food and beverages to guests
+    </p>
+  </div>
+  <div className="flex flex-col items-center">
+    <img
+      src={cocktail2}
+      alt="Cocktail Image"
+      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+    />
+    <p className="mt-2 text-center max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] text-base sm:text-lg md:text-xl lg:text-2xl">
+      List some ingredients and give an idea of the flavour, adding emphasis on any elements that elevate the cocktail
+    </p>
+  </div>
+  <div className="flex flex-col items-center">
+    <img
+      src={abibizimg}
+      alt="Abibiz Image"
+      className="h-[100px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-[150px] sm:w-[200px] md:w-[250px] lg:w-[300px] object-cover rounded-full shadow-md transition-transform duration-300 hover:scale-105"
+    />
+    <p className="mt-2 text-center max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] text-base sm:text-lg md:text-xl lg:text-2xl">
+      Guests in a restaurant <br /> waiting to be served
+    </p>
+  </div>
+</div>
+
 </div>
 
 
