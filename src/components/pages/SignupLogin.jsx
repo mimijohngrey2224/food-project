@@ -18,7 +18,6 @@ function SignupLogin({ onClose }) {
     street: "",
     city: "",
     country: "",
-    
   });
 
   const [loginData, setLoginData] = useState({
@@ -27,6 +26,10 @@ function SignupLogin({ onClose }) {
   });
 
   const [showLoginForm, setShowLoginForm] = useState(false);
+
+  // States for password visibility
+  const [showSignupPassword, setShowSignupPassword] = useState(false);
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
 
   const handleSignupChange = (e) => {
     const { name, value } = e.target;
@@ -40,6 +43,11 @@ function SignupLogin({ onClose }) {
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
+    // Check if passwords match
+    if (signupData.password !== signupData.confirmPassword) {
+      return toast.error("Passwords do not match");
+    }
+
     try {
       const response = await axios.post(`${url}/api/user/register`, signupData);
       console.log("Signup response:", response.data);
@@ -50,7 +58,7 @@ function SignupLogin({ onClose }) {
         "Signup error:",
         error.response ? error.response.data : error.message
       );
-      toast.error("Failed to registered");
+      toast.error("Failed to register");
     }
   };
 
@@ -75,6 +83,7 @@ function SignupLogin({ onClose }) {
         "Login error:",
         error.response ? error.response.data : error.message
       );
+      toast.error("Failed to login");
     }
   };
 
@@ -94,24 +103,35 @@ function SignupLogin({ onClose }) {
         <form onSubmit={handleLoginSubmit}>
           <h2 className="text-xl font-semibold mb-4">Login</h2>
           <div className="space-y-4">
-            <input
-              type="email"
-              name="email"
-              value={loginData.email}
-              onChange={handleLoginChange}
-              placeholder="Email"
-              className="border rounded-md p-2 w-full"
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              value={loginData.password}
-              onChange={handleLoginChange}
-              placeholder="Password"
-              className="border rounded-md p-2 w-full"
-              required
-            />
+            <div className="relative">
+              <input
+                type={showLoginPassword ? "text" : "password"}
+                name="email"
+                value={loginData.email}
+                onChange={handleLoginChange}
+                placeholder="Email"
+                className="border rounded-md p-2 w-full"
+                required
+              />
+            </div>
+            <div className="relative">
+              <input
+                type={showLoginPassword ? "text" : "password"}
+                name="password"
+                value={loginData.password}
+                onChange={handleLoginChange}
+                placeholder="Password"
+                className="border rounded-md p-2 w-full"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowLoginPassword(!showLoginPassword)}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2"
+              >
+                {showLoginPassword ? "Hide" : "Show"}
+              </button>
+            </div>
           </div>
           <button
             type="submit"
@@ -157,24 +177,42 @@ function SignupLogin({ onClose }) {
               className="border rounded-md p-2 w-full"
               required
             />
-            <input
-              type="password"
-              name="password"
-              value={signupData.password}
-              onChange={handleSignupChange}
-              placeholder="Password"
-              className="border rounded-md p-2 w-full"
-              required
-            />
-            <input
-              type="confirmPassword"
-              name="confirmPassword"
-              value={signupData.confirmPassword}
-              onChange={handleSignupChange}
-              placeholder="ConfirmPassword"
-              className="border rounded-md p-2 w-full"
-              required
-            />
+            <div className="relative">
+              <input
+                type={showSignupPassword ? "text" : "password"}
+                name="password"
+                value={signupData.password}
+                onChange={handleSignupChange}
+                placeholder="Password"
+                className="border rounded-md p-2 w-full"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowSignupPassword(!showSignupPassword)}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2"
+              >
+                {showSignupPassword ? "Hide" : "Show"}
+              </button>
+            </div>
+            <div className="relative">
+              <input
+                type={showSignupPassword ? "text" : "password"}
+                name="confirmPassword"
+                value={signupData.confirmPassword}
+                onChange={handleSignupChange}
+                placeholder="Confirm Password"
+                className="border rounded-md p-2 w-full"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowSignupPassword(!showSignupPassword)}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2"
+              >
+                {showSignupPassword ? "Hide" : "Show"}
+              </button>
+            </div>
             <input
               type="tel"
               name="phone"
@@ -211,7 +249,6 @@ function SignupLogin({ onClose }) {
               className="border rounded-md p-2 w-full"
               required
             />
-            
           </div>
           <button
             type="submit"
