@@ -12,11 +12,13 @@ function SignupLogin({ onClose }) {
     firstName: "",
     lastName: "",
     email: "",
+    password: "",
+    confirmPassword: "",
     phone: "",
     street: "",
     city: "",
     country: "",
-    password: "",
+    
   });
 
   const [loginData, setLoginData] = useState({
@@ -156,6 +158,24 @@ function SignupLogin({ onClose }) {
               required
             />
             <input
+              type="password"
+              name="password"
+              value={signupData.password}
+              onChange={handleSignupChange}
+              placeholder="Password"
+              className="border rounded-md p-2 w-full"
+              required
+            />
+            <input
+              type="confirmPassword"
+              name="confirmPassword"
+              value={signupData.password}
+              onChange={handleSignupChange}
+              placeholder="Password"
+              className="border rounded-md p-2 w-full"
+              required
+            />
+            <input
               type="tel"
               name="phone"
               value={signupData.phone}
@@ -191,15 +211,7 @@ function SignupLogin({ onClose }) {
               className="border rounded-md p-2 w-full"
               required
             />
-            <input
-              type="password"
-              name="password"
-              value={signupData.password}
-              onChange={handleSignupChange}
-              placeholder="Password"
-              className="border rounded-md p-2 w-full"
-              required
-            />
+            
           </div>
           <button
             type="submit"
