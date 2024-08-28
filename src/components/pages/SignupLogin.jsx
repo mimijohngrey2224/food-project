@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { LiaEyeSolid, LiaEyeSlashSolid } from "react-icons/lia";
 
 function SignupLogin({ onClose }) {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ function SignupLogin({ onClose }) {
 
   // States for password visibility
   const [showSignupPassword, setShowSignupPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showLoginPassword, setShowLoginPassword] = useState(false);
 
   const handleSignupChange = (e) => {
@@ -77,6 +79,8 @@ function SignupLogin({ onClose }) {
       console.log("Stored token:", localStorage.getItem("auth-token"));
       console.log("Stored user:", localStorage.getItem("user"));
 
+      // Close the form and navigate
+      onClose();
       navigate("/");
     } catch (error) {
       console.error(
@@ -103,17 +107,15 @@ function SignupLogin({ onClose }) {
         <form onSubmit={handleLoginSubmit}>
           <h2 className="text-xl font-semibold mb-4">Login</h2>
           <div className="space-y-4">
-            <div className="relative">
-              <input
-                type={showLoginPassword ? "text" : "password"}
-                name="email"
-                value={loginData.email}
-                onChange={handleLoginChange}
-                placeholder="Email"
-                className="border rounded-md p-2 w-full"
-                required
-              />
-            </div>
+            <input
+              type="email"
+              name="email"
+              value={loginData.email}
+              onChange={handleLoginChange}
+              placeholder="Email"
+              className="border rounded-md p-2 w-full"
+              required
+            />
             <div className="relative">
               <input
                 type={showLoginPassword ? "text" : "password"}
@@ -129,7 +131,11 @@ function SignupLogin({ onClose }) {
                 onClick={() => setShowLoginPassword(!showLoginPassword)}
                 className="absolute right-2 top-1/2 transform -translate-y-1/2"
               >
-                {showLoginPassword ? "Hide" : "Show"}
+                {showLoginPassword ? (
+                  <LiaEyeSlashSolid size={20} />
+                ) : (
+                  <LiaEyeSolid size={20} />
+                )}
               </button>
             </div>
           </div>
@@ -192,12 +198,16 @@ function SignupLogin({ onClose }) {
                 onClick={() => setShowSignupPassword(!showSignupPassword)}
                 className="absolute right-2 top-1/2 transform -translate-y-1/2"
               >
-                {showSignupPassword ? "Hide" : "Show"}
+                {showSignupPassword ? (
+                  <LiaEyeSlashSolid size={20} />
+                ) : (
+                  <LiaEyeSolid size={20} />
+                )}
               </button>
             </div>
             <div className="relative">
               <input
-                type={showSignupPassword ? "text" : "password"}
+                type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
                 value={signupData.confirmPassword}
                 onChange={handleSignupChange}
@@ -207,10 +217,14 @@ function SignupLogin({ onClose }) {
               />
               <button
                 type="button"
-                onClick={() => setShowSignupPassword(!showSignupPassword)}
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 className="absolute right-2 top-1/2 transform -translate-y-1/2"
               >
-                {showSignupPassword ? "Hide" : "Show"}
+                {showConfirmPassword ? (
+                  <LiaEyeSlashSolid size={20} />
+                ) : (
+                  <LiaEyeSolid size={20} />
+                )}
               </button>
             </div>
             <input
