@@ -132,9 +132,9 @@ function SignupLogin({ onClose }) {
                 className="absolute right-2 top-1/2 transform -translate-y-1/2"
               >
                 {showLoginPassword ? (
-                  <LiaEyeSlashSolid size={20} />
-                ) : (
-                  <LiaEyeSolid size={20} />
+                   <LiaEyeSolid size={20} />
+                  ) : (
+                    <LiaEyeSlashSolid size={20} />
                 )}
               </button>
             </div>
@@ -199,9 +199,9 @@ function SignupLogin({ onClose }) {
                 className="absolute right-2 top-1/2 transform -translate-y-1/2"
               >
                 {showSignupPassword ? (
-                  <LiaEyeSlashSolid size={20} />
-                ) : (
                   <LiaEyeSolid size={20} />
+                ) : (
+                  <LiaEyeSlashSolid size={20} />
                 )}
               </button>
             </div>
@@ -221,9 +221,9 @@ function SignupLogin({ onClose }) {
                 className="absolute right-2 top-1/2 transform -translate-y-1/2"
               >
                 {showConfirmPassword ? (
-                  <LiaEyeSlashSolid size={20} />
-                ) : (
                   <LiaEyeSolid size={20} />
+                ) : (
+                  <LiaEyeSlashSolid size={20} />
                 )}
               </button>
             </div>
