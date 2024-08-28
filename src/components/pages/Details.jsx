@@ -204,15 +204,16 @@ function Details({ restaurant, onClose }) {
         <p>No image available</p>
       )}
       <h3 className="text-sm font-semibold text-center mb-1">{name}</h3>
-      <p className="text-xs mb-2">Price: ${price}</p>
-      <select
+      <b className="text-xs mb-2">Price: ${price}</b>
+      {/* <select
         className="border border-gray-300 rounded-lg p-1 mb-2 text-xs"
         onChange={handleSelectChange}
         defaultValue=""
       >
         
-        <b>{name}</b>
-      </select>
+        
+      </select> */}
+      <b>{name}</b>
       <Button
         className="w-full text-xs bg-purple-500 text-white py-1"
         onClick={handleAddToCart}
