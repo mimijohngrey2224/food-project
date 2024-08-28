@@ -34,9 +34,10 @@ function Details({ restaurant, onClose }) {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [showMap, setShowMap] = useState(false);
 
+  // Function to handle adding item to cart
   const handleAddToCart = (item) => {
     if (!item || !item.name || !item.price) {
-      alert("Item details are missing.");
+      alert("Item information is missing.");
       return;
     }
 
@@ -86,9 +87,9 @@ function Details({ restaurant, onClose }) {
       console.error("Error fetching location:", error);
       alert("An error occurred while fetching the location. Please try again.");
     }
-  }, []);
+  }, [menuItems, breakItems, naijaItems, saladItems, signatureItems]);
 
-  const { name, image, address, operating_days = [], operating_hours = [], menu = [] } = restaurant || {};
+  const { name, image, address, operating_days = [], operating_hours = [] } = restaurant || {};
 
   // Combine all menu items into one list for display
   const menuItemsList = [
@@ -169,26 +170,24 @@ function Details({ restaurant, onClose }) {
                   key={item.name}
                   className="p-3 bg-gray-100 rounded-lg shadow-sm flex flex-col items-center"
                 >
-                  {/* Check if image URL is valid */}
                   {item.img ? (
                     <img
-                      src={`${url}/uploads/${item.img}`} // Use `item.img` if this is the correct property
+                      src={`${url}/uploads/${item.img}`}
                       alt={item.name}
                       className="w-24 h-24 object-cover rounded-lg mb-2"
                       onError={(e) => {
-                        // Handle error if image fails to load
-                        e.target.onerror = null; // prevents infinite loop in case of broken link
-                        e.target.src = '/path/to/default-image.jpg'; // fallback image
+                        e.target.onerror = null;
+                        e.target.src = '/path/to/default-image.jpg';
                       }}
                     />
                   ) : (
                     <p>No image available</p>
                   )}
-                  <p className="text-xs font-semibold text-center mb-1">{item.name}</p> {/* Adjusted font size */}
+                  <p className="text-xs font-semibold text-center mb-1">{item.name}</p>
                   <b className="text-xs mb-2">Price: ${item.price}</b>
                   <Button
                     className="w-full text-xs bg-purple-500 text-white py-1"
-                    onClick={() => handleAddToCart(item)} // Pass item details to the function
+                    onClick={() => handleAddToCart(item)}
                   >
                     Add to Cart
                   </Button>
@@ -218,3 +217,4 @@ function Details({ restaurant, onClose }) {
 }
 
 export default Details;
+
