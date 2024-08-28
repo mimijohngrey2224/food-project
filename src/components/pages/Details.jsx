@@ -210,8 +210,8 @@ function Details({ restaurant, onClose }) {
         onChange={handleSelectChange}
         defaultValue=""
       >
-        <option value="" disabled>Select an item</option>
-        <option value={name}>{name}</option>
+        
+        <b>{name}</b>
       </select>
       <Button
         className="w-full text-xs bg-purple-500 text-white py-1"
