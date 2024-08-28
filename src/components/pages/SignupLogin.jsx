@@ -169,9 +169,9 @@ function SignupLogin({ onClose }) {
             <input
               type="confirmPassword"
               name="confirmPassword"
-              value={signupData.password}
+              value={signupData.confirmPassword}
               onChange={handleSignupChange}
-              placeholder="Password"
+              placeholder="ConfirmPassword"
               className="border rounded-md p-2 w-full"
               required
             />
