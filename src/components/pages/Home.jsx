@@ -161,6 +161,9 @@ function Home() {
         {/* Restaurant Component */}
         
       </div>
+      <div>
+        <b className=' text-3xl'>Select your menu from your favourite restaurants below</b>
+      </div>
       <Restaurant />
     </div>
   );

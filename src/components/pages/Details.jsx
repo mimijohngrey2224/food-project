@@ -34,18 +34,18 @@ function Details({ restaurant, onClose }) {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [showMap, setShowMap] = useState(false);
 
-  // Function to handle adding item to cart
   const handleAddToCart = (item) => {
     if (!item || !item.name || !item.price) {
-      alert("Item information is missing.");
+      alert("Item details are missing.");
       return;
     }
 
+    // Add the item to the cart
     const cartItem = {
       name: item.name,
       price: item.price,
       quantity: 1,
-      img: item.img,
+      img: item.img || '/path/to/default-image.jpg', // Default image if not available
     };
 
     addToCart(cartItem);
@@ -87,9 +87,9 @@ function Details({ restaurant, onClose }) {
       console.error("Error fetching location:", error);
       alert("An error occurred while fetching the location. Please try again.");
     }
-  }, [menuItems, breakItems, naijaItems, saladItems, signatureItems]);
+  }, []);
 
-  const { name, image, address, operating_days = [], operating_hours = [] } = restaurant || {};
+  const { name, image, address, operating_days = [], operating_hours = [], menu = [] } = restaurant || {};
 
   // Combine all menu items into one list for display
   const menuItemsList = [
@@ -217,4 +217,3 @@ function Details({ restaurant, onClose }) {
 }
 
 export default Details;
-
