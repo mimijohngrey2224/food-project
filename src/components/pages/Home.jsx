@@ -162,7 +162,7 @@ function Home() {
         
       </div>
       <div className=' text-3xl flex text-center justify-center items-center'>
-        <b >Select your menu from your favourite restaurants below</b>
+        <dd ><span>(Select your menu from your favourite restaurants below)</span></dd>
       </div>
       <Restaurant />
     </div>
