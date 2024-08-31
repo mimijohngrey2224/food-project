@@ -60,7 +60,7 @@ function SignupLogin({ onClose }) {
         "Signup error:",
         error.response ? error.response.data : error.message
       );
-      toast.error("Failed to register");
+      toast.error("Failed due to Invalid Credentials");
     }
   };
 
@@ -87,7 +87,7 @@ function SignupLogin({ onClose }) {
         "Login error:",
         error.response ? error.response.data : error.message
       );
-      toast.error("Failed to login");
+      toast.error("Failed due to Invalid Credentials");
     }
   };
 
