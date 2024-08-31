@@ -402,10 +402,8 @@ const MenuContextProvider = ({ children }) => {
 
   // Save cart items to localStorage
   useEffect(() => {
-    if (!token) {
-      localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    }
-  }, [cartItems, token]);
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   // Sync local cart with server
   const syncLocalCartWithServer = async () => {
@@ -630,7 +628,7 @@ const MenuContextProvider = ({ children }) => {
     setCartItems(prevCartItems => {
       const existingItemIndex = prevCartItems.findIndex(item => item._id === itemId);
       if (existingItemIndex > -1) {
-        const updatedCartItems = prevCartItems.map(item =>
+        const updatedCartItems = prevCartItems.map(item => 
           item._id === itemId
             ? { ...item, quantity: item.quantity + 1 }
             : item
@@ -647,98 +645,24 @@ const MenuContextProvider = ({ children }) => {
       const existingItemIndex = prevCartItems.findIndex(item => item._id === itemId);
       if (existingItemIndex > -1) {
         const item = prevCartItems[existingItemIndex];
-        const updatedCartItems = item.quantity > 1
-          ? prevCartItems.map(cartItem =>
-            cartItem._id === itemId
-              ? { ...cartItem, quantity: cartItem.quantity - 1 }
-              : cartItem
-          )
-          : prevCartItems.filter(cartItem => cartItem._id !== itemId);
-
-        return updatedCartItems;
+        if (item.quantity > 1) {
+          const updatedCartItems = prevCartItems.map(item =>
+            item._id === itemId
+              ? { ...item, quantity: item.quantity - 1 }
+              : item
+          );
+          return updatedCartItems;
+        } else {
+          return prevCartItems.filter(item => item._id !== itemId);
+        }
       } else {
         return prevCartItems;
       }
     });
   };
 
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get(`${url}/api/user/profile`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (response.data && response.data.success) {
-        setUserProfile(response.data.data);
-      } else {
-        console.error('Failed to fetch user profile:', response.data.message);
-      }
-    } catch (error) {
-      console.error('Error fetching user profile:', error);
-    }
-  };
-
-  const updateUserProfile = async (profileData) => {
-    try {
-      const response = await axios.put(`${url}/api/user/profile`, profileData, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (response.data && response.data.success) {
-        setUserProfile(response.data.data);
-        setSuccess(true);
-      } else {
-        console.error('Failed to update user profile:', response.data.message);
-        setSuccess(false);
-      }
-    } catch (error) {
-      console.error('Error updating user profile:', error);
-      setSuccess(false);
-    }
-  };
-
-  const getUserProfile = async () => {
-    if (token) {
-      try {
-        const response = await axios.get(`${url}/api/user/profile`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        if (response.data.success) {
-          setUserProfile(response.data.data);
-        } else {
-          console.error('Failed to fetch user profile:', response.data.message);
-        }
-      } catch (error) {
-        console.error('Error fetching user profile:', error);
-      }
-    } else {
-      setUserProfile(null);
-    }
-  };
-
-  const contextValue = {
-    cartItems,
-    addToCart,
-    removeCartItem,
-    addCartItem,
-    reduceCartItem,
-    menuItems,
-    breakItems,
-    saladItems,
-    naijaItems,
-    signatureItems,
-    restaurantList,
-    url,
-    fetchUserData,
-    fetchCartData,
-    userName,
-    getUserProfile,
-    userProfile,
-    updateUserProfile,
-    error,
-    success
-  };
-
   return (
-    <MenuContext.Provider value={contextValue}>
+    <MenuContext.Provider value={{ cartItems, addToCart, removeCartItem, addCartItem, reduceCartItem, menuItems, breakItems, naijaItems, saladItems, signatureItems, restaurantList, userName, setUserName, userProfile, setUserProfile, error, setError, success, setSuccess, token, setToken }}>
       {children}
     </MenuContext.Provider>
   );
