@@ -45,15 +45,16 @@ function SignupLogin({ onClose }) {
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
-    // Check if passwords match
     if (signupData.password !== signupData.confirmPassword) {
       return toast.error("Passwords do not match");
     }
-
+  
     try {
       const response = await axios.post(`${url}/api/user/register`, signupData);
-      if (response.data.success) {
-        console.log("Signup response:", response.data);
+      console.log("Signup response status:", response.status);
+      console.log("Signup response data:", response.data);
+  
+      if (response.status === 200 && response.data.success) {
         setShowLoginForm(true);
         toast.success("Successfully Registered");
       } else {
@@ -67,6 +68,7 @@ function SignupLogin({ onClose }) {
       toast.error("Failed due to Invalid Credentials");
     }
   };
+  
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
