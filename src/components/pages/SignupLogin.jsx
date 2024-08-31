@@ -52,9 +52,13 @@ function SignupLogin({ onClose }) {
 
     try {
       const response = await axios.post(`${url}/api/user/register`, signupData);
-      console.log("Signup response:", response.data);
-      setShowLoginForm(true);
-      toast.success("Successfully Registered");
+      if (response.data.success) {
+        console.log("Signup response:", response.data);
+        setShowLoginForm(true);
+        toast.success("Successfully Registered");
+      } else {
+        toast.error(response.data.message || "Registration failed");
+      }
     } catch (error) {
       console.error(
         "Signup error:",
