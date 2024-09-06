@@ -198,6 +198,7 @@ const MenuContextProvider = ({ children }) => {
     }
   
     try {
+      // Post to the server to add the item to the cart
       const response = await axios.post(
         `${url}/api/cart/add`,
         { itemId: item._id },
@@ -205,15 +206,20 @@ const MenuContextProvider = ({ children }) => {
       );
   
       if (response.data.success) {
+        // Update local state
         setCartItems((prevCartItems) => {
           const updatedCartItems = [...prevCartItems];
           const existingItemIndex = updatedCartItems.findIndex(cartItem => cartItem._id === item._id);
+  
           if (existingItemIndex > -1) {
+            // Item already exists, update quantity
             updatedCartItems[existingItemIndex].quantity += 1;
           } else {
+            // Item does not exist, add new item with quantity 1
             updatedCartItems.push({ ...item, quantity: 1 });
           }
-          updateLocalStorage(updatedCartItems); // Update local storage with new cart items
+  
+          updateLocalStorage(updatedCartItems); // Update local storage
           return updatedCartItems;
         });
       } else {
@@ -224,10 +230,6 @@ const MenuContextProvider = ({ children }) => {
     }
   };
   
-  const updateLocalStorage = (updatedCart) => {
-    console.log('Updating localStorage with:', updatedCart);
-    localStorage.setItem('cartItems', JSON.stringify(updatedCart));
-  };
   
   const removeCartItem = async (itemId) => {
     if (!token) {
