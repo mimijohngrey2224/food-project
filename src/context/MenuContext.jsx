@@ -399,27 +399,18 @@ const MenuContextProvider = ({ children }) => {
   useEffect(() => {
     const storedCartItems = localStorage.getItem('cartItems');
     if (storedCartItems) {
-      try {
-        setCartItems(JSON.parse(storedCartItems));
-      } catch (e) {
-        console.error('Error parsing stored cart items:', e);
-        localStorage.removeItem('cartItems'); // Clear corrupted data
-      }
+      setCartItems(JSON.parse(storedCartItems));
     }
   }, []);
 
   // Save cart items to localStorage
   useEffect(() => {
-    if (Array.isArray(cartItems)) {
-      localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    }
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
 
   // Define updateLocalStorage function
   const updateLocalStorage = (updatedCart) => {
-    if (Array.isArray(updatedCart)) {
-      localStorage.setItem('cartItems', JSON.stringify(updatedCart));
-    }
+    localStorage.setItem('cartItems', JSON.stringify(updatedCart));
   };
 
   // Sync local cart with server
@@ -432,7 +423,7 @@ const MenuContextProvider = ({ children }) => {
           const response = await axios.post(`${url}/api/cart/sync`, { cartItems: localCart }, {
             headers: { Authorization: `Bearer ${token}` }
           });
-
+  
           if (response.data && response.data.cartData) {
             setCartItems(response.data.cartData); // Update cart state with server data
             localStorage.removeItem('cartItems'); // Clear local storage after successful sync
@@ -505,7 +496,7 @@ const MenuContextProvider = ({ children }) => {
 
   const fetchNaijaData = async () => {
     try {
-      const response = await axios.get(`${url}/api/menu/naija`);
+      const response = await axios.get(`https://food-project-api.onrender.com/api/menu/naija`);
       if (response.data.success) {
         setNaijaItems(response.data.data || []);
       } else {
@@ -582,7 +573,7 @@ const MenuContextProvider = ({ children }) => {
       console.error('No authentication token found');
       return;
     }
-
+  
     try {
       // Post to the server to add the item to the cart
       const response = await axios.post(
@@ -590,25 +581,21 @@ const MenuContextProvider = ({ children }) => {
         { itemId: item._id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
+  
       if (response.data.success) {
+        // Update local state
         setCartItems((prevCartItems) => {
-          if (!Array.isArray(prevCartItems)) {
-            console.error('Previous cart items is not an array');
-            return [];
-          }
-
           const updatedCartItems = [...prevCartItems];
           const existingItemIndex = updatedCartItems.findIndex(cartItem => cartItem._id === item._id);
-
+  
           if (existingItemIndex > -1) {
             // Item already exists, update quantity
-            updatedCartItems[existingItemIndex].quantity = (updatedCartItems[existingItemIndex].quantity || 0) + 1;
+            updatedCartItems[existingItemIndex].quantity += 1;
           } else {
             // Item does not exist, add new item with quantity 1
             updatedCartItems.push({ ...item, quantity: 1 });
           }
-
+  
           updateLocalStorage(updatedCartItems); // Update local storage
           return updatedCartItems;
         });
@@ -625,12 +612,12 @@ const MenuContextProvider = ({ children }) => {
       console.error('No authentication token found');
       return;
     }
-
+  
     try {
       const updatedCart = cartItems.filter(item => item._id !== itemId);
       setCartItems(updatedCart);
       updateLocalStorage(updatedCart);
-
+  
       await axios.delete(`${url}/api/cart/delete`, {
         headers: { Authorization: `Bearer ${token}` },
         data: { itemId },
@@ -643,96 +630,121 @@ const MenuContextProvider = ({ children }) => {
 
   const addCartItem = (itemId) => {
     setCartItems(prevCartItems => {
-      if (Array.isArray(prevCartItems)) {
-        const existingItemIndex = prevCartItems.findIndex(item => item._id === itemId);
-        if (existingItemIndex > -1) {
-          const updatedCartItems = prevCartItems.map(item => 
-            item._id === itemId
-              ? { ...item, quantity: (item.quantity || 0) + 1 }
-              : item
-          );
-          updateLocalStorage(updatedCartItems);
-          return updatedCartItems;
-        } else {
-          console.error('Item not found in cart');
-          return prevCartItems;
-        }
+      const existingItemIndex = prevCartItems.findIndex(item => item._id === itemId);
+      if (existingItemIndex > -1) {
+        const updatedCartItems = prevCartItems.map(item => 
+          item._id === itemId
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+        return updatedCartItems;
       } else {
-        console.error('Cart items should be an array');
-        return [];
+        const newItem = {}; // Replace with actual item details
+        return [...prevCartItems, { ...newItem, quantity: 1 }];
       }
     });
   };
 
   const reduceCartItem = (itemId) => {
     setCartItems(prevCartItems => {
-      if (Array.isArray(prevCartItems)) {
-        const updatedCartItems = prevCartItems.map(item => {
-          if (item._id === itemId) {
-            return {
-              ...item,
-              quantity: (item.quantity || 1) > 1 ? (item.quantity || 1) - 1 : 1,
-            };
-          }
-          return item;
-        }).filter(item => item.quantity > 0);
-
-        updateLocalStorage(updatedCartItems); // Ensure local storage is updated
-        return updatedCartItems;
-      } else {
-        console.error('Cart items should be an array');
-        return [];
-      }
+      const updatedCartItems = prevCartItems.map(item => {
+        if (item._id === itemId) {
+          return {
+            ...item,
+            quantity: item.quantity > 1 ? item.quantity - 1 : item.quantity,
+          };
+        }
+        return item;
+      }).filter(item => item.quantity > 0);
+      return updatedCartItems;
     });
   };
 
-  const clearCart = () => {
-    setCartItems([]);
-    updateLocalStorage([]);
+  const fetchUserData = () => {
+    try {
+      const userData = localStorage.getItem('user');
+      if (userData) {
+        const parsedData = JSON.parse(userData);
+        if (parsedData && parsedData.firstName) {
+          setUserName(parsedData.firstName);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to fetch user data:', error);
+    }
   };
 
-  const login = (token, userName) => {
-    setToken(token);
-    setUserName(userName);
+  const getUserProfile = async () => {
+    try {
+      const response = await axios.get(`${url}/api/profile`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setUserProfile(response.data.profile);
+      console.log("Fetched user profile:", response.data.profile);
+    } catch (error) {
+      console.error("Error fetching user profile:", error.response ? error.response.data : error.message);
+    }
   };
 
-  const logout = () => {
-    setToken('');
-    setUserName('');
-    localStorage.removeItem('auth-token');
-    clearCart();
+  const updateUserProfile = async (profileData) => {
+    try {
+      setError(null);
+      setSuccess(false);
+
+      let response;     
+      
+      if (profileData instanceof FormData) {
+        response = await axios.post(`${url}/api/profile/update`, profileData, {
+          headers: { 
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data' 
+          }
+        });
+      } else {
+        response = await axios.post(`${url}/api/profile/update`, profileData, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+      }
+          
+      setUserProfile(response.data.profile);
+      setSuccess(true);
+    } catch (error) {
+      console.error("Error updating user profile:", error);
+      setError("Failed to update profile. Please try again.");
+    }
+  };
+
+  const contextValue = {
+    cartItems,
+    addToCart,
+    removeCartItem,
+    addCartItem,
+    reduceCartItem,
+    menuItems,
+    breakItems,
+    saladItems,
+    naijaItems,
+    signatureItems,
+    restaurantList,
+    url,
+    fetchUserData,
+    fetchCartData,
+    userName,
+    getUserProfile,
+    userProfile,
+    updateUserProfile,
+    error,
+    success
   };
 
   return (
-    <MenuContext.Provider
-      value={{
-        cartItems,
-        menuItems,
-        breakItems,
-        naijaItems,
-        saladItems,
-        signatureItems,
-        restaurantList,
-        userName,
-        userProfile,
-        error,
-        success,
-        addToCart,
-        removeCartItem,
-        addCartItem,
-        reduceCartItem,
-        clearCart,
-        login,
-        logout,
-      }}
-    >
+    <MenuContext.Provider value={contextValue}>
       {children}
     </MenuContext.Provider>
   );
 };
 
 export default MenuContextProvider;
-
 
 
 
