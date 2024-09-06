@@ -250,7 +250,7 @@ function SimpleMap({ location }) {
 }
 
 function Details({ restaurant, onClose }) {
-  const { addToCart, url } = useContext(MenuContext);
+  const { addToCart, menuItems, breakItems, naijaItems, saladItems, signatureItems, url } = useContext(MenuContext);
 
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [showMap, setShowMap] = useState(false);
@@ -261,18 +261,23 @@ function Details({ restaurant, onClose }) {
       return;
     }
 
-    // Add the item to the cart
+    // Ensure item format is consistent with what MenuContext expects
     const cartItem = {
-      _id: item._id,
+      _id: item._id, // Assuming item has an _id field
       name: item.name,
       price: item.price,
-      quantity: 1,
       img: item.img || '/path/to/default-image.jpg', // Default image if not available
     };
 
-    addToCart(cartItem);
-    console.log(`Added ${item.name} to cart`, cartItem);
-    toast.success(`Added ${item.name} to cart`);
+    // Call addToCart from MenuContext
+    addToCart(cartItem)
+      .then(() => {
+        toast.success(`Added ${item.name} to cart`);
+      })
+      .catch((error) => {
+        console.error('Failed to add item to cart:', error);
+        toast.error('Failed to add item to cart');
+      });
   };
 
   const handleLocationClick = useCallback(async (address) => {
@@ -314,7 +319,13 @@ function Details({ restaurant, onClose }) {
   const { name, image, address, operating_days = [], operating_hours = [], menu = [] } = restaurant || {};
 
   // Combine all menu items into one list for display
-  const menuItemsList = menu; // Directly use the menu items passed in the restaurant prop
+  const menuItemsList = [
+    ...menuItems,
+    ...breakItems,
+    ...naijaItems,
+    ...saladItems,
+    ...signatureItems,
+  ];
 
   return (
     <div className="flex flex-col md:flex-row gap-4 p-4">
@@ -383,7 +394,7 @@ function Details({ restaurant, onClose }) {
             {menuItemsList.length > 0 ? (
               menuItemsList.map((item) => (
                 <div
-                  key={item._id} // Use _id instead of name for uniqueness
+                  key={item._id} // Use _id for key
                   className="p-3 bg-gray-100 rounded-lg shadow-sm flex flex-col items-center"
                 >
                   {item.img ? (
