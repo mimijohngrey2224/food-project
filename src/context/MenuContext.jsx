@@ -769,7 +769,7 @@ const MenuContextProvider = ({ children }) => {
   const [success, setSuccess] = useState(false);
   const [token, setToken] = useState(localStorage.getItem('auth-token') || '');
 
-  // Load cart items from localStorage initially
+  // Load cart items from localStorage initially if not logged in
   useEffect(() => {
     if (!token) {
       const storedCartItems = localStorage.getItem('cartItems');
@@ -779,7 +779,7 @@ const MenuContextProvider = ({ children }) => {
     }
   }, [token]);
 
-  // Save cart items to localStorage
+  // Save cart items to localStorage if not logged in
   useEffect(() => {
     if (!token) {
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
@@ -799,7 +799,6 @@ const MenuContextProvider = ({ children }) => {
           if (response.data && response.data.cartData) {
             setCartItems(response.data.cartData); // Update cart state with server data
             localStorage.removeItem('cartItems'); // Clear local storage after successful sync
-            console.log("Local storage cleared");
           } else {
             console.error('Server response does not contain cart data');
           }
@@ -815,7 +814,7 @@ const MenuContextProvider = ({ children }) => {
     }
   };
 
-  // Fetch cart data
+  // Fetch cart data from server
   const fetchCartData = async (authToken) => {
     if (!authToken) {
       console.error('No authentication token found');
@@ -940,6 +939,7 @@ const MenuContextProvider = ({ children }) => {
 
   const addToCart = async (item) => {
     if (!token) {
+      // Add to localStorage if not logged in
       const existingCart = JSON.parse(localStorage.getItem('cartItems') || '[]');
       const updatedCart = [...existingCart];
       const existingItemIndex = updatedCart.findIndex(cartItem => cartItem._id === item._id);
@@ -954,6 +954,7 @@ const MenuContextProvider = ({ children }) => {
       setCartItems(updatedCart);
     } else {
       try {
+        // Add to server cart if logged in
         const response = await axios.post(
           `${url}/api/cart/add`,
           { itemId: item._id },
@@ -1008,7 +1009,7 @@ const MenuContextProvider = ({ children }) => {
     setCartItems(prevCartItems => {
       const existingItemIndex = prevCartItems.findIndex(item => item._id === itemId);
       if (existingItemIndex > -1) {
-        const updatedCartItems = prevCartItems.map(item =>
+        const updatedCartItems = prevCartItems.map(item => 
           item._id === itemId
             ? { ...item, quantity: item.quantity + 1 }
             : item
@@ -1120,6 +1121,7 @@ const MenuContextProvider = ({ children }) => {
 };
 
 export default MenuContextProvider;
+
 
 
 
