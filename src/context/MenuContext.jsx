@@ -1446,12 +1446,9 @@ const MenuContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getUserProfile(); // Ensure this function is defined in context
-
-    const token = localStorage.getItem('auth-token');
-    setIsLoggedIn(!!token);
-  }, [getUserProfile]);
-
+    // Fetch user profile on mount if user is logged in
+    getUserProfile();
+  }, [url]);
 
   const updateUserProfile = async (profileData) => {
     try {
