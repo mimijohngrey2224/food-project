@@ -254,7 +254,7 @@ import ProfileForm from '../components/pages/profileForm';
 import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
 
 function Header() {
-  const { cartItems, url, userProfile } = useContext(MenuContext);
+  const { cartItems, url, userProfile, getUserProfile } = useContext(MenuContext);
   const navigate = useNavigate();
   
   // Calculate total items in cart
