@@ -14,7 +14,7 @@ import { starter, breakfast, dishes, nigerian, signatures } from "./components/d
 import { BrowserRouter as Router, Routes, Route  } from "react-router-dom"
 // import Restaurant from "./components/pages/Restaurant";
 import MenuContextProvider from "./context/MenuContext";
-// import SignupLogin from "./components/pages/SignupLogin";
+import SignupLogin from "./components/pages/SignupLogin";
 import Checkout from "./components/pages/Checkout";
 import Thanks from "./components/pages/Thanks";
 import 'leaflet/dist/leaflet.css';
@@ -32,6 +32,10 @@ function App() {
   const salad = dishes.filter((item)=> item.salad === true);
   const nigerianSoup = nigerian.filter((item)=> item.NigerianSoup === true);
   const signature = signatures.filter((item) => item.signature === true)
+
+  const handleUserLogin = (token, user) => {
+    // Update your MenuContext state
+  };
 
   return (
     
@@ -57,6 +61,7 @@ function App() {
           <Salad salad={salad} />
           <NigerianSoup nigerianSoup={nigerianSoup} />  
           <Signature signature={signature} />
+          <SignupLogin onClose={() => console.log('Closed')} onUserLogin={handleUserLogin} />
           </>
         } 
         />

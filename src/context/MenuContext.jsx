@@ -1477,6 +1477,12 @@ const MenuContextProvider = ({ children }) => {
     }
   };
 
+  const handleUserLogin = (newToken, user) => {
+    setToken(newToken);
+    setUserName(user.name);
+    setUserProfile(user);
+  };
+
   const contextValue = {
     cartItems,
     addToCart,
@@ -1497,7 +1503,9 @@ const MenuContextProvider = ({ children }) => {
     userProfile,
     updateUserProfile,
     error,
-    success
+    success,
+    setToken,
+    handleUserLogin
   };
 
   return (
