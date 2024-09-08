@@ -350,6 +350,15 @@ function Header() {
     fetchUserData();
   }, []);
 
+  useEffect(() => {
+    // Fetch user profile when the component mounts
+    getUserProfile();
+    
+    // Update login status based on the presence of token
+    const token = localStorage.getItem('auth-token');
+    setIsLoggedIn(!!token);
+  }, [getUserProfile]);
+
   return (
     <header className="bg-gradient-to-r from-purple-500 to-purple-700 shadow-lg sticky top-0 z-20">
       <div className="flex items-center justify-between p-4 lg:px-8">
