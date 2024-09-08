@@ -1427,15 +1427,28 @@ const MenuContextProvider = ({ children }) => {
   };
 
   const getUserProfile = async () => {
-    try {
-      const response = await axios.get(`${url}/api/profile`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      setUserProfile(response.data.profile);
-    } catch (error) {
-      console.error("Error fetching user profile:", error.response ? error.response.data : error.message);
+    const token = localStorage.getItem('auth-token');
+    if (token) {
+      try {
+        const response = await fetch(`${url}/user/profile`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        setUserProfile(data.profile);
+        setUserName(data.profile.name);
+      } catch (error) {
+        console.error('Failed to fetch user profile:', error);
+      }
     }
   };
+
+  useEffect(() => {
+    // Fetch user profile on mount if user is logged in
+    getUserProfile();
+  }, [url]);
 
   const updateUserProfile = async (profileData) => {
     try {
