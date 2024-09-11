@@ -2019,11 +2019,13 @@ const MenuContextProvider = ({ children }) => {
     }
   };
 
+
+
   const updateUserProfile = async (profileData) => {
     try {
       setError(null);
       setSuccess(false);
-
+  
       let response;
       if (profileData instanceof FormData) {
         response = await axios.post(`${url}/api/profile/update`, profileData, {
@@ -2037,7 +2039,8 @@ const MenuContextProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${token}` }
         });
       }
-
+  
+      // Update the user profile state with the response data
       setUserProfile(response.data.profile);
       setSuccess(true);
     } catch (error) {
@@ -2046,17 +2049,34 @@ const MenuContextProvider = ({ children }) => {
     }
   };
 
+
+  
+
   const getUserProfile = async () => {
     try {
       const response = await axios.get(`${url}/api/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      setUserProfile(response.data.profile);
-      setUserName(response.data.profile.firstName || 'User');
+      
+      // Ensure the response data has all needed fields
+      const profile = response.data.profile || {};
+      setUserProfile({
+        firstName: profile.firstName || '',
+        lastName: profile.lastName || '',
+        address: profile.address || '',
+        phoneNumber: profile.phoneNumber || '',
+        // Add other fields if needed
+      });
+      
+      // Optionally update the userName state for display purposes
+      setUserName(profile.firstName || 'User');
     } catch (error) {
       console.error('Failed to fetch user profile:', error);
     }
   };
+
+  
+  
 
   const addToCart = (item) => {
     setCartItems((prevItems) => {
