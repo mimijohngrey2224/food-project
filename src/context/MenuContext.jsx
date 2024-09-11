@@ -1828,23 +1828,36 @@ const MenuContextProvider = ({ children }) => {
   };
 
   const getUserProfile = async () => {
+    const token = localStorage.getItem('auth-token');
     if (token) {
       try {
-        const response = await fetch(`${url}/user/profile`, {
+        const response = await fetch(`${url}/api/profile`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
           },
         });
-        const data = await response.json();
-        setUserProfile(data.profile);
-        setUserName(data.profile.name);
+  
+        if (response.ok) {
+          // Attempt to parse JSON response
+          const data = await response.json();
+          setUserProfile(data.profile);
+          setUserName(data.profile.name);
+        } else {
+          // Handle non-200 responses
+          const errorText = await response.text();
+          console.error('Failed to fetch user profile:', errorText);
+          // Handle unexpected content types
+          if (response.headers.get('content-type')?.includes('text/html')) {
+            console.error('Unexpected HTML response:', errorText);
+          }
+        }
       } catch (error) {
         console.error('Failed to fetch user profile:', error);
       }
     }
   };
-
+  
   useEffect(() => {
     // Fetch user profile on mount if user is logged in
     getUserProfile();
