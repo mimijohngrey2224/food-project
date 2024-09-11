@@ -637,6 +637,7 @@ function SignupLogin({ onClose, onUserLogin }) {
   });
 
   const [showLoginForm, setShowLoginForm] = useState(false);
+  const [showSignupLogin, setShowSignupLogin] = useState(true);
 
   // States for password visibility
   const [showSignupPassword, setShowSignupPassword] = useState(false);
@@ -705,15 +706,16 @@ function SignupLogin({ onClose, onUserLogin }) {
       const response = await axios.post(`${url}/api/user/login`, loginData);
       console.log("Login response:", response.data);
       toast.success("Logged In Successfully");
-
+  
       // Store token and user data in localStorage
       localStorage.setItem("auth-token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
-
+  
       // Call the callback function to update the context
       onUserLogin(response.data.token, response.data.user);
-
+  
       // Close the form and navigate
+      console.log("Closing form...");
       onClose();
       navigate("/");
     } catch (error) {
@@ -724,9 +726,13 @@ function SignupLogin({ onClose, onUserLogin }) {
       toast.error("Failed due to Invalid Credentials");
     }
   };
-
+  
   const toggleLoginForm = () => {
     setShowLoginForm(!showLoginForm);
+  };
+
+  const handleClose = () => {
+    setShowSignupLogin(false);
   };
 
   return (
@@ -777,7 +783,7 @@ function SignupLogin({ onClose, onUserLogin }) {
             type="submit"
             className="bg-green-500 text-white py-2 px-4 mt-4 rounded w-full"
           >
-            Login
+            Login {showSignupLogin && <SignupLogin onClose={handleClose} onUserLogin={handleUserLogin} />}
           </button>
           <p
             className="mt-2 text-sm text-gray-500 cursor-pointer text-center"
