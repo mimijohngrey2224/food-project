@@ -837,9 +837,9 @@ function Header() {
     const token = localStorage.getItem('auth-token');
     setIsLoggedIn(!!token);
     if (token) {
-      getUserProfile(); // Ensure the profile is fetched when logged in
+        getUserProfile(); // Ensure the profile is fetched when logged in
     }
-  }, [getUserProfile]);
+}, [getUserProfile]);
 
   useEffect(() => {
     if (userProfile) {
@@ -870,11 +870,12 @@ function Header() {
           {isLoggedIn ? (
             <div className="text-lg font-medium flex items-center gap-2 relative">
               <img
-                src={userProfile?.image ? `${url}/uploads/${userProfile.image}` : avatar} 
-                alt="Profile"
-                className="h-12 w-12 rounded-full cursor-pointer border-2 border-white"
-                onClick={toggleProfileForm}
-              />
+                      src={userProfile?.image ? `${url}/uploads/${userProfile.image}` : avatar}
+                      alt="Profile"
+                      className="h-12 w-12 rounded-full cursor-pointer border-2 border-white"
+                      onClick={toggleProfileForm}
+                  />
+
               <p className="text-white ml-2 cursor-pointer">
                 Hi, {userName}!
               </p>
