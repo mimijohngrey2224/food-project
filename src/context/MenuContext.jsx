@@ -1143,6 +1143,7 @@ const MenuContextProvider = ({ children }) => {
   const [userProfile, setUserProfile] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [showSignupLogin, setShowSignupLogin] = useState(true);
   const [token, setToken] = useState(localStorage.getItem('auth-token') || '');
 
   // Initialize cart items from localStorage if not logged in
@@ -1482,6 +1483,11 @@ const MenuContextProvider = ({ children }) => {
     setUserName(user.name);
     setUserProfile(user);
   };
+
+  const handleClose = () => {
+    setShowSignupLogin(false);
+  };
+
 
   const contextValue = {
     cartItems,
