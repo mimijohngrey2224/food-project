@@ -355,9 +355,12 @@ function ProfileForm({ onClose }) {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setSelectedImage(file);
-    setProfileData(prevData => ({ ...prevData, image: file }));
+    if (file) {
+      setSelectedImage(URL.createObjectURL(file)); // Preview image
+      setProfileData(prevData => ({ ...prevData, image: file }));
+    }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -399,11 +402,12 @@ function ProfileForm({ onClose }) {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex items-center gap-4">
             <div className="relative">
-              <img 
-                src={profileData.image ? `${url}/uploads/${profileData.image}` : avatar} 
+            <img 
+                src={profileData.image ? selectedImage : `${url}/uploads/${profileData.image}`} 
                 alt="Profile" 
                 className="w-24 h-24 object-cover rounded-full border-2 border-gray-300"
               />
+
               <input 
                 type="file" 
                 accept="image/*" 

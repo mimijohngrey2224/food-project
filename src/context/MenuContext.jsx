@@ -2048,7 +2048,7 @@ const MenuContextProvider = ({ children }) => {
       setError("Failed to update profile. Please try again.");
     }
   };
-
+  
 
   
 
@@ -2057,25 +2057,31 @@ const MenuContextProvider = ({ children }) => {
       const response = await axios.get(`${url}/api/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      
+  
       // Ensure the response data has all needed fields
       const profile = response.data.profile || {};
       setUserProfile({
         firstName: profile.firstName || '',
         lastName: profile.lastName || '',
+        email: profile.email || '',
+        phone: profile.phone || '',
         address: profile.address || '',
-        phoneNumber: profile.phoneNumber || '',
-        // Add other fields if needed
+        image: profile.image || ''
       });
-      
-      // Optionally update the userName state for display purposes
+  
       setUserName(profile.firstName || 'User');
     } catch (error) {
       console.error('Failed to fetch user profile:', error);
     }
   };
 
-  
+  useEffect(() => {
+    if (token) {
+      getUserProfile();
+    }
+  }, [token, getUserProfile]);  
+
+
   
 
   const addToCart = (item) => {
