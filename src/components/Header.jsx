@@ -748,19 +748,20 @@
 
 // export default Header;
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { BsFillCartPlusFill } from 'react-icons/bs';
 import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
 import { RiMenu4Fill } from 'react-icons/ri';
-import { useMenuContext } from './MenuContext'; // Update this import path as needed
-import abibiz1 from './path/to/logo'; // Update this import path as needed
-import avatar from './path/to/default-avatar'; // Update this import path as needed
-import SignupLogin from './SignupLogin'; // Update this import path as needed
-import ProfileForm from './ProfileForm'; // Update this import path as needed
+import { MenuContext } from '../context/MenuContext';
+import abibiz1 from '../assets/abibiz1 logo.jpg';
+import avatar from '../assets/avatar.png'; // Fallback avatar
+import SignupLogin from '../components/pages/SignupLogin';
+import ProfileForm from '../components/pages/profileForm';
+// import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
 
 const Header = () => {
-  const { userProfile, updateUserProfile, isLoggedIn } = useMenuContext();
+  const { userProfile, updateUserProfile, isLoggedIn } = useContext(MenuContext);
   const [userName, setUserName] = useState('User');
   const [open, setOpen] = useState(false);
   const [showSignupLogin, setShowSignupLogin] = useState(false);
