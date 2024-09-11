@@ -307,8 +307,9 @@
 // export default ProfileForm;
 
 
-import React, { useState, useContext, useEffect } from 'react';
-import { MenuContext } from '../context/MenuContext';
+import React, { useEffect, useState, useContext } from "react";
+import { MenuContext } from "../../context/MenuContext";
+// import avatar from '../../assets/avatar.png';
 
 function ProfileForm({ onClose }) {
   const { userProfile, updateUserProfile } = useContext(MenuContext);
