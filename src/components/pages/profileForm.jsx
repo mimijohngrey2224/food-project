@@ -470,7 +470,7 @@
 
 
 import React, { useState, useEffect, useContext } from 'react';
-import { MenuContext } from '../context/MenuContext';
+import { MenuContext } from '../../context/MenuContext';
 
 function ProfileForm({ onClose }) {
   const { userProfile, updateUserProfile } = useContext(MenuContext);
