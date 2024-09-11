@@ -1484,9 +1484,9 @@ const MenuContextProvider = ({ children }) => {
     setUserProfile(user);
   };
 
-  const handleClose = () => {
-    setShowSignupLogin(false);
-  };
+  // const handleClose = () => {
+  //   setShowSignupLogin(false);
+  // };
 
 
   const contextValue = {
