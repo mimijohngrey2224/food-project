@@ -309,11 +309,12 @@
 
 import React, { useEffect, useState, useContext } from "react";
 import { MenuContext } from "../../context/MenuContext";
-// import avatar from '../../assets/avatar.png';
+
 
 function ProfileForm({ onClose }) {
   const { userProfile, updateUserProfile } = useContext(MenuContext);
-  
+
+  // Initialize form state with user profile data
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -322,7 +323,8 @@ function ProfileForm({ onClose }) {
     confirmPassword: '',
     image: '',
   });
-  
+
+  // Effect to set form data when userProfile changes
   useEffect(() => {
     if (userProfile) {
       setFormData({
@@ -336,15 +338,24 @@ function ProfileForm({ onClose }) {
     }
   }, [userProfile]);
 
+  // Handler for input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
+  // Handler for image file change
   const handleImageChange = (e) => {
-    setFormData({ ...formData, image: e.target.files[0] });
+    setFormData(prevState => ({
+      ...prevState,
+      image: e.target.files[0] // Update the file object
+    }));
   };
 
+  // Submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { firstName, lastName, email, password, confirmPassword, image } = formData;
