@@ -935,7 +935,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { LiaEyeSolid, LiaEyeSlashSolid } from "react-icons/lia";
 import { useContext } from "react";
-import { MenuContext } from "./MenuContextProvider"; // Adjust the import path as necessary
+import { MenuContext } from "../../context/MenuContext";
 
 function SignupLogin({ onClose }) {
   const navigate = useNavigate();
