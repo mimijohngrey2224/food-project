@@ -1915,4 +1915,4 @@ const MenuContextProvider = ({ children }) => {
   );
 };
 
-export default MenuContextProvider;
+export default MenuContextProvider
