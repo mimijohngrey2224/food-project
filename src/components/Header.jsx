@@ -841,11 +841,11 @@ function Header() {
     }
   }, [getUserProfile]);
 
-  useEffect(() => {
-    if (userProfile) {
-      setUserName(userProfile.firstName || 'User');
-    }
-  }, [userProfile]);
+  // useEffect(() => {
+  //   if (userProfile) {
+  //     setUserName(userProfile.firstName || 'User');
+  //   }
+  // }, [userProfile]);
 
   return (
     <header className="bg-gradient-to-r from-purple-500 to-purple-700 shadow-lg sticky top-0 z-20">
