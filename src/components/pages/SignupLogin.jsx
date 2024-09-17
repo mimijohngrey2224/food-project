@@ -1023,7 +1023,7 @@ function SignupLogin({ onClose }) {
   
       // Update context with user data
       handleUserLogin(response.data.token, response.data.user);
-  
+    
       // Close the form and navigate
       onClose();
       navigate("/");
