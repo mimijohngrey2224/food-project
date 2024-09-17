@@ -2021,66 +2021,102 @@ const MenuContextProvider = ({ children }) => {
 
 
 
-  const updateUserProfile = async (profileData) => {
-    try {
-      setError(null);
-      setSuccess(false);
+  // const updateUserProfile = async (profileData) => {
+  //   try {
+  //     setError(null);
+  //     setSuccess(false);
   
-      let response;
-      if (profileData instanceof FormData) {
-        response = await axios.post(`${url}/api/profile/update`, profileData, {
-          headers: { 
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data' 
-          }
-        });
-      } else {
-        response = await axios.post(`${url}/api/profile/update`, profileData, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-      }
+  //     let response;
+  //     if (profileData instanceof FormData) {
+  //       response = await axios.post(`${url}/api/profile/update`, profileData, {
+  //         headers: { 
+  //           'Authorization': `Bearer ${token}`,
+  //           'Content-Type': 'multipart/form-data' 
+  //         }
+  //       });
+  //     } else {
+  //       response = await axios.post(`${url}/api/profile/update`, profileData, {
+  //         headers: { Authorization: `Bearer ${token}` }
+  //       });
+  //     }
   
-      // Update the user profile state with the response data
-      setUserProfile(response.data.profile);
-      setSuccess(true);
-    } catch (error) {
-      console.error("Error updating user profile:", error);
-      setError("Failed to update profile. Please try again.");
-    }
-  };
+  //     // Update the user profile state with the response data
+  //     setUserProfile(response.data.profile);
+  //     setSuccess(true);
+  //   } catch (error) {
+  //     console.error("Error updating user profile:", error);
+  //     setError("Failed to update profile. Please try again.");
+  //   }
+  // };
   
 
   
+
+  // const getUserProfile = async () => {
+  //   try {
+  //     const response = await axios.get(`${url}/api/profile`, {
+  //       headers: { Authorization: `Bearer ${token}` }
+  //     });
+  
+  //     // Ensure the response data has all needed fields
+  //     const profile = response.data.profile || {};
+  //     setUserProfile({
+  //       firstName: profile.firstName || '',
+  //       lastName: profile.lastName || '',
+  //       email: profile.email || '',
+  //       phone: profile.phone || '',
+  //       address: profile.address || '',
+  //       image: profile.image || ''
+  //     });
+  
+  //     setUserName(profile.firstName || 'User');
+  //   } catch (error) {
+  //     console.error('Failed to fetch user profile:', error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (token) {
+  //     getUserProfile();
+  //   }
+  // }, [token, getUserProfile]);  
 
   const getUserProfile = async () => {
-    try {
-      const response = await axios.get(`${url}/api/profile`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-  
-      // Ensure the response data has all needed fields
-      const profile = response.data.profile || {};
-      setUserProfile({
-        firstName: profile.firstName || '',
-        lastName: profile.lastName || '',
-        email: profile.email || '',
-        phone: profile.phone || '',
-        address: profile.address || '',
-        image: profile.image || ''
-      });
-  
-      setUserName(profile.firstName || 'User');
-    } catch (error) {
-      console.error('Failed to fetch user profile:', error);
+    const token = localStorage.getItem('auth-token');
+    if (token) {
+      try {
+        const response = await fetch(`${url}/api/profile`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        setUserProfile(data.profile);
+        setUserName(data.profile.firstName);
+      } catch (error) {
+        console.error('Failed to fetch user profile:', error);
+      }
     }
   };
 
   useEffect(() => {
-    if (token) {
-      getUserProfile();
-    }
-  }, [token, getUserProfile]);  
+    // Fetch user profile on mount if user is logged in
+    getUserProfile();
+  }, [url]);
 
+  const updateUserProfile = async (profileData) => {
+    try {
+      const response = await axios.put(`${url}/api/profile/update`, profileData, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setSuccess(true);
+      setUserProfile(response.data);
+    } catch (error) {
+      setError("Failed to update profile.");
+      console.error("Error updating profile:", error);
+    }
+  };
 
   
 
@@ -2093,6 +2129,8 @@ const MenuContextProvider = ({ children }) => {
       return updatedItems;
     });
   };
+
+  
 
   const removeFromCart = (itemId) => {
     setCartItems((prevItems) => {
