@@ -11,7 +11,7 @@ import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
 
 function Header() {
   const { cartItems, url, userProfile, getUserProfile } = useContext(MenuContext);
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   
   const [open, setOpen] = useState(false);
   const [showSignupLogin, setShowSignupLogin] = useState(false);
