@@ -1543,7 +1543,7 @@ const MenuContextProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [showSignupLogin, setShowSignupLogin] = useState(true);
-  const [token, setToken] = useState(localStorage.getItem('auth-token') || '');
+  const [token, setToken] = useState(localStorage.getItem('auth-token') || '')
 
   // Initialize cart items from localStorage if not logged in
   useEffect(() => {
