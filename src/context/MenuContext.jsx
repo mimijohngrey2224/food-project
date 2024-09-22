@@ -1090,6 +1090,10 @@ const MenuContextProvider = ({ children }) => {
     }
   };
 
+  useEffect(()=>{
+      setUserProfile()
+  }, [])
+
   // const handleUserLogin = (newToken, user) => {
   //   setToken(newToken);
   //   setUserName(user.name);
