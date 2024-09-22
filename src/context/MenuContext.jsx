@@ -1052,43 +1052,50 @@ const MenuContextProvider = ({ children }) => {
   };
 
   const getUserProfile = async () => {
-    try {
-      const response = await axios.get(`${url}/api/profile`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      setUserProfile(response.data.profile);
-      console.log("Fetched user profile:", response.data.profile);
-    } catch (error) {
-      console.error("Error fetching user profile:", error.response ? error.response.data : error.message);
+    const token = localStorage.getItem('auth-token');
+    if (userProfile) return;
+    if (token) {
+      try {
+        const response = await fetch(`${url}/api/profile`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        setUserProfile(data.profile);
+        setUserName(data.profile.firstName);
+      } catch (error) {
+        console.error('Failed to fetch user profile:', error);
+      }
     }
   };
+
+  useEffect(() => {
+    // Fetch user profile on mount if user is logged in
+    getUserProfile();
+  }, [url]);
+
 
   const updateUserProfile = async (profileData) => {
     try {
-      setError(null);
-      setSuccess(false);
-
-      let response;
-      if (profileData instanceof FormData) {
-        response = await axios.post(`${url}/api/profile/update`, profileData, {
-          headers: { 
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data' 
-          }
-        });
-      } else {
-        response = await axios.post(`${url}/api/profile/update`, profileData, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-      }
-
-      setUserProfile(response.data.profile);
+      const response = await axios.post(`${url}/api/profile/update`, profileData, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       setSuccess(true);
+      setUserProfile(response.data);
     } catch (error) {
-      console.error("Error updating user profile:", error);
-      setError("Failed to update profile. Please try again.");
+      setError("Failed to update profile.");
+      console.error("Error updating profile:", error);
     }
   };
+
+  // const handleUserLogin = (newToken, user) => {
+  //   setToken(newToken);
+  //   setUserName(user.name);
+  //   // setUserProfile(user);
+  // };
+
 
   const contextValue = {
     cartItems,

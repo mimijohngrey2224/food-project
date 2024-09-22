@@ -693,6 +693,15 @@ function ProfileForm({ onClose }) {
     fetchProfile();
   }, [getUserProfile]);
 
+
+  useEffect(() => {
+    if (!userProfile) {
+        fetchProfile(); // Only fetch if there's no profile
+    }
+}, [userProfile]);
+
+
+
   useEffect(() => {
     if (userProfile) {
       setProfileData({
@@ -705,6 +714,8 @@ function ProfileForm({ onClose }) {
       });
     }
   }, [userProfile]);
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -738,8 +749,8 @@ function ProfileForm({ onClose }) {
 
     try {
       await updateUserProfile(formData);
-      // Refetch the profile after updating to ensure the latest data is displayed
-      await getUserProfile();
+      // // Refetch the profile after updating to ensure the latest data is displayed
+      // await getUserProfile();
     } catch (error) {
       console.error('Failed to update profile:', error);
     }

@@ -78,9 +78,9 @@ function Header() {
     const token = localStorage.getItem('auth-token');
     setIsLoggedIn(!!token);
     if (token) {
-        getUserProfile(); // Fetch profile
+        // getUserProfile(); // Fetch profile
     }
-  }, [getUserProfile]);
+  }, []);
 
   useEffect(() => {
     if (userProfile) {
