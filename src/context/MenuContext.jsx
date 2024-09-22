@@ -1111,7 +1111,7 @@ const MenuContextProvider = ({ children }) => {
     updateUserProfile,
     error,
     success
-  };
+  }
 
   return (
     <MenuContext.Provider value={contextValue}>
