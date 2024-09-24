@@ -344,11 +344,11 @@ const MenuContextProvider = ({ children }) => {
       setUserProfile()
   }, [])
 
-  const handleUserLogin = (newToken, user) => {
-    setToken(newToken);
-    setUserName(user.name);
-    setUserProfile(user);
-  };
+  // const handleUserLogin = (newToken, user) => {
+  //   setToken(newToken);
+  //   setUserName(user.name);
+  //   setUserProfile(user);
+  // };
 
 
   const contextValue = {
@@ -370,7 +370,7 @@ const MenuContextProvider = ({ children }) => {
     getUserProfile,
     userProfile,
     updateUserProfile,
-    handleUserLogin,
+    // handleUserLogin,
     error,
     success
   }
