@@ -344,16 +344,16 @@ const MenuContextProvider = ({ children }) => {
       setUserProfile()
   }, [])
 
-  // const handleUserLogin = (newToken, user) => {
-  //   setToken(newToken);
-  //   setUserName(user.name);
-  //   setUserProfile(user);
-  // };
-
-  const handleUserLogin = (token, user) => {
-    setUserData(user); // Assuming this updates user data including avatar
-    setAuthToken(token);
+  const handleUserLogin = (newToken, user) => {
+    setToken(newToken);
+    setUserName(user.name);
+    setUserProfile(user);
   };
+
+  // const handleUserLogin = (token, user) => {
+  //   setUserData(user); // Assuming this updates user data including avatar
+  //   setAuthToken(token);
+  // };
   
 
 
