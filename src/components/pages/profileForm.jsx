@@ -339,6 +339,24 @@ function ProfileForm({ onClose }) {
                 alt="Profile" 
                 className="w-24 h-24 object-cover rounded-full border-2 border-gray-300"
               />
+              <div className="relative">
+              <img 
+                src={profileData.image ? profileData.image : avatar} 
+                alt="Profile" 
+                className="w-24 h-24 object-cover rounded-full border-2 border-gray-300"
+              />
+              <input 
+                type="file" 
+                accept="image/*" 
+                onChange={handleImageChange}
+                id="profileImage"
+                className="absolute inset-0 opacity-0 cursor-pointer"
+              />
+              <label htmlFor="profileImage" className="absolute bottom-0 right-0 bg-blue-500 text-white py-1 px-3 rounded-full text-xs cursor-pointer">
+                Change
+              </label>
+            </div>
+
               <input 
                 type="file" 
                 accept="image/*" 
