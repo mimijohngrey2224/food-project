@@ -9,8 +9,9 @@ import { MenuContext } from "../../context/MenuContext";
 
 function SignupLogin({ onClose }) {
   const navigate = useNavigate();
-  const { handleUserLogin } = useContext(MenuContext); // Get handleUserLogin from context
+  const { handleUserLogin,getUserProfile } = useContext(MenuContext); // Get handleUserLogin from context
 
+  // const [url] = useState("http://localhost:3000");
   const [url] = useState("https://food-project-api.onrender.com");
   const [signupData, setSignupData] = useState({
     firstName: "",
@@ -56,6 +57,7 @@ function SignupLogin({ onClose }) {
   const handleLoginChange = (e) => {
     const { name, value } = e.target;
     setLoginData((prev) => ({ ...prev, [name]: value }));
+    
   };
 
   const handleSignupSubmit = async (e) => {
@@ -93,7 +95,7 @@ function SignupLogin({ onClose }) {
   
       // Update context with user data
       handleUserLogin(response.data.token, response.data.user);
-    
+      // await getUserProfile()
       // Close the form and navigate
       onClose();
       navigate("/");

@@ -5,6 +5,7 @@ export const MenuContext = createContext(null);
 
 const MenuContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  // const [url] = useState("https://localhost:3000");
   const [url] = useState("https://food-project-api.onrender.com");
   const [menuItems, setMenuItems] = useState([]);
   const [breakItems, setBreakItems] = useState([]);
@@ -18,6 +19,7 @@ const MenuContextProvider = ({ children }) => {
   const [success, setSuccess] = useState(false);
   const [token, setToken] = useState(localStorage.getItem('auth-token') || '');
 
+  // console.log(userProfile)
   // Load cart items from localStorage initially if not logged in
   useEffect(() => {
     if (!token) {
@@ -34,6 +36,10 @@ const MenuContextProvider = ({ children }) => {
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }
   }, [cartItems, token]);
+
+  useEffect(() => {
+    getUserProfile()
+  }, [])
 
   // Sync local cart with server
   const syncLocalCartWithServer = async () => {
@@ -313,7 +319,10 @@ const MenuContextProvider = ({ children }) => {
         });
         const data = await response.json();
         setUserProfile(data.profile);
+        console.log(data);
+        
         setUserName(data.profile.firstName);
+        // console.log
       } catch (error) {
         console.error('Failed to fetch user profile:', error);
       }

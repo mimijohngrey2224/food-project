@@ -104,6 +104,8 @@ function Header() {
               {cartItems.reduce((total, item) => total + (Number(item.quantity) || 0), 0)}
             </div>
           </Link>
+          {/* {console.log(userProfile.image)} */}
+          {/* {console.log('username', userName)} */}
           {isLoggedIn ? (
             <div className="text-lg font-medium flex items-center gap-2 relative">
               <img
