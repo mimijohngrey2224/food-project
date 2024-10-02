@@ -350,28 +350,75 @@ function SignupLogin({ onClose }) {
     setLoginData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // const handleSignupSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (signupData.password !== signupData.confirmPassword) {
+  //     return toast.error("Passwords do not match");
+  //   }
+  //   if (passwordError) {
+  //     return toast.error(passwordError);
+  //   }
+
+  //   try {
+  //     const response = await axios.post(`${url}/api/user/register`, signupData);
+  //     if (response.status === 200 && response.data.success) {
+  //       setShowLoginForm(true);
+  //       toast.success("Successfully Registered");
+  //     } else {
+  //       toast.error(response.data.message || "Registration failed");
+  //     }
+  //   } catch (error) {
+  //     console.error("Signup error:", error.response ? error.response.data : error.message);
+  //     toast.error(error.response.data.message || "Registration failed"); // Show specific error message
+  //   }
+  // };
+
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
+
+    // Check if passwords match
     if (signupData.password !== signupData.confirmPassword) {
-      return toast.error("Passwords do not match");
+        return toast.error("Passwords do not match");
     }
+    
+    // Handle any other validation errors here (if applicable)
     if (passwordError) {
-      return toast.error(passwordError);
+        return toast.error(passwordError);
     }
 
     try {
-      const response = await axios.post(`${url}/api/user/register`, signupData);
-      if (response.status === 200 && response.data.success) {
-        setShowLoginForm(true);
-        toast.success("Successfully Registered");
-      } else {
-        toast.error(response.data.message || "Registration failed");
-      }
+        // Attempt to register the user
+        const response = await axios.post(`${url}/api/user/register`, signupData);
+
+        // Check if the registration was successful
+        if (response.status === 200 && response.data.success) {
+            setShowLoginForm(true);
+            toast.success("Successfully Registered");
+        } else {
+            // If the registration wasn't successful, show the error message
+            toast.error(response.data.message || "Registration failed");
+        }
     } catch (error) {
-      console.error("Signup error:", error.response ? error.response.data : error.message);
-      toast.error(error.response.data.message || "Registration failed"); // Show specific error message
+        // Log the error for debugging
+        console.error("Signup error:", error.response ? error.response.data : error.message);
+
+        // Show specific error messages
+        if (error.response) {
+            // If the server responded with an error status
+            if (error.response.status === 409) {
+                // Conflict error (user already exists)
+                toast.error("User already exists");
+            } else {
+                // Show the server's error message
+                toast.error(error.response.data.message || "Registration failed");
+            }
+        } else {
+            // Network error or other issue
+            toast.error("Error registering user. Please try again later.");
+        }
     }
-  };
+};
+
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
