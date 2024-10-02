@@ -405,7 +405,7 @@ function ProfileForm({ onClose }) {
   );
 }
 
-// export default ProfileForm;
+export default ProfileForm;
 
 
 
