@@ -334,6 +334,7 @@ const MenuContextProvider = ({ children }) => {
   //   setUserProfile(updatedProfile);
   // };
   
+  // this is serious
 
   useEffect(() => {
     // Fetch user profile on mount if user is logged in
