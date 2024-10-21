@@ -176,7 +176,40 @@ function Menu() {
       {/* End of Menu Categories */}
 
       {/* Delicacies */}
+{/* 
+      <div>
+            <label for="">Fovorite Food</label>
+            <br>
+            <label for="">Rice</label>
+            <input type="checkbox">
+            <label for="">Beans</label>
+            <input type="checkbox">
+            <label for="">Yam</label>
+            <input type="checkbox">
+        </div> */}
+        
           <div className="text-center font-bold text-3xl text-purple-400 mt-[-3%]  ">DRINKS & DELICACIES</div>
+          {/* <div>
+            <label for="">Select Favorite</label>
+            <br>
+            <select name="" id="">
+                <option value="">Chelsea</option>
+                <option value="">Arsenal</option>
+                <option value="">Liverpool</option>
+                <option value="">Barcelona</option>
+            </select>
+        </div> */}
+        
+          {/* <div>
+          <label htmlFor="">SELECT DRINKS</label>
+          <br />
+          <select name="" id="">
+            <img className="w-full md:w-[calc(50% - 8px)] lg:w-[calc(25% - 10px)] max-w-[350px] h-[300px] rounded-lg shadow-md transform hover:scale-105 transition duration-300" src={whisky1} alt="" />
+            <img className="w-full md:w-[calc(50% - 8px)] lg:w-[calc(25% - 10px)] max-w-[350px] h-[300px] rounded-lg shadow-md transform hover:scale-105 transition duration-300" src={whisky} alt="" />
+            <img className="w-full md:w-[calc(50% - 8px)] lg:w-[calc(25% - 10px)] max-w-[350px] h-[300px] rounded-lg shadow-md transform hover:scale-105 transition duration-300" src={whisky2} alt="" />
+            <img className="w-full md:w-[calc(50% - 8px)] lg:w-[calc(25% - 10px)] max-w-[350px] h-[300px] rounded-lg shadow-md transform hover:scale-105 transition duration-300" src={whisky3} alt="" />
+          </select>
+        </div> */}
     <div className="flex flex-wrap justify-center gap-4 md:gap-6 mt-10">
         <img className="w-full md:w-[calc(50% - 8px)] lg:w-[calc(25% - 10px)] max-w-[350px] h-[300px] rounded-lg shadow-md transform hover:scale-105 transition duration-300" src={whisky1} alt="" />
         <img className="w-full md:w-[calc(50% - 8px)] lg:w-[calc(25% - 10px)] max-w-[350px] h-[300px] rounded-lg shadow-md transform hover:scale-105 transition duration-300" src={whisky} alt="" />
@@ -201,3 +234,52 @@ function Menu() {
 }
 
 export default Menu;
+
+
+// import React, { useState } from 'react';
+// import whisky1 from './path/to/whisky1.jpg';
+// import whisky from './path/to/whisky.jpg';
+// import whisky2 from './path/to/whisky2.jpg';
+// import whisky3 from './path/to/whisky3.jpg';
+
+// const DrinkSelector = () => {
+//   const [selectedDrink, setSelectedDrink] = useState('');
+
+//   const handleChange = (event) => {
+//     setSelectedDrink(event.target.value);
+//   };
+
+//   const drinks = [
+//     { value: 'whisky1', src: whisky1, alt: 'Whisky 1' },
+//     { value: 'whisky', src: whisky, alt: 'Whisky' },
+//     { value: 'whisky2', src: whisky2, alt: 'Whisky 2' },
+//     { value: 'whisky3', src: whisky3, alt: 'Whisky 3' },
+//   ];
+
+//   return (
+//     <div>
+//       <label htmlFor="drinks">SELECT DRINKS</label>
+//       <br />
+//       <select id="drinks" onChange={handleChange}>
+//         <option value="">Select a drink</option>
+//         {drinks.map(drink => (
+//           <option key={drink.value} value={drink.value}>{drink.alt}</option>
+//         ))}
+//       </select>
+
+//       <div className="image-gallery">
+//         {selectedDrink && drinks.filter(drink => drink.value === selectedDrink).map(drink => (
+//           <img
+//             key={drink.value}
+//             className="w-full md:w-[calc(50% - 8px)] lg:w-[calc(25% - 10px)] max-w-[350px] h-[300px] rounded-lg shadow-md transform hover:scale-105 transition duration-300"
+//             src={drink.src}
+//             alt={drink.alt}
+//           />
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default DrinkSelector;
+

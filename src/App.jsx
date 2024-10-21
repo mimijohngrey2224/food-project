@@ -20,6 +20,8 @@ import Thanks from "./components/pages/Thanks";
 import 'leaflet/dist/leaflet.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthProvider } from "./context/AuthContext";
+import useLocalStorage from "./hooks/useLocalStorage"
 
 
 
@@ -33,13 +35,17 @@ function App() {
   const nigerianSoup = nigerian.filter((item)=> item.NigerianSoup === true);
   const signature = signatures.filter((item) => item.signature === true)
 
+  const { getItem } = useLocalStorage("auth-token");
+  const token = getItem();
+  let authInitialState = { accessToken: token ?? null };
+
   
 
   return (
     
-       
-        <Router>
+       <AuthProvider defaultState={authInitialState}>
           <MenuContextProvider>
+        <Router>
       <Header />
       <Routes>
       <Route path="/" element={<Home />} />
@@ -78,10 +84,10 @@ function App() {
         draggable
         pauseOnHover
       />
-      </MenuContextProvider>
     </Router>
+      </MenuContextProvider>
     
-   
+      </AuthProvider>
     
   )
 }
