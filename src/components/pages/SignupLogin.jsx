@@ -660,8 +660,8 @@ function SignupLogin({ onClose }) {
   const navigate = useNavigate();
   const { handleUserLogin, getUserProfile } = useContext(MenuContext);
   
-  const [url] = useState("http://localhost:3000");
-  // const [url] = useState("https://food-project-api.onrender.com");
+  // const [url] = useState("http://localhost:3000");
+  const [url] = useState("https://food-project-api.onrender.com");
   
   const [signupData, setSignupData] = useState({
     firstName: "",
