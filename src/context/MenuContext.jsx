@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import AuthContext from "./AuthContext";
 
@@ -6,8 +6,8 @@ export const MenuContext = createContext(null);
 
 const MenuContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
-  // const [url] = useState("http://localhost:3000");
-  const [url] = useState("https://food-project-api.onrender.com");
+  const [url] = useState("http://localhost:3000");
+  // const [url] = useState("https://food-project-api.onrender.com");
   const [menuItems, setMenuItems] = useState([]);
   const [breakItems, setBreakItems] = useState([]);
   const [naijaItems, setNaijaItems] = useState([]);
@@ -20,6 +20,8 @@ const MenuContextProvider = ({ children }) => {
   const [success, setSuccess] = useState(false);
   const [token, setToken] = useState(localStorage.getItem('auth-token') || '');
   const [state, dispatch] = useState(AuthContext);
+  const hasLoggedProfile = useRef(false); // Use a ref to track logging state
+
 
   const isAuthenticated = state.accessToken !== null;
 
@@ -305,67 +307,93 @@ const MenuContextProvider = ({ children }) => {
     }
   };
 
-  // this will repeatly log the profile 26 oct
-  // const getUserProfile = async () => {              
-  //   const token = localStorage.getItem('auth-token');
-  //   if (userProfile) return;
-  //   if (token) {
-  //     try {
-  //       const response = await fetch(`${url}/api/profile`, {
-  //         method: 'GET',
-  //         headers: {
-  //           'Authorization': `Bearer ${token}`,
-  //         },
-  //       });
-  //       const data = await response.json();
-  //       console.log("profile data",data.profile)
-  //       setUserProfile(data.profile);
-  //       setUserName(data.profile);
-  //     } catch (error) {
-  //       console.error('Failed to fetch user profile:', error);
-  //     }
-  //   }
-  // };
+const getUserProfile = async () => {
+  const token = localStorage.getItem('auth-token');
+  
+  // Only fetch profile if it hasn't been set yet
+  if (userProfile) return;
 
+  if (token) {
+      try {
+          const response = await fetch(`${url}/api/profile`, {
+              method: 'GET',
+              headers: {
+                  'Authorization': `Bearer ${token}`,
+              },
+          });
 
-  //  useEffect(() => {
-  //   // Fetch user profile on mount if user is logged in
-  //   getUserProfile();
-  // }, [url, userProfile]);
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
 
-  const getUserProfile = async () => {
-    const token = localStorage.getItem('auth-token');
-    // Only fetch profile if it hasn't been set yet
-    if (userProfile) return;
+          const data = await response.json();
 
-    if (token) {
-        try {
-            const response = await fetch(`${url}/api/profile`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
+          // Log profile data only once
+          if (!hasLoggedProfile.current) {
+              console.log("Profile data:", data.profile);
+              hasLoggedProfile.current = true; // Prevent further logging
+          }
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const data = await response.json();
-            // console.log("Profile data:", data.profile);
-            setUserProfile(data.profile);
-            setUserName(data.profile);
-        } catch (error) {
-            console.error('Failed to fetch user profile:', error);
-        }
-    }
+          setUserProfile(data.profile);
+          setUserName(data.profile);
+      } catch (error) {
+          console.error('Failed to fetch user profile:', error);
+      }
+  }
 };
 
 // useEffect to fetch user profile on component mount
 useEffect(() => {
-    // Fetch user profile on mount if user is logged in and userProfile is not set
-    getUserProfile();
-}, [url]); // Only include `url` as a dependency
+  getUserProfile();
+}, [url]); // Only re-run if `url` changes
+
+
+// const getUserProfile = async () => {
+//   const token = localStorage.getItem('auth-token');
+  
+//   // Only fetch profile if it hasn't been set yet
+//   if (userProfile) return;
+
+//   if (token) {
+//       try {
+//           const response = await fetch(`${url}/api/profile`, {
+//               method: 'GET',
+//               headers: {
+//                   'Authorization': `Bearer ${token}`,
+//               },
+//           });
+
+//           if (!response.ok) {
+//               throw new Error('Network response was not ok');
+//           }
+
+//           const data = await response.json();
+
+//           // Log profile data only once
+//           if (!hasLoggedProfile) {
+//               console.log("Profile data:", data.profile);
+//               setHasLoggedProfile(true); // Prevent further logging
+//           }
+
+//           setUserProfile(data.profile);
+//           setUserName(data.profile);
+//       } catch (error) {
+//           console.error('Failed to fetch user profile:', error);
+//       }
+//   }
+// };
+
+// // useEffect to fetch user profile on component mount
+// useEffect(() => {
+//   getUserProfile();
+// }, [url]); // Only re-run if `url` changes
+
+// // useEffect to reset the profile on logout or when userProfile is set
+// useEffect(() => {
+//   if (userProfile) {
+//       setHasLoggedProfile(false); // Reset logging state if user profile changes
+//   }
+// }, [userProfile]);
 
 
 
