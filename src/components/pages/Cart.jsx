@@ -14,9 +14,19 @@ function Cart() {
     url,
   } = useContext(MenuContext);
 
+// old item 29 oct
   useEffect(() => {
     console.log("Cart items in Cart component:", cartItems); // Debug log to check cartItems
   }, [cartItems]);
+
+  
+
+
+// new item 29 oct
+  // useEffect(() => {
+  //   console.log("Cart items in Cart component:", cartItems.map(item => item.name || item._id)); // Better logging
+  // }, [cartItems]);
+  
 
   const totalCartAmount = () => {
     let totalAmount = 0;

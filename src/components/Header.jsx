@@ -64,7 +64,7 @@ function Header() {
       <div className="flex items-center justify-between p-4 lg:px-8">
         <div className="flex items-center gap-4">
           <img className="w-24 sm:w-32 h-auto object-cover" src={abibiz1} alt="Logo" />
-          <h1 className="text-white text-xl sm:text-2xl lg:text-3xl font-bold">Food Ordering App</h1>
+          <h1 className="text-white text-xl sm:text-2xl lg:text-3xl font-bold">Food Courier's</h1>
         </div>
 
         <div className='lg:hidden'>

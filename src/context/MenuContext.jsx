@@ -278,6 +278,55 @@ const MenuContextProvider = ({ children }) => {
     });
   };
 
+
+// new item with undefined
+  // const addCartItem = (itemId) => {
+  //   setCartItems(prevCartItems => {
+  //     const existingItemIndex = prevCartItems.findIndex(item => item._id === itemId);
+  //     if (existingItemIndex > -1) {
+  //       // Increment quantity
+  //       return prevCartItems.map(item =>
+  //         item._id === itemId
+  //           ? { ...item, quantity: item.quantity + 1 }
+  //           : item
+  //       );
+  //     } else {
+  //       // Find the item in menuItems
+  //       const newItem = menuItems.find(item => item._id === itemId);
+  //       if (newItem) {
+  //         // Return new cart item structure
+  //         return [...prevCartItems, { ...newItem, quantity: 1 }];
+  //       } else {
+  //         console.error('Item not found:', itemId);
+  //         return prevCartItems; // Avoid undefined items
+  //       }
+  //     }
+  //   });
+  // };
+  
+
+  // new item 29
+  // const addCartItem = (itemId) => {
+  //   setCartItems(prevCartItems => {
+  //     const existingItemIndex = prevCartItems.findIndex(item => item._id === itemId);
+  //     if (existingItemIndex > -1) {
+  //       // Increment quantity if the item already exists
+  //       return prevCartItems.map(item => 
+  //         item._id === itemId
+  //           ? { ...item, quantity: item.quantity + 1 }
+  //           : item
+  //       );
+  //     } else {
+  //       const newItem = menuItems.find(item => item._id === itemId); // Find the item details
+  //       if (newItem) {
+  //         return [...prevCartItems, { ...newItem, quantity: 1 }];
+  //       }
+  //       console.error('Item not found for ID:', itemId);
+  //       return prevCartItems; // Return existing if the item is not found
+  //     }
+  //   });
+  // };
+  
   const reduceCartItem = (itemId) => {
     setCartItems(prevCartItems => {
       const updatedCartItems = prevCartItems.map(item => {
@@ -288,10 +337,11 @@ const MenuContextProvider = ({ children }) => {
           };
         }
         return item;
-      }).filter(item => item.quantity > 0);
+      }).filter(item => item.quantity > 0); // Remove items with zero quantity
       return updatedCartItems;
     });
   };
+  
 
   const fetchUserData = () => {
     try {
