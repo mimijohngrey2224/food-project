@@ -77,7 +77,8 @@ function Header() {
           <Link to="/cart" className="text-lg font-medium hover:text-gray-200 transition-colors duration-300 relative">
             <BsFillCartPlusFill className="text-2xl" />
             <div className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-              {cartItems.reduce((total, item) => total + (Number(item.quantity) || 0), 0)}
+              {(cartItems?.products?.reduce((total, item) => total + (Number(item.quantity) || 0), 0)) || 0}
+
             </div>
           </Link>
           {isLoggedIn ? (
@@ -129,7 +130,7 @@ function Header() {
       <Link to="/cart" className="text-2xl font-medium hover:text-purple-500 transition-colors duration-300 relative" onClick={() => setOpen(false)}>
         <BsFillCartPlusFill className="text-xl" />
         <div className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-          {cartItems.reduce((total, item) => total + (Number(item.quantity) || 0), 0)}
+          {/* {cartItems.reduce((total, item) => total  + (Number(item.quantity) || 0), 0)} */}
         </div>
       </Link>
         {isLoggedIn ? (

@@ -36,7 +36,7 @@ function App() {
   const signature = signatures.filter((item) => item.signature === true)
 
   const { getItem } = useLocalStorage("auth-token");
-  const token = getItem();
+  const token = getItem("auth-token");
   let authInitialState = { accessToken: token ?? null };
 
   

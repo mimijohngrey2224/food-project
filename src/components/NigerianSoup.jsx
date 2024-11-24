@@ -4,13 +4,25 @@ import { MenuContext } from "../context/MenuContext";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
+
+// Utility function to format numbers into thousands (K) or millions (M)
+const formatPrice = (price) => {
+  if (price >= 1000000) {
+    return `${(price / 1000000).toFixed(1)}M`;  // For millions
+  }
+  if (price >= 1000) {
+    return `${(price / 1000).toFixed(1)}K`;  // For thousands
+  }
+  return price.toString();  // For values less than 1,000
+};
+
 function NigerianSoup() {
   const { naijaItems, addToCart } = useContext(MenuContext);
 
   const handleAddToCart = (item) => {
-    addToCart(item);
-    console.log(`Added ${item.name} to cart`);
+    addToCart(item._id, 1, item); //pass product ID, quantity, and product details
     toast.success(`Added ${item.name} to cart`);
+    console.log(item._id, 1, item);
   };
 
   return (
@@ -34,7 +46,8 @@ function NigerianSoup() {
             <div className="p-2 sm:p-4">
               <p className="font-bold text-base sm:text-lg">{item.name}</p>
               <p className="text-gray-600 text-sm sm:text-base">{item.description}</p>
-              <p className="text-gray-600 text-sm sm:text-base font-bold">₦{item.price}</p>
+              {/* <p className="text-gray-600 text-sm sm:text-base font-bold">₦{item.price}</p> */}
+              <b className="text-gray-600 block text-sm sm:text-base">₦{formatPrice(item.price)}</b>
               <button
                 className="bg-purple-400 text-white p-2 rounded mt-2 w-full text-sm sm:text-base"
                 onClick={() => handleAddToCart(item)}

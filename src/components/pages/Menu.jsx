@@ -83,7 +83,7 @@ function Menu() {
         onClick={toggleImages} 
         className="mt-4 px-4 py-2 bg-purple-500 text-white rounded-lg shadow-md hover:bg-purple-600 transition duration-300"
       >
-        {showImages ? 'Hide drinks' : 'Show drinks'}
+        {showImages ? 'Hide Drinks' : 'Show Drinks'}
       </button>
       
       {showImages && (
