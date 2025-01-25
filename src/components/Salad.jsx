@@ -21,7 +21,7 @@ function Salad() {
 
   const handleAddToCart = (item) => {
     addToCart(item._id, 1, item); // Pass product ID, quantity, and product details
-    toast.success(`Added ${item.name} to cart`);
+    toast.success(`Added ${item.name} to cart yes`);
     console.log(item._id, 1, item)
   };
 

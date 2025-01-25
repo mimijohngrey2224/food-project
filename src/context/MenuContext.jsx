@@ -23,6 +23,7 @@ const MenuContextProvider = ({ children }) => {
   const [signatureItems, setSignatureItems] = useState([]);
   const [restaurantList, setRestaurantList] = useState([]);
   const [userName, setUserName] = useState('');
+  const [order, setOrder] = useState('');
   const [userProfile, setUserProfile] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -49,7 +50,7 @@ const MenuContextProvider = ({ children }) => {
   // Save cart items to localStorage if not logged in
   useEffect(() => {
     fetchCartData()
-  }, []);
+  }, [cartItems]);
 
 
   useEffect(() => {
@@ -91,7 +92,8 @@ const MenuContextProvider = ({ children }) => {
   const fetchCartData = async () => {
     if (isAuthenticated) {
       // authenticated
-      const res = await fetch("https://food-project-api.onrender.com/api/carts", {
+      // http://localhost:3000/api/carts
+      const res = await fetch("https://food-project-api.onrender.com/carts", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Correct string interpolation
@@ -99,9 +101,27 @@ const MenuContextProvider = ({ children }) => {
           // "auth-token": `${localStorage.getItem("auth-token")}`,
         },
       });
+      console.log(res, "fetchCart")
+
+      // testing 4th december 2024
+      // Fetch cart items after login (client-side)
+// fetch('/api/cart', {
+//   method: 'GET',
+//   headers: {
+//     'Authorization': `Bearer ${localStorage.getItem("auth_token")}`,
+//   },
+// })
+// .then(response => response.json())
+// .then(cart => {
+//   // Sync cart data on the client
+//   localStorage.setItem('cart_items', JSON.stringify(cart));
+// });
+
       const data = await res.json();
+      console.log(data, "data")
+      console.log(cartItems, "data22")
       if (res.ok) {
-        setCartItems(data.products && data); // change the operator both statement has to be true
+        setCartItems(data.data); // change the operator both statement has to be true
       } else {
         toast("error", "Could not get cart");
       }
@@ -109,7 +129,7 @@ const MenuContextProvider = ({ children }) => {
     } else {
       // unauthenticated
       const localCart = localStorage.getItem("cartItems");
-      const cart = JSON.parse(localStorage.getItem("cartItems")) || { products: [] };
+      const cart = JSON.parse(localStorage.getItem("cartItems")) || { menus: [] };
       // console.log("Cart:", cart);
 
       // console.log("cart",localCart);
@@ -658,12 +678,39 @@ console.log(isAuthenticated) // shows false on console
 //     }
 //   }
 // };
+useEffect(() => console.log(cartItems, "cartItems 2") , [cartItems])
 
-const addToCart = async (productId, quantity, product) => {
-  console.log("addToCart called with:", { productId, quantity, product });
+// const addToCart = async (productId, quantity, product) => {
+//   console.log("called endpoint for add to cart")
+//   try{
+//   const response = await fetch("http://localhost:3000/api/add-to-cart", {
+//     method: "POST",
+//     headers: {
+//       "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Send the token in the Authorization header
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ productId, quantity, product }),
+//   });
+//   console.log(response)
+//   if (!response.ok) {
+//     const errorData = await response.json();
+//     throw new Error(errorData.message || "Failed to add item to authenticated user's cart.");
+//   }
 
-  const userToken = localStorage.getItem("userToken"); // Retrieve token from localStorage
+//   const updatedCart = await response.json();
+//   console.log(updatedCart)
+//   setCartItems(updatedCart.cart); // Update frontend state with the latest cart from the backend
+//   toast.success("Item added to cart");
+// } catch (error) {
+//   console.error("Error adding to authenticated cart:", error.message);
+//   toast.error(error.message || "Failed to add the item to the cart.");
+// }
+// }
 
+const addToCart = async (productId, quantity, menu) => {
+  console.log("addToCart called with:", { productId, quantity, menu });
+  console.log("request made")
+  const userToken = localStorage.getItem("auth-token"); // Retrieve token from localStorage Z
   if (isAuthenticated) {
     // Authenticated user's cart logic
     try {
@@ -671,15 +718,31 @@ const addToCart = async (productId, quantity, product) => {
         toast.error("User token is missing. Please log in.");
         return; // Exit the function if token is missing
       }
-
-      const response = await fetch("/api/cart/add", {
+        // http://localhost:3000/api/add-to-cart
+      const response = await fetch("https://food-project-api.onrender.com/api/add-to-cart", {
         method: "POST",
         headers: {
+          "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Send the token in the Authorization header
           "Content-Type": "application/json",
-          Authorization: `Bearer ${userToken}`, // Send the token in the Authorization header
         },
         body: JSON.stringify({ productId, quantity }),
       });
+
+      // trying 4th december 2024
+
+//       const localCart = JSON.parse(localStorage.getItem("cart_items"));
+//           if (localCart && localCart.length > 0) {
+//   // Send local cart to the server (client-side)
+//             fetch('/api/cart/sync', {
+//                method: 'POST',
+//                 headers: {
+//             'Authorization': `Bearer ${token}`,
+//             'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(localCart),
+//   });
+// }
+
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -696,29 +759,29 @@ const addToCart = async (productId, quantity, product) => {
   } else {
     // Guest user's cart logic remains the same
     try {
-      const storedCart = JSON.parse(localStorage.getItem("cartItems")) || { products: [] };
+      const storedCart = JSON.parse(localStorage.getItem("cartItems")) || { menus: [] };
 
-      if (!Array.isArray(storedCart.products)) {
-        storedCart.products = [];
+      if (!Array.isArray(storedCart.menus)) {
+        storedCart.menus = [];
       }
 
-      const itemIndex = storedCart.products.findIndex(
-        (item) => item.product._id === productId
+      const itemIndex = storedCart.menus.findIndex(
+        (item) => item.menu._id === productId
       );
 
       if (itemIndex >= 0) {
-        storedCart.products[itemIndex].quantity += quantity;
-        storedCart.products[itemIndex].amount =
-          product.price * storedCart.products[itemIndex].quantity;
+        storedCart.menus[itemIndex].quantity += quantity;
+        storedCart.menus[itemIndex].amount =
+          menu.price * storedCart.menus[itemIndex].quantity;
       } else {
-        if (!product) {
+        if (!menu) {
           throw new Error("Product details are missing. Please provide the correct product.");
         }
 
-        storedCart.products.push({
-          product,
+        storedCart.menus.push({
+          menu,
           quantity,
-          amount: product.price * quantity,
+          amount: menu.price * quantity,
         });
       }
 
@@ -744,8 +807,6 @@ const addToCart = async (productId, quantity, product) => {
 
 // mr promise code
 // const updateCartItems = async (productId, quantity, itemId, change) => {
-  
-  
 //   if (isAuthenticated) {
 //     try {
 //       const res = await fetch("http://localhost:3000/api/update-cart", {
@@ -1092,85 +1153,210 @@ const addToCart = async (productId, quantity, product) => {
 
   // mr promise code 1st november
   // remove cart items
-  // const removeCartItems = async (productId) => {
-  //   if (window.confirm("Are you sure you want to delete?..")) {
-  //     if (isAuthenticated) {
-  //       try {
-  //         // authenticated
-  //         const res = await fetch("http://localhost:3000/api/delete-cart", {
-  //           method: "DELETE",
-  //           headers: {
-  //             "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Correct string interpolationfetch
-  //             "Content-Type": "application/json",
-  //           },
-  //           body: JSON.stringify({ productId }),
-  //         });
-  //         const data = await res.json();
-  //         if (res.ok) {
-  //           console.log("success", "Product Successfully deleted from cart");
-  //           setCartItems(data);
-  //           //   setCartItems(data || data.products);
-  //         }
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //       // authenticated done
-  //     } else {
-  //       // unauthenticated
-  //       const storedCart = JSON.parse(localStorage.getItem("cartItems")) || {
-  //         products: [],
-  //       };
-  //       const itemIndex = storedCart.products.findIndex(
-  //         (item) => item.product._id === productId
-  //       );
-  //       if (itemIndex >= 0) {
-  //         storedCart.products.splice(itemIndex, 1);
-  //         localStorage.setItem("cartItems", JSON.stringify(storedCart));
-  //         setCartItems(storedCart); // Update the state to reflect changes in local storage
-  //         console.log("success", "Product removed from cart successfully!");
-  //       } else {
-  //         console.log("error", "Product not found in cart.");
-  //       }
-  //       // unauthenticated done
-  //     }
-  //   }
-  // };
+  const removeCartItems = async (productId) => {
+    if (window.confirm("Are you sure you want to delete this item?..")) {
+      if (isAuthenticated) {
+        try {
+          // authenticated
+          // http://localhost:3000/api/delete-cart
+          const res = await fetch("https://food-project-api.onrender.com/api/delete-cart", {
+            method: "DELETE",
+            headers: {
+              "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Correct string interpolationfetch
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ productId }),
+          });
+          const data = await res.json();
+          if (res.ok) {
+            console.log("success", "Product Successfully deleted from cart");
+            setCartItems(data);
+            toast.info("Item removed from cart");
+            //   setCartItems(data || data.products);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+        // authenticated done
+      } else {
+        // unauthenticated
+        const storedCart = JSON.parse(localStorage.getItem("cartItems")) || {
+          products: [],
+        };
+        const itemIndex = storedCart.menus.findIndex(
+          (item) => item.menu._id === productId
+        );
+        if (itemIndex >= 0) {
+          storedCart.menus.splice(itemIndex, 1);
+          localStorage.setItem("cartItems", JSON.stringify(storedCart));
+          setCartItems(storedCart); // Update the state to reflect changes in local storage
+          toast.info("Item removed from cart");
+          console.log("success", "Product removed from cart successfully!");
+        } else {
+          console.log("error", "Product not found in cart.");
+        }
+        // unauthenticated done
+      }
+    }
+  };
 
   // testing removedcartitems 21 november
 
-  const removeCartItems = (productId) => {
-    const updatedCart = {
-      ...cartItems,
-      products: cartItems.products.filter((item) => item.product._id !== productId),
-    };
-    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
-    setCartItems(updatedCart);
-    toast.info("Item removed from cart");
-  };
+  // const removeCartItems = (productId) => {
+  //   const updatedCart = {
+  //     ...cartItems,
+  //     menus: cartItems.menus.filter((item) => item.menu._id !== productId),
+  //   };
+  //   localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+  //   setCartItems(updatedCart);
+  //   toast.info("Item removed from cart");
+  // };
 
 
   // update testing 21 november
-  const updateCartItems = (productId, change) => {
-    const updatedCart = { ...cartItems };
-    const itemIndex = updatedCart.products.findIndex(
-      (item) => item.product._id === productId
+const updateCartItems = async (productId, quantity, itemId, change) => {
+  if (isAuthenticated) {
+    try {
+      // http://localhost:3000/api/update-cart
+      const res = await fetch("https://food-project-api.onrender.com/api/update-cart", {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Correct string interpolation
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId, quantity }),
+      });
+      
+      const data = await res.json();
+      console.log("Update cart data", data)
+      if (res.status === 200) {
+        // Find the index of the product in the cart
+        const updatedCart = { ...cartItems };
+        const itemIndex = updatedCart.menus.findIndex(
+          (item) => item.menu._id === productId
+        );
+      
+        if (itemIndex >= 0) {
+          updatedCart.menus[itemIndex].quantity += change;
+    
+          if (updatedCart.menus[itemIndex].quantity <= 0) {
+            updatedCart.menus.splice(itemIndex, 1); // Remove item if quantity is zero
+          } else {
+            updatedCart.menus[itemIndex].amount =
+              updatedCart.menus[itemIndex].menu.price *
+              updatedCart.menus[itemIndex].quantity;
+          }
+        }
+        console.log("updt cart", updatedCart)
+        setCartItems(updatedCart);
+      } else {
+        console.log("error", "Could not update cart");
+      }
+    } catch (error) {
+      console.error("Error updating cart:", error);
+      console.log("error", "An error occurred while updating your cart.");
+    }
+  }else {
+  const updatedCart = { ...cartItems };
+    const itemIndex = updatedCart.menus.findIndex(
+      (item) => item.menu._id === productId
     );
 
     if (itemIndex >= 0) {
-      updatedCart.products[itemIndex].quantity += change;
+      updatedCart.menus[itemIndex].quantity += quantity;
 
-      if (updatedCart.products[itemIndex].quantity <= 0) {
-        updatedCart.products.splice(itemIndex, 1); // Remove item if quantity is zero
+      if (updatedCart.menus[itemIndex].quantity <= 0) {
+        updatedCart.menus.splice(itemIndex, 1); // Remove item if quantity is zero
       } else {
-        updatedCart.products[itemIndex].amount =
-          updatedCart.products[itemIndex].product.price *
-          updatedCart.products[itemIndex].quantity;
+        updatedCart.menus[itemIndex].amount =
+          updatedCart.menus[itemIndex].menu.price *
+          updatedCart.menus[itemIndex].quantity;
       }
     }
 
     localStorage.setItem("cartItems", JSON.stringify(updatedCart));
     setCartItems(updatedCart);
-  };
+  }
+};
+
+
+  // } else {
+  //   // Handle unauthenticated users (localStorage path)
+  //    // Get cart from localStorage
+  // let cart = JSON.parse(localStorage.getItem("cartItems")) || { menus: [] };
+  
+  // const existingItemIndex = cart.menus.findIndex(item => item.menu._id === productId);
+
+  // if (existingItemIndex !== -1) {
+  //   // Item found, update quantity
+  //   const updatedItem = cart.menus[existingItemIndex];
+  //   updatedItem.quantity += quantity;
+
+  //   // If the quantity is 0 or less, remove the item from the cart
+  //   if (updatedItem.quantity <= 0) {
+  //     cart.menus.splice(existingItemIndex, 1);
+  //   } else {
+  //     updatedItem.amount = updatedItem.menu.price * updatedItem.quantity;
+  //   }
+  // } else if (quantity > 0) {
+  //   // Item not found and quantity > 0, add it to the cart
+  //   const newItem = { product: { _id: productId }, quantity, amount: 0 }; // Populate with actual product data
+  //   cart.menus.push(newItem);
+  // }
+
+  // // Save the updated cart to localStorage
+  // localStorage.setItem("cartItems", JSON.stringify(cart));
+
+  // // Update the context or state
+  // setCartItems(cart);
+  //   const storedCart = JSON.parse(localStorage.getItem("cartItems")) || { menus: [] };
+  //   const itemIndex = storedCart.menus.findIndex(
+  //     (item) => item.menu._id === productId
+  //   );
+
+  //   if (itemIndex >= 0) {
+  //     if (quantity === 0) {
+  //       // Remove item from cart if quantity is 0
+  //       storedCart.menus.splice(itemIndex, 1);
+  //     } else {
+  //       // Update the quantity and amount for the item
+  //       storedCart.menus[itemIndex].quantity = parseInt(quantity, 10);
+  //       storedCart.menus[itemIndex].amount =
+  //         storedCart.menus[itemIndex].menu.price *
+  //         storedCart.menus[itemIndex].quantity;
+  //     }
+  //     // Update localStorage with the modified cart
+  //     localStorage.setItem("cart", JSON.stringify(storedCart));
+  //     setCartItems(storedCart); // Update state with the new cart
+  //     console.log("success", "Cart updated successfully!");
+  //   } else {
+  //     console.log("error", "Item not found in cart.");
+  //   }
+  // }
+
+
+
+  // const updateCartItems = (productId, change) => {
+  //   const updatedCart = { ...cartItems };
+  //   const itemIndex = updatedCart.menus.findIndex(
+  //     (item) => item.menu._id === productId
+  //   );
+
+  //   if (itemIndex >= 0) {
+  //     updatedCart.menus[itemIndex].quantity += change;
+
+  //     if (updatedCart.menus[itemIndex].quantity <= 0) {
+  //       updatedCart.menus.splice(itemIndex, 1); // Remove item if quantity is zero
+  //     } else {
+  //       updatedCart.menus[itemIndex].amount =
+  //         updatedCart.menus[itemIndex].menu.price *
+  //         updatedCart.menus[itemIndex].quantity;
+  //     }
+  //   }
+
+  //   localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+  //   setCartItems(updatedCart);
+  // };
 
   useEffect(() => {
     // Sync state with localStorage changes (if needed)
@@ -1338,7 +1524,7 @@ const addToCart = async (productId, quantity, product) => {
   
         const data = await response.json();
   
-        // Log profile data
+        // Log profile data old to test perplexity24 november
         console.log("Profile data:", data.profile);
   
         setUserProfile(data.profile);
@@ -1346,6 +1532,17 @@ const addToCart = async (productId, quantity, product) => {
       } catch (error) {
         console.error('Failed to fetch user profile:', error);
       }
+
+      // update from perplexity 24 november
+      // try {
+      //   const response = await getUserProfile(); // Fetch user profile from API
+      //   console.log("Profile data:", response.profile);
+        
+      //   setUserProfile(response.profile); // Update state with fetched profile data
+      //   setUserName(response.profile.name); // Assuming 'name' is the field for username
+      // } catch (error) {
+      //   console.error('Failed to fetch user profile:', error);
+      // }
     }
   };
 
@@ -1569,11 +1766,23 @@ useEffect(() => {
   //     setUserProfile(null)
   // }, [])
 
-  const handleUserLogin = (newToken, user) => {
+  const handleUserLogin = (newToken, user) => {  //testing 4th december
+    const token = localStorage.getItem("auth_token");
+if (!token) {
+  // Handle token missing
+}
+// Add cart item logic here
+
     setToken(newToken);
-    setUserName(user.name);
+    // setUserName(user.name);
+    setUserName(user.name || 'Guest');  // Fallback to 'Guest' if name is undefined
     setUserProfile(user);
+      // On successful login
+
   };
+
+  console.log(isAuthenticated); //Debug to check the status
+  
 
   // new 31th oct
   // const updateUserProfile = async (profileData) => {
@@ -1633,12 +1842,12 @@ useEffect(() => {
   // mr promise code 1st november
   const createOrder = async (transaction_id, orderId) => {
     try {
-      const res = await fetch("https://localhost:3000/api/payment/verify", {
-         // const response = await fetch("https://food-project-api.onrender.com/api/payment/verify", {
+      // const res = await fetch("http://localhost:3000/api/payment/verify", {
+         const res = await fetch("https://food-project-api.onrender.com/api/payment/verify", {
         method: "POST",
         headers: {
+          "Authorization": `Bearer ${localStorage.getItem("auth-token")}`,
           "Content-Type": "application/json",
-          "auth-token": `${localStorage.getItem("auth-token")}`,
         },
         body: JSON.stringify({ transaction_id, orderId }),
       });
@@ -1646,6 +1855,8 @@ useEffect(() => {
       if (res.ok) {
         setOrder(data.order);
         console.log(data.order && data);
+        console.log("Menu Order", order)
+        console.log("Menu Order data", data)
         setCartItems([]);
       } else {
         toast("error", "insufficient Funds!...Credit your acct boss");
@@ -1690,6 +1901,7 @@ useEffect(() => {
     cartItems,
     addToCart,
     removeCartItems,
+    order, setOrder,
 
     // addCartItem,
     // reduceCartItem,
@@ -1700,6 +1912,7 @@ useEffect(() => {
     signatureItems,
     restaurantList,
     url,
+    setCartItems,
     syncLocalCartWithServer,
     updateCartItems,
     fetchUserData,

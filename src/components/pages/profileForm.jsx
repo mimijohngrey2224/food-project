@@ -247,6 +247,17 @@ function ProfileForm({ onClose }) {
     } catch (error) {
       console.error('Failed to update profile:', error);
     }
+
+    // update from perplexity 24 november
+    // try {
+    //   await updateUserProfile(formData); // Update the user profile
+    //   const updatedProfile = await getUserProfile(); // Refetch the profile after updating
+    //   setUserProfile(updatedProfile); // Update state with the new profile data
+    //   setUserName(updatedProfile.name); // Assuming 'name' is the field for username
+    //   onClose(); // Close the profile form after updating
+    // } catch (error) {
+    //   console.error('Failed to update profile:', error);
+    // }
   };
   
   return (

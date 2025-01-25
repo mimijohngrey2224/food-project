@@ -7,20 +7,24 @@ import { MenuContext } from "../../context/MenuContext";
 // import thax from './path/to/thax.png'; // Update the path according to your project structu
 
 const Thanks = () => {
-  const {createOrder} = useContext(MenuContext)
+  const {createOrder, order} = useContext(MenuContext)
   const [searchParams] = useSearchParams()
   const tx_ref = searchParams.get("tx_ref")
   const transaction_id = searchParams.get("transaction_id")
   // const { firstName, lastName, totalAmount, Date } = body
 
+
  
 
-  // console.log(transaction_id, tx_ref)
-  // useEffect(()=>{
-  //   if (transaction_id && tx_ref) {
-  //     createOrder(transaction_id, tx_ref)
-  //   }
-  // }, [transaction_id, tx_ref, createOrder])
+  console.log( transaction_id, tx_ref )
+  console.log("Order", order)
+  useEffect(()=>{
+    if (transaction_id && tx_ref) {
+      // if(order){
+        createOrder(transaction_id, tx_ref)
+      // }
+    }
+  }, [transaction_id, tx_ref])
 
   return (
     
@@ -36,35 +40,46 @@ const Thanks = () => {
         <div className="font-bold text-2xl">
         
         <div className="receipt bg-gray-100 shadow-md rounded-lg p-6 mt-8 mx-auto w-full max-w-md">
-  <h2 className="text-xl font-semibold text-center mb-4 text-indigo-600">
-    Payment Receipt
-  </h2>
-  <div className="flex flex-col gap-4">
-    <div className="flex justify-between">
-      <span className="font-medium">First Name:</span>
-      {/* <span>{firstName || "N/A"}</span> */}
-    </div>
-    <div className="flex justify-between">
-      <span className="font-medium">Last Name:</span>
-      {/* <span>{lastName || "N/A"}</span> */}
-    </div>
-    <div className="flex justify-between">
-      <span className="font-medium">Total Amount:</span>
-      {/* <span>₦{amount || "0.00"}</span> */}
-    </div>
-    <div className="flex justify-between">
-      {/* <span className="font-medium">Date:</span> */}
-      <span>
-        {new Date().toLocaleString("en-US", { month: "long", year: "numeric" })}
-      </span>
-    </div>
-  </div>
-</div>
+          <h2 className="text-xl font-semibold text-center mb-4 text-indigo-600">
+            Payment Receipt
+          </h2>
+          <div className="flex flex-col gap-4">
+            <div className="flex justify-between">
+              <span className="font-medium">First Name: {order.firstName}</span>
+              {/* <span>{firstName || "N/A"}</span> */}
+            </div>
+            <div className="flex justify-between">
+              <span className="font-medium">Last Name: {order.lastName}</span>
+              {/* <span>{lastName || "N/A"}</span> */}
+            </div>
+            <div className="flex justify-between">
+              <span className="font-medium">Total Amount: {order.amount}</span>
+              {/* <span>₦{amount || "0.00"}</span> */}
+            </div>
+            <div className="flex justify-between">
+              <span className="font-medium">Date:</span>
+              <span className="">
+                { order.date ? new Date(order.date).toLocaleString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : ""}
+              </span>
+              {/* <span className="">
+  {order.date ? new Date(order.date).toLocaleString("en-GB", { day: "numeric", month: "long", year: "numeric" }).replace(",", "") : ""}
+</span> */}
 
-            
-
+            </div>
+          </div>
+          <div className="listing">
+              <h2 className="mt-5 capitalize mb-2">Purchased Items</h2>
+              {/* <li className="p-2 font-serif mb-2 font-normal text-xl capitalize hover:bg-slate-300 bg-slate-200">new goods &nbsp;  -- 3 &nbsp;-- 200</li> */}
+              {order?.menus?.map((items)=> (
+                <ul>
+                    <li className="p-2 font-serif mb-2 font-normal text-xl capitalize hover:bg-slate-300 bg-slate-200">{items?.menu?.name} &nbsp; -- {items?.quantity} -- &nbsp; {items?.menu?.price}</li>
+                </ul>
+              ))}
           </div>
         </div>
+
+</div>
+</div>
       
 
   );

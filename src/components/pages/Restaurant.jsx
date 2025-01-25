@@ -55,7 +55,7 @@ function Restaurant() {
               onClick={handleClose}
               className="absolute top-2 right-2 text-purple-400 text-2xl hover:text-purple-600 focus:outline-none"
             >
-              X
+              X 
             </button>
             <Details restaurant={selectedRestaurant} onClose={handleClose} />
           </div>

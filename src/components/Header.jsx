@@ -77,7 +77,7 @@ function Header() {
           <Link to="/cart" className="text-lg font-medium hover:text-gray-200 transition-colors duration-300 relative">
             <BsFillCartPlusFill className="text-2xl" />
             <div className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-              {(cartItems?.products?.reduce((total, item) => total + (Number(item.quantity) || 0), 0)) || 0}
+              {(cartItems?.menus?.reduce((total, item) => total + (Number(item.quantity) || 0), 0)) || 0}
 
             </div>
           </Link>
@@ -127,10 +127,11 @@ function Header() {
       <MdOutlineCancel onClick={() => setOpen(false)} className='absolute z-50 top-[40px] right-[40px] text-xl cursor-pointer hover:text-purple-500 transition-colors duration-300' />
       <Link to="/" className="text-2xl font-medium hover:text-purple-500 transition-colors duration-300" onClick={() => setOpen(false)}>Restaurant</Link>
       <Link to="/menu" className="text-2xl font-medium hover:text-purple-500 transition-colors duration-300" onClick={() => setOpen(false)}>Menu</Link>
-      <Link to="/cart" className="text-2xl font-medium hover:text-purple-500 transition-colors duration-300 relative" onClick={() => setOpen(false)}>
-        <BsFillCartPlusFill className="text-xl" />
+      <Link to="/cart" className="text-lg font-medium hover:text-gray-200 transition-colors duration-300 relative">
+        <BsFillCartPlusFill className="text-2xl" />
         <div className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-          {/* {cartItems.reduce((total, item) => total  + (Number(item.quantity) || 0), 0)} */}
+          {(cartItems?.menus?.reduce((total, item) => total + (Number(item.quantity) || 0), 0)) || 0}
+
         </div>
       </Link>
         {isLoggedIn ? (
@@ -142,6 +143,8 @@ function Header() {
               onClick={() => setShowProfileForm(!showProfileForm)}
             />
             <p>Hi, {userName}!</p>
+            {/* {userName && <p>{userName}</p>}  // username appears regardless of profile image 14 december */}
+
             <div className="relative">
               <div onClick={() => setShowLogoutMenu(!showLogoutMenu)} className="cursor-pointer hover:text-purple-500 transition-colors duration-300">Logout</div>
               {showLogoutMenu && (

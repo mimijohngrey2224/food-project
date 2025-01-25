@@ -257,3 +257,9 @@ useEffect(() => {
       console.log(error);
     }
   };
+
+
+
+  ok, i notice something on my project, when i am not signin, when i add to cart it will say "user token is missing please login" but when i refresh and try add to cart again it will add to cart, and when i refresh my page the cart item will still be there, but when i login, and add to cart, it will say "user token is missing please login again", and when i refresh to try to again, it will say the same thing, then when i logout and add to cart it will add to cart, and when i refresh the cart item will still be there, when i now login and add to cart, it will be added to cart without saying user token is missing please login again and when the cart item is added to cart and i refresh the page, all the cart items will be disappear.
+
+please see to this and explain what the issue is and give me a solution to it

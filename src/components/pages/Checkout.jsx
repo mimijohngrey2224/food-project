@@ -541,14 +541,14 @@ function Checkout() {
 
   const calculateTotalAmount = () => {
     try {
-      if (!cartItems || !Array.isArray(cartItems.products)) {
+      if (!cartItems || !Array.isArray(cartItems.menus)) {
         console.error("Invalid cartItems structure:", cartItems);
         return "0.00";
       }
 
       let total = 0;
-      cartItems.products.forEach((item) => {
-        const price = Number(item?.product?.price || 0);
+      cartItems.menus.forEach((item) => {
+        const price = Number(item?.menu?.price || 0);
         const quantity = Number(item?.quantity || 0);
         total += price * quantity;
         console.log("Item being processed:", item);
@@ -648,7 +648,7 @@ function Checkout() {
 
     try {
       // Check if the cart is empty
-      if (!cartItems?.products?.length) {
+      if (!cartItems?.menus?.length) {
         throw new Error("Your cart is empty.");
       }
     
@@ -699,7 +699,7 @@ function Checkout() {
         {/* Order Summary Section */}
         <div className="w-full lg:w-1/2 bg-white p-4 rounded-lg shadow-lg">
           <h1 className="font-bold text-xl md:text-2xl mb-4">Order Summary</h1>
-          {!cartItems?.products?.length ? (
+          {!cartItems?.menus?.length ? (
             <p>Your cart is empty</p>
           ) : (
             <>
@@ -716,12 +716,12 @@ function Checkout() {
                     </tr>
                   </thead>
                   <tbody>
-                    {cartItems.products.map((item, index) => {
-                      const name = item?.product?.name || "Unknown";
-                      const price = Number(item?.product?.price || 0);
+                    {cartItems.menus.map((item, index) => {
+                      const name = item?.menu?.name || "Unknown";
+                      const price = Number(item?.menu?.price || 0);
                       const quantity = Number(item?.quantity || 0);
-                      const imgSrc = item.product?.img
-                        ? `${url}/uploads/${item.product.img}`
+                      const imgSrc = item.menu?.img
+                        ? `${url}/uploads/${item.menu.img}`
                         : "default_image_url";
                       const total = price * quantity;
 
@@ -750,12 +750,12 @@ function Checkout() {
 
               {/* Mobile View */}
               <div className="block sm:hidden">
-                {cartItems.products.map((item, index) => {
-                  const name = item?.product?.name || "Unknown";
-                  const price = Number(item?.product?.price || 0);
+                {cartItems.menus.map((item, index) => {
+                  const name = item?.menu?.name || "Unknown";
+                  const price = Number(item?.menu?.price || 0);
                   const quantity = Number(item?.quantity || 0);
-                  const imgSrc = item.product?.img
-                    ? `${url}/uploads/${item.product.img}`
+                  const imgSrc = item.menu?.img
+                    ? `${url}/uploads/${item.menu.img}`
                     : "default_image_url";
                   const total = price * quantity;
 
@@ -808,7 +808,7 @@ function Checkout() {
             <button
               type="submit"
               className="bg-black text-white py-2 px-4 rounded-md hover:bg-orange-500 transition-colors duration-300 w-full"
-              disabled={isLoading || !cartItems?.products?.length}
+              disabled={isLoading || !cartItems?.menus?.length}
             >
               {isLoading ? "Processing..." : "Pay Now"}
             </button>

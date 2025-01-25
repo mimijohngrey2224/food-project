@@ -312,8 +312,8 @@ import AuthContext from "../../context/AuthContext";
 
 function SignupLogin({ onClose }) {
   const navigate = useNavigate();
-  const {dispatch, state} = useContext(AuthContext)
-  const { handleUserLogin, getUserProfile } = useContext(MenuContext);
+  const [ state, dispatch ] = useContext(AuthContext)
+  const { handleUserLogin, getUserProfile, fetchCartData, setCartItems } = useContext(MenuContext);
   
   // const [url] = useState("http://localhost:3000");
     const [url] = useState("https://food-project-api.onrender.com");
@@ -398,22 +398,24 @@ function SignupLogin({ onClose }) {
         const cartDataItem = JSON.parse(localStorage.getItem("cartItems"));
         if (cartDataItem) {
           console.log("request made");
-          await Promise.all(cartDataItem?.products?.map(async (item) => {
-            // const response = await fetch("http://localhost:3000/api/add-to-cart",
-            const response = await fetch("https://food-project-api.onrender.com/add-to-cart", {
+          await Promise.all(cartDataItem?.menus?.map(async (item) => {
+            
+            // http://localhost:3000/add-to-cart
+            // const response = await fetch("http://food-project-api.onrender.com/api/add-to-cart",
+            const cartresponse = await fetch("https://food-project-api.onrender.com/api/add-to-cart", {
               method: "POST",
               headers: {
+                "Authorization": `Bearer ${getItem("auth-token")}`,  // Use the token directly
                 "Content-Type": "application/json",
-                "auth-token": getItem("auth-token"),  // Use the token directly
               },
-              body: JSON.stringify({ productId: item.product._id, quantity: item.quantity }),
+              body: JSON.stringify({ productId: item.menu._id, quantity: item.quantity }),
             });
 
-            const cartdata = await response.json();
+            const cartdata = await cartresponse.json();
             // console.log( "todday", cartdata);
             if (response.ok) {
-              setCartItems(cartdata && cartdata.products);
-              fetchCart();
+              setCartItems(cartdata && cartdata.menus);
+              fetchCartData();
               showHide("success", "added to cart successfully")
             } else {
               // console.error(Failed to add items to the backend cart);
@@ -427,7 +429,7 @@ function SignupLogin({ onClose }) {
         //   await Promise.all(
         //     cartDataItem?.products?.map(async (item) => {
         //       const cartResponse = await axios.post(
-        //         "http://localhost:3000/api/add-to-cart", { productId: item.product._id, quantity: item.quantity },
+        //         "http://localhost:3000/api/add-to-cart", { productId: item.menu._id, quantity: item.quantity },
         //         {
         //           headers: {
         //             "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Correct string interpolation
@@ -437,7 +439,7 @@ function SignupLogin({ onClose }) {
         //       );
               
         //       if (cartResponse.status === 200) {
-        //         setCartItems(cartResponse.data.products);
+        //         setCartItems(cartResponse.data.menus);
         //         fetchCart();
         //         await getUserProfile(); // Fetch updated user profile on login
         //         onClose();
@@ -475,10 +477,37 @@ function SignupLogin({ onClose }) {
     try {
       const response = await axios.post(`${url}/api/user/login`, loginData);
       console.log(response);
-
+      
       if (response.data.success) {
+        const cartDataItem = JSON.parse(localStorage.getItem("cartItems"));
+        console.log("localstorage cart", cartDataItem)
         toast.success("Logged In Successfully");
         localStorage.setItem("auth-token", response.data.token);
+        if(cartDataItem){
+          await Promise.all(cartDataItem?.menus?.map(async (item) => {
+            // http://localhost:3000/api/add-to-cart
+            const CartResponse = await fetch("https://food-project-api.onrender.com/api/add-to-cart", {
+              method: "POST",
+              headers: {
+                "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Use the token directly
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ productId: item.menu._id, quantity: item.quantity }),
+            });
+  
+            const cartdata = await CartResponse.json();
+            console.log(cartdata.data, "Login cart")
+            if (CartResponse.ok) {
+              setCartItems(cartdata && cartdata.data)
+              await fetchCartData();
+              toast.success("added to cart successfully")
+            } else {
+              console.error("Failed to add items to the backend cart");
+            }
+          }));
+        }
+
+        localStorage.removeItem("cartItems")
         localStorage.setItem("user", JSON.stringify(response.data.user));
 
         handleUserLogin(response.data.token, response.data.user);
@@ -798,7 +827,7 @@ export default SignupLogin;
 //                 {
 //                   headers: {
 //                     "Content-Type": "application/json",
-//                     Authorization: `Bearer ${localStorage.getItem("token")}`,
+//                     Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
 //                     // "auth-token": localStorage.getItem("auth-token"),
 //                   },
 //                 }
