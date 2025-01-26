@@ -1247,7 +1247,7 @@ const updateCartItems = async (productId, quantity, itemId, change) => {
               updatedCart.menus[itemIndex].quantity;
           }
         }
-        console.log("updt cart", updatedCart)
+        console.log("update cart", updatedCart)
         setCartItems(updatedCart);
       } else {
         console.log("error", "Could not update cart");
