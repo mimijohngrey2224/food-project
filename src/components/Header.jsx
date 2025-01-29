@@ -10,7 +10,7 @@ import ProfileForm from '../components/pages/profileForm';
 import { MdOutlineCancel } from "react-icons/md";
 
 function Header() {
-  const { cartItems, url, userProfile, getUserProfile } = useContext(MenuContext);
+  const { cartItems, url, userProfile, getUserProfile, loading } = useContext(MenuContext);
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
