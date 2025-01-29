@@ -56,7 +56,7 @@ function Header() {
     setUserName('User');
     setIsLoggedIn(false);
     setShowLogoutMenu(false);
-    navigate('/thanks');
+    navigate('/');
   };
 
   return (

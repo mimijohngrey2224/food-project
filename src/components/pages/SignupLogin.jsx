@@ -456,6 +456,7 @@ function SignupLogin({ onClose }) {
         // Update context with user data and redirect
         await getUserProfile(); // Fetch updated user profile on login
         navigate("/");
+        window.location.reload()
         console.log("success", "You are now logged in");
       }
     } catch (error) {
