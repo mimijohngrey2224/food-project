@@ -20,7 +20,6 @@ function Header() {
   const [userName, setUserName] = useState('User');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [bar, setBar] = useState(false)
-  const [loading, setLoading] = useState(false)
   
 
   useEffect(() => {
@@ -48,7 +47,6 @@ function Header() {
   useEffect(() => {
     if (userProfile) {
       setUserName(userProfile.firstName || 'User');
-      setLoading(true)
     }
   }, [userProfile]);
 

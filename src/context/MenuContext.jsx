@@ -32,6 +32,7 @@ const MenuContextProvider = ({ children }) => {
   // const [cartItems, setCartItems] = useState([]);
   const [cartItems, setCartItems] = useState({ products: [] });
   const hasLoggedProfile = useRef(false); // Use a ref to track logging state
+  const [loading, setLoading] = useState(true)
 
 
 
@@ -1761,6 +1762,8 @@ useEffect(() => {
       setUserName(response.data.profile.firstName); // Update username immediately
     } catch (error) {
       console.error("Error updating profile:", error);
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -1905,6 +1908,7 @@ if (!token) {
     addToCart,
     removeCartItems,
     order, setOrder,
+    loading,
 
     // addCartItem,
     // reduceCartItem,
