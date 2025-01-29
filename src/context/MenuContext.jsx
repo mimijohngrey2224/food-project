@@ -1535,6 +1535,8 @@ const updateCartItems = async (productId, quantity, itemId, change) => {
         setUserName(data.profile);
       } catch (error) {
         console.error('Failed to fetch user profile:', error);
+      }finally{
+        setLoading(false)
       }
 
       // update from perplexity 24 november
@@ -1762,8 +1764,6 @@ useEffect(() => {
       setUserName(response.data.profile.firstName); // Update username immediately
     } catch (error) {
       console.error("Error updating profile:", error);
-    }finally{
-      setLoading(false)
     }
   };
 
