@@ -93,7 +93,7 @@ const MenuContextProvider = ({ children }) => {
     if (isAuthenticated) {
       // authenticated
       // http://localhost:3000/api/carts
-      const res = await fetch("https://food-project-api.onrender.com/carts", {
+      const res = await fetch("https://food-project-api.onrender.com/api/carts", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Correct string interpolation
@@ -1171,6 +1171,7 @@ const addToCart = async (productId, quantity, menu) => {
           if (res.ok) {
             console.log("success", "Product Successfully deleted from cart");
             setCartItems(data);
+            fetchCartData()
             toast.info("Item removed from cart");
             //   setCartItems(data || data.products);
           }
