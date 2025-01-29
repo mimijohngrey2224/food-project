@@ -49,7 +49,9 @@ const MenuContextProvider = ({ children }) => {
 
   // Save cart items to localStorage if not logged in
   useEffect(() => {
-    fetchCartData()
+    if (isAuthenticated) {
+      fetchCartData()
+    }
   }, [cartItems]);
 
 
