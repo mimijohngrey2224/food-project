@@ -20,6 +20,7 @@ function Header() {
   const [userName, setUserName] = useState('User');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [bar, setBar] = useState(false)
+  const [loading, setLoading] = useState(true)
   
 
   useEffect(() => {
@@ -57,6 +58,7 @@ function Header() {
     setIsLoggedIn(false);
     setShowLogoutMenu(false);
     navigate('/');
+    window.location.reload();
   };
 
   return (
@@ -89,7 +91,7 @@ function Header() {
                 className="h-12 w-12 rounded-full cursor-pointer border-2 border-white"
                 onClick={() => setShowProfileForm(!showProfileForm)}
               />
-              <p className="text-white ml-2 cursor-pointer">Hi, {userName}!</p>
+              <p className="text-white ml-2 cursor-pointer">Hi, {loading ? ('...'):(userName)}</p>
               <div className="relative group">
                 <p className='cursor-pointer px-4 py-2 text-white font-bold rounded' onClick={() => setShowLogoutMenu(!showLogoutMenu)}>logout</p>
                 {showLogoutMenu && (
