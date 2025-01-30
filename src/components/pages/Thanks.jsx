@@ -11,6 +11,7 @@ const Thanks = () => {
   const [searchParams] = useSearchParams()
   const tx_ref = searchParams.get("tx_ref")
   const transaction_id = searchParams.get("transaction_id")
+  window.location.reload();
   // const { firstName, lastName, totalAmount, Date } = body
 
 

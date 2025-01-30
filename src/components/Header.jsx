@@ -90,7 +90,7 @@ function Header() {
                 className="h-12 w-12 rounded-full cursor-pointer border-2 border-white"
                 onClick={() => setShowProfileForm(!showProfileForm)}
               />
-              <p className="text-white ml-2 cursor-pointer">Hi, {loading ? ('...'):(userName)}</p>
+              <p className="text-white ml-2 cursor-pointer">Hi {loading ? ('...'):(userName)}</p>
               <div className="relative group">
                 <p className='cursor-pointer px-4 py-2 text-white font-bold rounded' onClick={() => setShowLogoutMenu(!showLogoutMenu)}>logout</p>
                 {showLogoutMenu && (
@@ -143,7 +143,8 @@ function Header() {
               className="h-12 w-12 rounded-full"
               onClick={() => setShowProfileForm(!showProfileForm)}
             />
-            <p>Hi, {userName}!</p>
+            {/* <p>Hi, {userName}!</p> */}
+            <p>Hi {loading ? ('...'):(userName)}</p>
             {/* {userName && <p>{userName}</p>}  // username appears regardless of profile image 14 december */}
 
             <div className="relative">
