@@ -200,121 +200,6 @@
 
 
 // 30th jan 2025
-// import { useContext, useEffect, useState } from "react";
-// import { useSearchParams } from "react-router-dom";
-// import { MenuContext } from "../../context/MenuContext";
-
-// const Thanks = () => {
-//   const { createOrder, order, clearCart } = useContext(MenuContext); // Assuming clearCart is a function to reset the cart
-//   const [searchParams] = useSearchParams();
-//   const tx_ref = searchParams.get("tx_ref");
-//   const transaction_id = searchParams.get("transaction_id");
-
-//   const [loading, setLoading] = useState(true); // To handle loading state
-//   const [error, setError] = useState(""); // To store error messages
-
-//   useEffect(() => {
-//     if (transaction_id && tx_ref) {
-//       // Attempt to create the order
-//       createOrder(transaction_id, tx_ref)
-//         .then((response) => {
-//           if (response.success) {
-//             // Clear the cart after successful order
-//             clearCart();
-//             setLoading(false); // Stop loading once the order is created successfully
-//           } else {
-//             // Set error message if order creation fails
-//             setError("An error occurred while processing your order.");
-//             setLoading(false);
-//           }
-//         })
-//         .catch((err) => {
-//           console.error("Error creating order:", err);
-//           setError("An error occurred while processing your order.");
-//           setLoading(false);
-//         });
-//     }
-//   }, [transaction_id, tx_ref, createOrder, clearCart]);
-
-//   if (loading) {
-//     return (
-//       <div className="loading-spinner">
-//         <p>Loading...</p>
-//       </div>
-//     ); // Display loading state while waiting for the order to complete
-//   }
-
-//   return (
-//     <div className="thanks-content">
-//       {error && (
-//         <div className="error-message">
-//           <p>{error}</p>
-//         </div>
-//       )}
-//       <div className="mt-10 flex justify-center">
-//         <video
-//           className=" w-[60vw] h-[60vh] rounded-full"
-//           src="/thanks-vid.mp4"
-//           loop
-//           autoPlay
-//           muted
-//           controls
-//         ></video>
-//       </div>
-//       <p className="text-center font-bold text-2xl mt-3">
-//         We appreciate your feedback. Have a great day!
-//       </p>
-//       {order && (
-//         <div className="font-bold text-2xl">
-//           <div className="receipt bg-gray-100 shadow-md rounded-lg p-6 mt-8 mx-auto w-full max-w-md">
-//             <h2 className="text-xl font-semibold text-center mb-4 text-indigo-600">
-//               Payment Receipt
-//             </h2>
-//             <div className="flex flex-col gap-4">
-//               <div className="flex justify-between">
-//                 <span className="font-medium">First Name: {order.firstName}</span>
-//               </div>
-//               <div className="flex justify-between">
-//                 <span className="font-medium">Last Name: {order.lastName}</span>
-//               </div>
-//               <div className="flex justify-between">
-//                 <span className="font-medium">Total Amount: {order.amount}</span>
-//               </div>
-//               <div className="flex justify-between">
-//                 <span className="font-medium">Date:</span>
-//                 <span className="">
-//                   {order.date
-//                     ? new Date(order.date).toLocaleString("en-GB", {
-//                         day: "numeric",
-//                         month: "long",
-//                         year: "numeric",
-//                       })
-//                     : ""}
-//                 </span>
-//               </div>
-//             </div>
-//             <div className="listing">
-//               <h2 className="mt-5 capitalize mb-2">Purchased Items</h2>
-//               {order?.menus?.map((items) => (
-//                 <ul key={items?.menu?.id}>
-//                   <li className="p-2 font-serif mb-2 font-normal text-xl capitalize hover:bg-slate-300 bg-slate-200">
-//                     {items?.menu?.name} &nbsp; -- {items?.quantity} -- &nbsp;
-//                     {items?.menu?.price}
-//                   </li>
-//                 </ul>
-//               ))}
-//             </div>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Thanks;
-
-
-// trying 30th jan 2025
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { MenuContext } from "../../context/MenuContext";
@@ -333,8 +218,7 @@ const Thanks = () => {
       // Attempt to create the order
       createOrder(transaction_id, tx_ref)
         .then((response) => {
-          console.log("Response from createOrder:", response); // Log the response to debug
-          if (response && response.success) {
+          if (response.success) {
             // Clear the cart after successful order
             clearCart();
             setLoading(false); // Stop loading once the order is created successfully
@@ -428,6 +312,122 @@ const Thanks = () => {
 };
 
 export default Thanks;
+
+
+// trying 30th jan 2025
+// import { useContext, useEffect, useState } from "react";
+// import { useSearchParams } from "react-router-dom";
+// import { MenuContext } from "../../context/MenuContext";
+
+// const Thanks = () => {
+//   const { createOrder, order, clearCart } = useContext(MenuContext); // Assuming clearCart is a function to reset the cart
+//   const [searchParams] = useSearchParams();
+//   const tx_ref = searchParams.get("tx_ref");
+//   const transaction_id = searchParams.get("transaction_id");
+
+//   const [loading, setLoading] = useState(true); // To handle loading state
+//   const [error, setError] = useState(""); // To store error messages
+
+//   useEffect(() => {
+//     if (transaction_id && tx_ref) {
+//       // Attempt to create the order
+//       createOrder(transaction_id, tx_ref)
+//         .then((response) => {
+//           console.log("Response from createOrder:", response); // Log the response to debug
+//           if (response && response.success) {
+//             // Clear the cart after successful order
+//             clearCart();
+//             setLoading(false); // Stop loading once the order is created successfully
+//           } else {
+//             // Set error message if order creation fails
+//             setError("An error occurred while processing your order.");
+//             setLoading(false);
+//           }
+//         })
+//         .catch((err) => {
+//           console.error("Error creating order:", err);
+//           setError("An error occurred while processing your order.");
+//           setLoading(false);
+//         });
+//     }
+//   }, [transaction_id, tx_ref, createOrder, clearCart]);
+
+//   if (loading) {
+//     return (
+//       <div className="loading-spinner">
+//         <p>Loading...</p>
+//       </div>
+//     ); // Display loading state while waiting for the order to complete
+//   }
+
+//   return (
+//     <div className="thanks-content">
+//       {error && (
+//         <div className="error-message">
+//           <p>{error}</p>
+//         </div>
+//       )}
+//       <div className="mt-10 flex justify-center">
+//         <video
+//           className=" w-[60vw] h-[60vh] rounded-full"
+//           src="/thanks-vid.mp4"
+//           loop
+//           autoPlay
+//           muted
+//           controls
+//         ></video>
+//       </div>
+//       <p className="text-center font-bold text-2xl mt-3">
+//         We appreciate your feedback. Have a great day!
+//       </p>
+//       {order && (
+//         <div className="font-bold text-2xl">
+//           <div className="receipt bg-gray-100 shadow-md rounded-lg p-6 mt-8 mx-auto w-full max-w-md">
+//             <h2 className="text-xl font-semibold text-center mb-4 text-indigo-600">
+//               Payment Receipt
+//             </h2>
+//             <div className="flex flex-col gap-4">
+//               <div className="flex justify-between">
+//                 <span className="font-medium">First Name: {order.firstName}</span>
+//               </div>
+//               <div className="flex justify-between">
+//                 <span className="font-medium">Last Name: {order.lastName}</span>
+//               </div>
+//               <div className="flex justify-between">
+//                 <span className="font-medium">Total Amount: {order.amount}</span>
+//               </div>
+//               <div className="flex justify-between">
+//                 <span className="font-medium">Date:</span>
+//                 <span className="">
+//                   {order.date
+//                     ? new Date(order.date).toLocaleString("en-GB", {
+//                         day: "numeric",
+//                         month: "long",
+//                         year: "numeric",
+//                       })
+//                     : ""}
+//                 </span>
+//               </div>
+//             </div>
+//             <div className="listing">
+//               <h2 className="mt-5 capitalize mb-2">Purchased Items</h2>
+//               {order?.menus?.map((items) => (
+//                 <ul key={items?.menu?.id}>
+//                   <li className="p-2 font-serif mb-2 font-normal text-xl capitalize hover:bg-slate-300 bg-slate-200">
+//                     {items?.menu?.name} &nbsp; -- {items?.quantity} -- &nbsp;
+//                     {items?.menu?.price}
+//                   </li>
+//                 </ul>
+//               ))}
+//             </div>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Thanks;
 
 
 
