@@ -1857,12 +1857,26 @@ if (!token) {
         },
         body: JSON.stringify({ transaction_id, orderId }),
       });
+
+      //just added 31 jan 2025
+      // const response = await fetch('/api/payment/verify');
+      // if (!response.ok) {
+      //     console.error('Error verifying payment:', response.statusText);
+      //     return;
+      // }
+      // const data = await response.json();
+      // if (!data) {
+      //     console.error('No data returned from createOrder');
+      //     return;
+      // }
+
       const data = await res.json();
       if (res.ok) {
         setOrder(data.order);
         console.log(data.order && data);
         console.log("Menu Order", order)
         console.log("Menu Order data", data)
+        console.error('No data returned from createOrder');
         setCartItems([]);
       } else {
         toast("error", "insufficient Funds!...Credit your acct boss");
@@ -1870,6 +1884,7 @@ if (!token) {
     } catch (error) {
       console.log(error);
     }
+
   };
 
   // my code 1st november
