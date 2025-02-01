@@ -29,7 +29,7 @@ function Header() {
     if (userData) {
       try {
         const parsedData = JSON.parse(userData);
-        setUserName(parsedData.firstName || 'User');
+        setUserName(parsedData.firstName || 'Name');
         setIsLoggedIn(!!token);
       } catch (error) {
         console.error('Failed to parse user data:', error);
