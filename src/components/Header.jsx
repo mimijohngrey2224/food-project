@@ -22,39 +22,16 @@ function Header() {
   const [bar, setBar] = useState(false)
   
   // old to check todat 1st feb 2025
-  // useEffect(() => {
-  //   const userData = localStorage.getItem('user');
-  //   const token = localStorage.getItem('auth-token');
-    
-  //   if (userData) {
-  //     try {
-  //       const parsedData = JSON.parse(userData);
-  //       setUserName(parsedData.firstName || 'User');
-  //       setIsLoggedIn(!!token);
-  //     } catch (error) {
-  //       console.error('Failed to parse user data:', error);
-  //     }
-  //   } else {
-  //     setUserName('User');
-  //     setIsLoggedIn(false);
-  //   }
-    
-  //   if (token) {
-  //     getUserProfile(); // Fetch profile
-  //   }
-  // }, [getUserProfile]);
-
-  //new 1 feb 2025
   useEffect(() => {
     const userData = localStorage.getItem('user');
     const token = localStorage.getItem('auth-token');
-
+    
     if (userData) {
       try {
         const parsedData = JSON.parse(userData);
         setUserName(parsedData.firstName || 'User');
         setIsLoggedIn(!!token);
-        localStorage.setItem('user', JSON.stringify(userData)); // where userData is the new user object
+        // localStorage.setItem('user', JSON.stringify(userData)); // where userData is the new user object
       } catch (error) {
         console.error('Failed to parse user data:', error);
       }
@@ -62,11 +39,11 @@ function Header() {
       setUserName('User');
       setIsLoggedIn(false);
     }
-
+    
     if (token) {
       getUserProfile(); // Fetch profile
     }
-  }, [getUserProfile, localStorage.getItem('user')]); // Add `user` as dependency to update username immediately edding 
+  }, [getUserProfile, localStorage.getItem("user")]);
 
 
   useEffect(() => {

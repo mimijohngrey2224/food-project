@@ -510,13 +510,14 @@ function SignupLogin({ onClose }) {
 
         localStorage.removeItem("cartItems")
         localStorage.setItem("user", JSON.stringify(response.data.user));
-
         handleUserLogin(response.data.token, response.data.user);
+       
         getUserProfile();
         onClose();
         navigate("/", { replace: true });
       } else {
         toast.error("Invalid Credentials");
+        localStorage.setItem('user', JSON.stringify(userData)); // where userData is the new user object
 
       }
     } catch (error) {
