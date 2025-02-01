@@ -1780,7 +1780,7 @@ if (!token) {
 // Add cart item logic here
 
     setToken(newToken);
-    setUserName(user.name);
+    // setUserName(user.name);
     setUserName(user.name || 'Guest');  // Fallback to 'Guest' if name is undefined
     setUserProfile(user);
       // On successful login
