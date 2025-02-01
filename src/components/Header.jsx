@@ -53,7 +53,7 @@ function Header() {
   const handleLogout = () => {
     localStorage.removeItem('auth-token');
     localStorage.removeItem('user');
-    setUserName('User');
+    setUserName('User.name');
     setIsLoggedIn(false);
     setShowLogoutMenu(false);
     navigate('/');
