@@ -36,7 +36,7 @@ function Header() {
       }
     } else {
       setUserName('User');
-      setIsLoggedIn(false);
+      setIsLoggedIn(true);
     }
     
     if (token) {
