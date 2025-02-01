@@ -54,13 +54,12 @@ function Header() {
         const parsedData = JSON.parse(userData);
         setUserName(parsedData.firstName || 'User');
         setIsLoggedIn(!!token);
+        localStorage.setItem('user', JSON.stringify(userData)); // where userData is the new user object
       } catch (error) {
         console.error('Failed to parse user data:', error);
       }
     } else {
       setUserName('User');
-      localStorage.setItem('user', JSON.stringify(userData)); // where userData is the new user object
-
       setIsLoggedIn(false);
     }
 
