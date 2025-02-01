@@ -59,6 +59,8 @@ function Header() {
       }
     } else {
       setUserName('User');
+      localStorage.setItem('user', JSON.stringify(userData)); // where userData is the new user object
+
       setIsLoggedIn(false);
     }
 
