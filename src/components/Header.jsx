@@ -53,10 +53,11 @@ function Header() {
   const handleLogout = () => {
     localStorage.removeItem('auth-token');
     localStorage.removeItem('user');
-    setUserName('User.name');
+    setUserName('User');
     setIsLoggedIn(false);
     setShowLogoutMenu(false);
-    navigate('/');
+    navigate('/'); // new
+    // navigate('/thanks'); old
     window.location.reload();
   };
 
@@ -90,7 +91,7 @@ function Header() {
                 className="h-12 w-12 rounded-full cursor-pointer border-2 border-white"
                 onClick={() => setShowProfileForm(!showProfileForm)}
               />
-              <p className="text-white ml-2 cursor-pointer">Hi {loading ? ('...'):(userName)}</p>
+              <p className="text-white ml-2 cursor-pointer">Hi {loading ? ('...'):(user.name)}</p>
               <div className="relative group">
                 <p className='cursor-pointer px-4 py-2 text-white font-bold rounded' onClick={() => setShowLogoutMenu(!showLogoutMenu)}>logout</p>
                 {showLogoutMenu && (
