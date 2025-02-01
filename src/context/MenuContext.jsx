@@ -1772,39 +1772,39 @@ useEffect(() => {
   //     setUserProfile(null)
   // }, [])
 
-//   const handleUserLogin = (newToken, user) => {  //testing 4th december checking 1 feb 2025
-//     const token = localStorage.getItem("auth_token");
-// if (!token) {
-//   // Handle token missing
-// }
-// // Add cart item logic here
+  const handleUserLogin = (newToken, user) => {  //testing 4th december checking 1 feb 2025
+    const token = localStorage.getItem("auth_token");
+if (!token) {
+  // Handle token missing
+}
+// Add cart item logic here
 
-//     setToken(newToken);
-//     // setUserName(user.name);
-//     setUserName(user.name || 'Guest');  // Fallback to 'Guest' if name is undefined
-//     setUserProfile(user);
-//       // On successful login
+    setToken(newToken);
+    setUserName(user.name);
+    setUserName(user.name || 'Guest');  // Fallback to 'Guest' if name is undefined
+    setUserProfile(user);
+      // On successful login
 
-//   };
+  };
 
   // checking 1feb 2025
-  const handleUserLogin = (newToken, user) => {
-    const token = localStorage.getItem("auth_token");
-    if (!token) {
-      // Handle token missing
-    }
+  // const handleUserLogin = (newToken, user) => {
+  //   const token = localStorage.getItem("auth_token");
+  //   if (!token) {
+  //     // Handle token missing
+  //   }
   
-    // Assuming you are setting a loading state before fetching user data
-    setToken(newToken);
+  //   // Assuming you are setting a loading state before fetching user data
+  //   setToken(newToken);
   
-    if (user && user.name) {
-      setUserName(user.name);  // Set user name immediately if it's available
-    } else {
-      setUserName('Guest');  // Set fallback if name is missing
-    }
+  //   if (user && user.name) {
+  //     setUserName(user.name);  // Set user name immediately if it's available
+  //   } else {
+  //     setUserName('Guest');  // Set fallback if name is missing
+  //   }
   
-    setUserProfile(user);
-  };
+  //   setUserProfile(user);
+  // };
   
 
   console.log(isAuthenticated); //Debug to check the status
