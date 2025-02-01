@@ -91,7 +91,7 @@ function Header() {
                 className="h-12 w-12 rounded-full cursor-pointer border-2 border-white"
                 onClick={() => setShowProfileForm(!showProfileForm)}
               />
-              <p className="text-white ml-2 cursor-pointer">Hi {loading ? ('...'):(user.name)}</p>
+              <p className="text-white ml-2 cursor-pointer">Hi {loading ? ('...'):(userName)}</p>
               <div className="relative group">
                 <p className='cursor-pointer px-4 py-2 text-white font-bold rounded' onClick={() => setShowLogoutMenu(!showLogoutMenu)}>logout</p>
                 {showLogoutMenu && (
