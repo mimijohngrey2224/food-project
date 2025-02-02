@@ -130,9 +130,18 @@ const MenuContextProvider = ({ children }) => {
       }
       // authenticated done
     } else {
-      // unauthenticated
+      // unauthenticated  old just change 2 feb 2025
+      // const localCart = localStorage.getItem("cartItems");
+      // const cart = JSON.parse(localStorage.getItem("cartItems")) || { menus: [] };
+
       const localCart = localStorage.getItem("cartItems");
-      const cart = JSON.parse(localStorage.getItem("cartItems")) || { menus: [] };
+      const parsedCart = localCart ? JSON.parse(localCart) : { menus: [] }; // new added 2 feb 2025
+  
+      if (parsedCart.menus && parsedCart.menus.length > 0) {
+        setCartItems(parsedCart);
+      } else {
+        setCartItems([]); // Clear cart items if nothing is in local storage
+      }
       // console.log("Cart:", cart);
 
       // console.log("cart",localCart);
@@ -145,7 +154,6 @@ const MenuContextProvider = ({ children }) => {
       // unauthenticated done
     }
   };
-
 
 
   // my code 1st november
@@ -1786,27 +1794,7 @@ if (!token) {
       // On successful login
 
   };
-
-  // checking 1feb 2025
-  // const handleUserLogin = (newToken, user) => {
-  //   const token = localStorage.getItem("auth_token");
-  //   if (!token) {
-  //     // Handle token missing
-  //   }
   
-  //   // Assuming you are setting a loading state before fetching user data
-  //   setToken(newToken);
-  
-  //   if (user && user.name) {
-  //     setUserName(user.name);  // Set user name immediately if it's available
-  //   } else {
-  //     setUserName('Guest');  // Set fallback if name is missing
-  //   }
-  
-  //   setUserProfile(user);
-  // };
-  
-
   console.log(isAuthenticated); //Debug to check the status
   
 
