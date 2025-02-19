@@ -45,7 +45,7 @@ function Signature() {
           <Card key={item._id}>
             <div to={`/details/${item._id}`} className="block relative">
               <img
-              //  src={item.img ? `http://localhost:3000/uploads/${item.product.img}` : "default_image_url"}
+              //  src={item.img ? `http://food-project-api.onrender.com/uploads/${item.product.img}` : "default_image_url"}
                 src={`https://food-project-api.onrender.com/uploads/${item.img}`} // Adjust URL as needed
                 alt={item.name}
                 className="w-[350px] h-[280px] sm:h-48 md:h-52 lg:h-56 object-cover transition duration-300 transform hover:scale-105 rounded-lg"

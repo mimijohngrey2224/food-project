@@ -14,8 +14,8 @@ const isAuthenticated = false;
 
 const MenuContextProvider = ({ children }) => {
   // const [cartItems, setCartItems] = useState([]);
-  // const [url] = useState("http://localhost:3000");
-  const [url] = useState("https://food-project-api.onrender.com");
+  const [url] = useState("http://food-project-api.onrender.com");
+  // const [url] = useState("https://food-project-api.onrender.com");
   const [menuItems, setMenuItems] = useState([]);
   const [breakItems, setBreakItems] = useState([]);
   const [naijaItems, setNaijaItems] = useState([]);
@@ -95,8 +95,9 @@ const MenuContextProvider = ({ children }) => {
   const fetchCartData = async () => {
     if (isAuthenticated) {
       // authenticated
-      // http://localhost:3000/api/carts
-      const res = await fetch("https://food-project-api.onrender.com/api/carts", {
+      
+      // https://food-project-api.onrender.com/api/carts
+      const res = await fetch("http://food-project-api.onrender.com/api/carts", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Correct string interpolation
@@ -293,7 +294,7 @@ const MenuContextProvider = ({ children }) => {
 // const addToCart = async (productId, quantity, product) => {
 //   if (isAuthenticated) {
 //     try {
-//       const res = await fetch("http://localhost:3000/api/add-to-cart", {
+//       const res = await fetch("http://food-project-api.onrender.com/api/add-to-cart", {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -390,7 +391,7 @@ console.log(isAuthenticated) // shows false on console
 //       //   return;
 //       // }
 
-//       const res = await fetch("http://localhost:3000/api/add-to-cart", {
+//       const res = await fetch("http://food-project-api.onrender.com/api/add-to-cart", {
 //         method: "POST",
 //         headers: {
 //           "Authorization": `Bearer ${localStorage.getItem("auth-token")}`,
@@ -694,7 +695,7 @@ useEffect(() => console.log(cartItems, "cartItems 2") , [cartItems])
 // const addToCart = async (productId, quantity, product) => {
 //   console.log("called endpoint for add to cart")
 //   try{
-//   const response = await fetch("http://localhost:3000/api/add-to-cart", {
+//   const response = await fetch("http://food-project-api.onrender.com/api/add-to-cart", {
 //     method: "POST",
 //     headers: {
 //       "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Send the token in the Authorization header
@@ -729,8 +730,9 @@ const addToCart = async (productId, quantity, menu) => {
         toast.error("User token is missing. Please log in.");
         return; // Exit the function if token is missing
       }
-        // http://localhost:3000/api/add-to-cart
-      const response = await fetch("https://food-project-api.onrender.com/api/add-to-cart", {
+        // http://food-project-api.onrender.com/api/add-to-cart
+        // https://food-project-api.onrender.com/api/add-to-cart
+      const response = await fetch("http://food-project-api.onrender.com/api/add-to-cart", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Send the token in the Authorization header
@@ -820,7 +822,7 @@ const addToCart = async (productId, quantity, menu) => {
 // const updateCartItems = async (productId, quantity, itemId, change) => {
 //   if (isAuthenticated) {
 //     try {
-//       const res = await fetch("http://localhost:3000/api/update-cart", {
+//       const res = await fetch("http://food-project-api.onrender.com/api/update-cart", {
 //         method: "PUT",
 //         headers: {
 //           "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Correct string interpolation
@@ -924,7 +926,7 @@ const addToCart = async (productId, quantity, menu) => {
 //         return;
 //       }
 
-//       const res = await fetch("http://localhost:3000/api/add-to-cart", {
+//       const res = await fetch("http://food-project-api.onrender.com/api/add-to-cart", {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -997,7 +999,7 @@ const addToCart = async (productId, quantity, menu) => {
 // const updateCartItems = async (productId, quantity, itemId, change) => {
 //   if (isAuthenticated) {
 //     try {
-//       const res = await fetch("http://localhost:3000/api/update-cart", {
+//       const res = await fetch("http://food-project-api.onrender.com/api/update-cart", {
 //         method: "PUT",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -1169,8 +1171,9 @@ const addToCart = async (productId, quantity, menu) => {
       if (isAuthenticated) {
         try {
           // authenticated
-          // http://localhost:3000/api/delete-cart
-          const res = await fetch("https://food-project-api.onrender.com/api/delete-cart", {
+          
+          // https://food-project-api.onrender.com/api/delete-cart
+          const res = await fetch("http://food-project-api.onrender.com/api/delete-cart", {
             method: "DELETE",
             headers: {
               "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Correct string interpolationfetch
@@ -1229,8 +1232,9 @@ const addToCart = async (productId, quantity, menu) => {
 const updateCartItems = async (productId, quantity, itemId, change) => {
   if (isAuthenticated) {
     try {
-      // http://localhost:3000/api/update-cart
-      const res = await fetch("https://food-project-api.onrender.com/api/update-cart", {
+     
+      // https://food-project-api.onrender.com/api/update-cart
+      const res = await fetch("http://food-project-api.onrender.com/api/update-cart", {
         method: "PUT",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Correct string interpolation
@@ -1791,6 +1795,10 @@ if (!token) {
     // setUserName(user.name);
     setUserName(user.name || 'Guest');  // Fallback to 'Guest' if name is undefined
     setUserProfile(user);
+
+
+    console.log(user); // Log the whole user object to check if name is present
+    
       // On successful login
 
   };
@@ -1856,8 +1864,8 @@ if (!token) {
   // mr promise code 1st november
   const createOrder = async (transaction_id, orderId) => {
     try {
-      // const res = await fetch("http://localhost:3000/api/payment/verify", {
-         const res = await fetch("https://food-project-api.onrender.com/api/payment/verify", {
+      const res = await fetch("http://food-project-api.onrender.com/api/payment/verify", {
+        //  const res = await fetch("https://food-project-api.onrender.com/api/payment/verify", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("auth-token")}`,
@@ -1877,7 +1885,7 @@ if (!token) {
       //     console.error('No data returned from createOrder');
       //     return;
       // }
-
+      console.log("order", res)
       const data = await res.json();
       if (res.ok) {
         setOrder(data.order);
@@ -1887,7 +1895,7 @@ if (!token) {
         console.error('No data returned from createOrder'); // to check
         setCartItems([]);
       } else {
-        toast("error", "insufficient Funds!...Credit your acct boss");
+        // toast("error", "insufficient Funds!...Credit your acct boss");
       }
     } catch (error) {
       console.log(error);

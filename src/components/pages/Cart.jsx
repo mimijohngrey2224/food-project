@@ -121,7 +121,7 @@
 //                     <td className="py-2 px-2 sm:px-4">
 //                       <div className="flex justify-center">
 //                         <img
-//                           src={item.product?.img ? `http://localhost:3000/uploads/${item.product.img}` : "default_image_url"}
+//                           src={item.product?.img ? `http://food-project-api.onrender.com/uploads/${item.product.img}` : "default_image_url"}
 //                           className="h-12 w-12 object-cover rounded"
 //                           alt={item.name}
 //                         />
@@ -312,8 +312,9 @@ function Cart() {
                     <td className="py-2 px-2 sm:px-4">
                       <div className="flex justify-center">
                         <img
-                        // http://localhost:3000/uploads
-                          src={item.menu?.img ? `https://food-project-api.onrender.com/uploads/${item.menu.img}` : "default_image_url"}
+                       
+                        // http://food-project-api.onrender.com/uploads
+                          src={item.menu?.img ? ` https://food-project-api.onrender.com/uploads/${item.menu.img}` : "default_image_url"}
                           className="h-12 w-12 object-cover rounded"
                           alt={item.name}
                         />

@@ -10,7 +10,7 @@
 //   const navigate = useNavigate();
 //   const { handleUserLogin, getUserProfile } = useContext(MenuContext);
   
-//   const [url] = useState("http://localhost:3000");
+//   const [url] = useState("http://food-project-api.onrender.com");
 //   // const [url] = useState("https://food-project-api.onrender.com");
   
 //   const [signupData, setSignupData] = useState({
@@ -315,7 +315,7 @@ function SignupLogin({ onClose }) {
   const [ state, dispatch ] = useContext(AuthContext)
   const { handleUserLogin, getUserProfile, fetchCartData, setCartItems } = useContext(MenuContext);
   
-  // const [url] = useState("http://localhost:3000");
+  // const [url] = useState("http://food-project-api.onrender.com");
     const [url] = useState("https://food-project-api.onrender.com");
   
   const [signupData, setSignupData] = useState({
@@ -400,9 +400,10 @@ function SignupLogin({ onClose }) {
           console.log("request made");
           await Promise.all(cartDataItem?.menus?.map(async (item) => {
             
-            // http://localhost:3000/add-to-cart
+           
+            // https://food-project-api.onrender.com/api/add-to-cart
             // const response = await fetch("http://food-project-api.onrender.com/api/add-to-cart",
-            const cartresponse = await fetch("https://food-project-api.onrender.com/api/add-to-cart", {
+            const cartresponse = await fetch("http://food-project-api.onrender.com/add-to-cart", {
               method: "POST",
               headers: {
                 "Authorization": `Bearer ${getItem("auth-token")}`,  // Use the token directly
@@ -429,7 +430,7 @@ function SignupLogin({ onClose }) {
         //   await Promise.all(
         //     cartDataItem?.products?.map(async (item) => {
         //       const cartResponse = await axios.post(
-        //         "http://localhost:3000/api/add-to-cart", { productId: item.menu._id, quantity: item.quantity },
+        //         "http://food-project-api.onrender.com/api/add-to-cart", { productId: item.menu._id, quantity: item.quantity },
         //         {
         //           headers: {
         //             "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Correct string interpolation
@@ -486,8 +487,9 @@ function SignupLogin({ onClose }) {
         localStorage.setItem("auth-token", response.data.token);
         if(cartDataItem){
           await Promise.all(cartDataItem?.menus?.map(async (item) => {
-            // http://localhost:3000/api/add-to-cart
-            const CartResponse = await fetch("https://food-project-api.onrender.com/api/add-to-cart", {
+            
+            // https://food-project-api.onrender.com/api/add-to-cart
+            const CartResponse = await fetch("http://food-project-api.onrender.com/api/add-to-cart", {
               method: "POST",
               headers: {
                 "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Use the token directly
@@ -729,7 +731,7 @@ export default SignupLogin;
 //   const {dispatch, state} = useContext(AuthContext)
 //   const { handleUserLogin, getUserProfile } = useContext(MenuContext);
   
-//   const [url] = useState("http://localhost:3000");
+//   const [url] = useState("http://food-project-api.onrender.com");
 //   // const [url] = useState("https://food-project-api.onrender.com");
   
 //   const [signupData, setSignupData] = useState({
@@ -824,7 +826,7 @@ export default SignupLogin;
 //           await Promise.all(
 //             cartDataItem?.products?.map(async (item) => {
 //               const cartResponse = await axios.post(
-//                 "http://localhost:3000/api/add-to-cart",
+//                 "http://food-project-api.onrender.com/api/add-to-cart",
 //                 { productId: item.product._id, quantity: item.quantity },
 //                 {
 //                   headers: {
@@ -1089,7 +1091,7 @@ export default SignupLogin;
 //   const navigate = useNavigate();
 //   const { handleUserLogin, getUserProfile } = useContext(MenuContext);
   
-//   const [url] = useState("http://localhost:3000");
+//   const [url] = useState("http://food-project-api.onrender.com");
 //   // const [url] = useState("https://food-project-api.onrender.com");
   
 //   const [signupData, setSignupData] = useState({
