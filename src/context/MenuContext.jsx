@@ -14,8 +14,8 @@ const isAuthenticated = false;
 
 const MenuContextProvider = ({ children }) => {
   // const [cartItems, setCartItems] = useState([]);
-  const [url] = useState("http://food-project-api.onrender.com");
-  // const [url] = useState("https://food-project-api.onrender.com");
+  // const [url] = useState("http://food-project-api.onrender.com");
+  const [url] = useState("https://food-project-api.onrender.com");
   const [menuItems, setMenuItems] = useState([]);
   const [breakItems, setBreakItems] = useState([]);
   const [naijaItems, setNaijaItems] = useState([]);
@@ -97,7 +97,7 @@ const MenuContextProvider = ({ children }) => {
       // authenticated
       
       // https://food-project-api.onrender.com/api/carts
-      const res = await fetch("http://food-project-api.onrender.com/api/carts", {
+      const res = await fetch("https://food-project-api.onrender.com/api/carts", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Correct string interpolation
@@ -732,7 +732,7 @@ const addToCart = async (productId, quantity, menu) => {
       }
         // http://food-project-api.onrender.com/api/add-to-cart
         // https://food-project-api.onrender.com/api/add-to-cart
-      const response = await fetch("http://food-project-api.onrender.com/api/add-to-cart", {
+      const response = await fetch("https://food-project-api.onrender.com/api/add-to-cart", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Send the token in the Authorization header
@@ -1173,7 +1173,7 @@ const addToCart = async (productId, quantity, menu) => {
           // authenticated
           
           // https://food-project-api.onrender.com/api/delete-cart
-          const res = await fetch("http://food-project-api.onrender.com/api/delete-cart", {
+          const res = await fetch("https://food-project-api.onrender.com/api/delete-cart", {
             method: "DELETE",
             headers: {
               "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Correct string interpolationfetch
@@ -1234,7 +1234,7 @@ const updateCartItems = async (productId, quantity, itemId, change) => {
     try {
      
       // https://food-project-api.onrender.com/api/update-cart
-      const res = await fetch("http://food-project-api.onrender.com/api/update-cart", {
+      const res = await fetch("https://food-project-api.onrender.com/api/update-cart", {
         method: "PUT",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Correct string interpolation
@@ -1864,7 +1864,7 @@ if (!token) {
   // mr promise code 1st november
   const createOrder = async (transaction_id, orderId) => {
     try {
-      const res = await fetch("http://food-project-api.onrender.com/api/payment/verify", {
+      const res = await fetch("https://food-project-api.onrender.com/api/payment/verify", {
         //  const res = await fetch("https://food-project-api.onrender.com/api/payment/verify", {
         method: "POST",
         headers: {

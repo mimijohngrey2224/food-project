@@ -403,7 +403,7 @@ function SignupLogin({ onClose }) {
            
             // https://food-project-api.onrender.com/api/add-to-cart
             // const response = await fetch("http://food-project-api.onrender.com/api/add-to-cart",
-            const cartresponse = await fetch("http://food-project-api.onrender.com/add-to-cart", {
+            const cartresponse = await fetch("https://food-project-api.onrender.com/add-to-cart", {
               method: "POST",
               headers: {
                 "Authorization": `Bearer ${getItem("auth-token")}`,  // Use the token directly
@@ -489,7 +489,7 @@ function SignupLogin({ onClose }) {
           await Promise.all(cartDataItem?.menus?.map(async (item) => {
             
             // https://food-project-api.onrender.com/api/add-to-cart
-            const CartResponse = await fetch("http://food-project-api.onrender.com/api/add-to-cart", {
+            const CartResponse = await fetch("https://food-project-api.onrender.com/api/add-to-cart", {
               method: "POST",
               headers: {
                 "Authorization": `Bearer ${localStorage.getItem("auth-token")}`, // Use the token directly
