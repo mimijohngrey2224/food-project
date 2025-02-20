@@ -671,7 +671,7 @@ function Checkout() {
           // Check if the response indicates success
           if (response.data.success) {
             const paymentLink = response.data.link;
-            console.log("payment lnk", paymentLink)
+            console.log("payment link", paymentLink)
             window.location.href = paymentLink; // Redirect to Flutterwave payment page
           } else {
             throw new Error(response.data.error || "Failed to initiate payment.");
