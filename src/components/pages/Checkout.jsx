@@ -658,29 +658,65 @@ function Checkout() {
         throw new Error("You need to log in to proceed.");
       }
     
-      // Define the function to create a payment link
+      // Define the function to create a payment link old
+      // const createPaymentLink = async (payload) => {
+      //   try {
+      //     const response = await axios.post(`${url}/api/payment/initiate`, payload, {
+      //       headers: { Authorization: `Bearer ${token}` },
+      //     });
+          
+      //     // Log the full response to debug
+      //     console.log("Full response from payment initiation API:", response.data);
+    
+      //     // Check if the response indicates success
+      //     if (response.data.success) {
+      //       const paymentLink = response.data.link;
+      //       console.log("payment link", paymentLink)
+      //       window.location.href = paymentLink; // Redirect to Flutterwave payment page
+      //     } else {
+      //       throw new Error(response.data.error || "Failed to initiate payment.");
+      //     }
+      //   } catch (error) {
+      //     console.error("Error creating payment link:", error);
+      //     throw error; // Rethrow error for outer catch block
+      //   }
+      // };
+
+      // new 
       const createPaymentLink = async (payload) => {
         try {
-          const response = await axios.post(`${url}/api/payment/initiate`, payload, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          
-          // Log the full response to debug
-          console.log("Full response from payment initiation API:", response.data);
+            const response = await axios.post(`${url}/api/payment/initiate`, payload, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
     
-          // Check if the response indicates success
-          if (response.data.success) {
-            const paymentLink = response.data.link;
-            console.log("payment link", paymentLink)
-            window.location.href = paymentLink; // Redirect to Flutterwave payment page
-          } else {
-            throw new Error(response.data.error || "Failed to initiate payment.");
-          }
+            // Log the full response to debug
+            console.log("Full response from payment initiation API:", response.data);
+    
+            // Inspect the full response to check the success condition
+            if (response.data && response.data.success) {
+                const paymentLink = response.data.link;
+                console.log("Payment link", paymentLink);
+                window.location.href = paymentLink; // Redirect to Flutterwave payment page
+            } else {
+                // Log response for better error handling
+                console.error("Error response data:", response.data);
+                throw new Error(response.data.error || "Failed to initiate payment.");
+            }
         } catch (error) {
-          console.error("Error creating payment link:", error);
-          throw error; // Rethrow error for outer catch block
+            console.error("Error creating payment link:", error);
+            // Optional: Provide more specific error handling based on the error type
+            if (error.response) {
+                console.error("API error response:", error.response.data);
+            } else {
+                console.error("Unknown error:", error.message);
+            }
+            throw error; // Rethrow error for outer catch block or handle in UI
         }
-      };
+        console.log("API URL:", url);
+        console.log("Authorization Token:", token);
+
+    };
+    
     
       // Call the createPaymentLink function with the payload
       await createPaymentLink(payload);
