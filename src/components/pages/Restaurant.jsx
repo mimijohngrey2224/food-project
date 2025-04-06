@@ -1,11 +1,21 @@
+
 import React, { useState, useContext } from "react";
 import Card from "../shared/Card";
 import Details from "./Details";
 import { MenuContext } from '../../context/MenuContext';
+import Container from "../shared/Container";
 
 function Restaurant() {
   const { restaurantList } = useContext(MenuContext);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const restaurantsPerPage = 6;
+
+  // Get current restaurants
+  const indexOfLastRestaurant = currentPage * restaurantsPerPage;
+  const indexOfFirstRestaurant = indexOfLastRestaurant - restaurantsPerPage;
+  const currentRestaurants = restaurantList.slice(indexOfFirstRestaurant, indexOfLastRestaurant);
+  const totalPages = Math.ceil(restaurantList.length / restaurantsPerPage);
 
   const handlePictureClick = (restaurantName) => {
     const foundRestaurant = restaurantList.find((item) => item.name === restaurantName);
@@ -16,34 +26,80 @@ function Restaurant() {
     setSelectedRestaurant(null);
   };
 
+  const goToNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const goToPrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
-    <div className="my-[20px] mx-[30px]">
-      <div className="flex gap-2 flex-wrap px-3 space-y-4">
-        {restaurantList.map((item, index) => (
+    <Container className="mt-8">
+      <div className="grid mb-5 grid-cols-1 md:grid-cols-3 gap-2 justify-center items-center flex-wrap px-3 space-y-4">
+        {currentRestaurants.map((item, index) => (
           <Card key={index}>
-            <div onClick={() => handlePictureClick(item.name)}>
+            <div className="w-full h-full" onClick={() => handlePictureClick(item.name)}>
               <img
-                src={item.image || 'fallback-image-url'} // Ensure 'fallback-image-url' is a valid path to an image
+                src={item.image || 'fallback-image-url'}
                 alt={item.name}
-                className="w-[350px] h-[280px] rounded-lg shadow-md cursor-pointer"
-                onError={(e) => e.target.src = 'fallback-image-url'} // Optional fallback
+                className="w-full h-[280px] rounded-lg shadow-md cursor-pointer"
+                onError={(e) => e.target.src = 'fallback-image-url'}
               />
-              <p className="font-bold">{item.name}</p>
-              <p>{item.address}</p>
             </div>
-            <button
-              onClick={() => handlePictureClick(item.name)}
-              className="bg-purple-400 text-white p-[10px] rounded mt-[10px]"
-            >
-              Select
-            </button>
+            <div className="p-2 md:p-3">
+              <p className="font-bold">{item.name}</p>
+              <p className="">{item.address}</p>
+              <button
+                onClick={() => handlePictureClick(item.name)}
+                className="bg-purple-400 text-white p-[10px] rounded mt-[10px]"
+              >
+                Select
+              </button>
+            </div>
           </Card>
         ))}
       </div>
+
+      {/* Pagination with Prev/Next buttons */}
+      {restaurantList.length > restaurantsPerPage && (
+        <div className="flex justify-center items-center mt-4 mb-8 gap-2">
+          <button
+            onClick={goToPrevPage}
+            disabled={currentPage === 1}
+            className="px-4 py-2 bg-purple-400 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed"
+          >
+            Previous
+          </button>
+          
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map(number => (
+            <button
+              key={number}
+              onClick={() => setCurrentPage(number)}
+              className={`px-4 py-2 rounded ${currentPage === number ? 'bg-purple-600 text-white' : 'bg-gray-200'}`}
+            >
+              {number}
+            </button>
+          ))}
+          
+          <button
+            onClick={goToNextPage}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 bg-purple-400 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed"
+          >
+            Next
+          </button>
+        </div>
+      )}
+
       <div>
-        <marquee behavior="" direction="">
+        <marquee className="mb-4" behavior="" direction="">
           <b>
-          Food Courier's Service Delivery........... let us quench your appetite with our delicious delicacies from top restaurants...
+            Food Courier's Service Delivery........... let us quench your appetite with our delicious delicacies from top restaurants...
           </b>
         </marquee>
       </div>
@@ -61,9 +117,8 @@ function Restaurant() {
           </div>
         </div>
       )}
-    </div>
+    </Container>
   );
 }
 
 export default Restaurant;
-

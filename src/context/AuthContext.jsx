@@ -19,7 +19,6 @@ export const AuthProvider = ({ children, defaultState = initialState }) => {
 
   return (
     <AuthContext.Provider value={[state, dispatch ]}>
-    {/* <AuthContext.Provider value={{ state, dispatch }}> */}
       {children}
     </AuthContext.Provider>
   );
