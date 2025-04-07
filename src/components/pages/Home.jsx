@@ -46,9 +46,7 @@ function Home() {
           </h1>
           <div className="mt-6 mx-auto max-w-4xl">
             <p className="text-base sm:text-lg md:text-xl text-gray-800 leading-relaxed">
-              Unbeatable, the atmosphere of these restaurants is unbeatable, soft lighting, comfortable seating with elbow room, an attentive
-              smartly dressed waitresses and waiters with good customer service, great service, a distinctive, well-thought-out menu,
-              hospitality, food, drinks, and soft background music.
+            "The atmosphere of these restaurants is unparalleled — a seamless blend of elegance and comfort. The soft, ambient lighting casts a warm glow, while the spacious seating invites relaxation without compromise. The staff, impeccably dressed and attentive, provide service that is both gracious and efficient, ensuring every need is met with a smile. The thoughtfully curated menu offers a delightful range of distinctive flavors, and the food is nothing short of sublime. From expertly crafted drinks to the harmonious blend of soft background music, every element works in perfect synergy to create an unforgettable dining experience. The hospitality here is truly exceptional, making you feel like a cherished guest rather than just a customer."
             </p>
             <h2 className='font-bold text-lg sm:text-xl mt-4'>
               A genuine fine-dining experience awaits.

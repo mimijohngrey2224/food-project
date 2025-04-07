@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect, useRef, useContext } from "r
 import axios from 'axios';
 import AuthContext from "./AuthContext";
 import { toast } from "react-toastify";
+import { useState } from 'react';
 
 export const MenuContext = createContext(null);
 
@@ -34,6 +35,13 @@ const MenuContextProvider = ({ children }) => {
   const hasLoggedProfile = useRef(false); // Use a ref to track logging state
   const [loading, setLoading] = useState(true)
 
+  // State to control form visibility
+const [showUpdateUserProfileForm, setShowUpdateUserProfileForm] = useState(true); // Initially show the form
+
+// Function to toggle the form visibility
+const toggleUpdateUserProfileForm = () => {
+  setShowUpdateUserProfileForm(false); // Hide the form once update is successful
+};
 
 
   const isAuthenticated = state.accessToken !== null
@@ -1765,20 +1773,40 @@ useEffect(() => {
 
   
   // new page 17th oct working perfectly
-  const updateUserProfile = async (profileData) => {
-    try {
-      const response = await axios.post(`${url}/api/profile/update`, profileData, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+  // const updateUserProfile = async (profileData) => {
+  //   try {
+  //     const response = await axios.post(`${url}/api/profile/update`, profileData, {
+  //       headers: { Authorization: `Bearer ${token}` }
+  //     });
       
-      // Update the context state with the new profile
-      setUserProfile(response.data.profile);
-      setUserName(response.data.profile.firstName); // Update username immediately
-    } catch (error) {
-      console.error("Error updating profile:", error);
-    }
-  };
+  //     // Update the context state with the new profile
+  //     setUserProfile(response.data.profile);
+  //     setUserName(response.data.profile.firstName); // Update username immediately
+  //   } catch (error) {
+  //     console.error("Error updating profile:", error);
+  //   }
+  // };
 
+  // new to test toggleupdate 7 appril
+  const updateUserProfile = async (profileData) => {
+  try {
+    const response = await axios.post(`${url}/api/profile/update`, profileData, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    
+    // Update the context state with the new profile
+    setUserProfile(response.data.profile);
+    setUserName(response.data.profile.firstName); // Update username immediately
+
+    // Hide the form after the profile is updated
+    toggleUpdateUserProfileForm(); // This hides the form after the profile image update
+    
+  } catch (error) {
+    console.error("Error updating profile:", error);
+  }
+};
+
+  
 
   // useEffect(()=>{
   //     setUserProfile(null)
