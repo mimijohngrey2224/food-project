@@ -176,7 +176,7 @@ const MenuContextProvider = ({ children }) => {
         if (res.ok) {
           setCartItems(data.data || { menus: [] });
         } else {
-          toast.error("Could not get cart");
+          console.error("Could not get cart");
         }
       } catch (error) {
         console.error("Error fetching cart:", error);
